@@ -1,0 +1,314 @@
+.sign-up-form {
+    width: 410px;
+}
+
+
+
+.input-error::after {
+    position: absolute;
+    right: 15px;
+    top: 12px;
+    content: "!";
+    background: #ff8080;
+    border-radius: 50%;
+    text-align: center;
+    padding: 3px;
+    box-sizing: border-box;
+    color: white;
+    height: 22px;
+    width: 22px;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.input-error *[class*="input"] {
+    border: 1px solid red;
+}
+
+
+
+input[class*="-input"] {
+    position: relative;
+    height: 39px;
+    border-color: #bdc7d8;
+    border-radius: 5px;
+    padding: 8px 10px;
+    box-sizing: border-box;
+    font-size: 18px;
+    border: 1px solid #ccd0d5;
+    margin: 5px;
+}
+
+.first-name-input,
+.last-name-input {
+    width: 194px;
+}
+
+
+
+div[class *="-div"] {
+    position: relative;
+}
+
+.first-name-div,
+.last-name-div {
+    display: inline-block;
+
+}
+
+.email-input,
+.password-input {
+    width: 399px;
+}
+
+.birthday-form-label,
+.gender-form-label {
+    color: #90949c;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 15px 0;
+}
+
+.birthday-form select[class*="-input"] {
+    border: 1px solid #ccd0d5;
+    height: 30px;
+}
+
+.day-input {
+    width: 63px;
+}
+
+.month-input {
+    width: 48px;
+}
+
+.year-input {
+    width: 57px;
+}
+
+.birthday-form,
+.gender-form {
+    margin: 5px;
+}
+
+.gender-input,
+.birthday-input {
+    font-size: 18px;
+    margin-right: 20px;
+}
+
+.gender-input input[type="radio"] {
+    margin-right: 5px;
+    margin-bottom: 12px;
+}
+
+.sign-up-button {
+    font-family: 'Freight Sans Bold',
+        Helvetica,
+        Arial,
+        sans-serif !important;
+    font-size: 19px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: linear-gradient(#67ae55, #578843);
+    background-color: #69a74e;
+    box-shadow: inset 0 1px 1px #a4e388;
+    border-color: #3b6e22 #3b6e22 #2c5115;
+    font-weight: 600;
+    width: 194px;
+    padding: 7px 20px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .5);
+}
+
+.pronoun-input {
+    margin-top: 8px;
+    height: 30px;
+    width: 399px;
+    position: relative;
+}
+
+.custom-gender-input {
+    width: 399px;
+    margin-left: 0 !important;
+}
+
+.pronoun-description {
+    color: #606770;
+    display: block;
+    font-size: 12px;
+}
+
+.nav-bar {
+    background: #ff8080;
+    height: 75px;
+}
+
+body {
+    margin: 0;
+}
+
+.main-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.splash-art {
+    width: 600px;
+    height: 800px;
+    background-image: url("watercolor-flamingo-olga-shvartsur.jpg");
+}
+
+.form-label {
+    display: block;
+    font-family: 'Freight Sans Bold',
+        Helvetica,
+        Arial,
+        sans-serif !important;
+    font-weight: bold;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.form-description {
+    display: block;
+    font-family: 'Freight Sans',
+        Helvetica,
+        Arial,
+        sans-serif !important;
+    font-weight: normal !important;
+    margin-bottom: 20px;
+    font-size: 19px;
+    line-height: 126%;
+
+}
+
+.password-error-bubble,
+.email-error-bubble {
+    background-color: #be4b49;
+    border: 0;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(139, 3, 0, .75),
+        0 1px 10px rgba(0, 0, 0, .35);
+    color: #fff;
+    position: absolute;
+    font-size: 13px;
+    width: 326px;
+    height: 60px;
+    padding: 13px;
+    right: 427px;
+    top: -8px;
+    box-sizing: border-box;
+}
+
+.password-error-bubble:after,
+.email-error-bubble:after {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 11px 0 11px 15px;
+    border-color: transparent #be4b49;
+    display: block;
+    width: 0;
+    z-index: 1;
+    right: -15px;
+    top: 14px;
+}
+
+.first-name-error-bubble {
+    width: 153px;
+    height: 43px;
+    box-sizing: border-box;
+    background-color: #be4b49;
+    border: 0;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(139, 3, 0, .75),
+        0 1px 10px rgba(0, 0, 0, .35);
+    color: #fff;
+    position: absolute;
+    padding: 13px;
+    font-size: 13px;
+    z-index: 1;
+    right: 221px;
+    top: -2px;
+}
+
+.first-name-error-bubble:after {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 11px 0 11px 15px;
+    border-color: transparent #be4b49;
+    display: block;
+    width: 0;
+    z-index: 1;
+    right: -15px;
+    top: 7px;
+}
+
+
+.last-name-error-bubble {
+    width: 153px;
+    height: 43px;
+    box-sizing: border-box;
+    background-color: #be4b49;
+    border: 0;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(139, 3, 0, .75),
+        0 1px 10px rgba(0, 0, 0, .35);
+    color: #fff;
+    position: absolute;
+    padding: 13px;
+    font-size: 13px;
+    z-index: 1;
+    right: 45px;
+    top: 67px;
+    /* border-radius: 10px; */
+}
+
+.last-name-error-bubble:after {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 0 11px 15px;
+    border-color: #be4b49 transparent;
+    display: block;
+    z-index: 1;
+    top: -15px;
+    left: 20px;
+}
+
+.pronoun-error-bubble {
+    width: 206px;
+    height: 43px;
+    box-sizing: border-box;
+    background-color: #be4b49;
+    border: 0;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(139, 3, 0, .75),
+        0 1px 10px rgba(0, 0, 0, .35);
+    color: #fff;
+    position: absolute;
+    padding: 13px;
+    font-size: 13px;
+    z-index: 1;
+    right: 427px;
+    top: 2px;
+}
+
+.pronoun-error-bubble:after {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 11px 0 11px 15px;
+    border-color: transparent #be4b49;
+    display: block;
+    width: 0;
+    z-index: 1;
+    right: -15px;
+    top: 7px;
+}
