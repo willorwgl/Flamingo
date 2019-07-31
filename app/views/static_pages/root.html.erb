@@ -1,5 +1,17 @@
 <script type="text/javascript">
-      window.splashImage = "<%= image_url("watercolor-flamingo-olga-shvartsur.jpg") %>"
+      window.splashImage = "<%= image_url("splash_image.jpg") %>"
+      window.logo = "<%= image_url("icon.png") %>"
 </script>
+
+<% if logged_in? %>
+
+      <script type="text/javascript">
+            window.currentUser = <%= render(
+                  "api/users/user.json.jbuilder",
+                  user: current_user
+            ).html_safe %>
+      </script>
+<% end %>
+
 
 <main id="root">Hello</main>

@@ -1,0 +1,10 @@
+.main-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 200px;
+}
+
+.splash-image {
+    width: 600px;
+}
