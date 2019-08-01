@@ -9,8 +9,7 @@ class HomeNavBar extends React.Component {
         return (
           <nav className="home-nav-bar">
             <div className="centered-nav-content">
-              {/* <Logo /> */}
-              <span className="title">Flamingo</span>
+              <span className="title">flamingo</span>
               <NavLoginForm />
             </div>
           </nav>

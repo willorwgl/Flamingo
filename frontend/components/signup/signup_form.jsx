@@ -3,7 +3,8 @@ import { merge } from "lodash";
 import generate_random_key from "../../util/app_utils";
 import ErrorBubble from "./error_bubble";
 import { connect } from "react-redux";
-import { createNewUser } from "../../actions/session_actions";
+import { createNewUser, login } from "../../actions/session_actions";
+
 
 //regex taken from stackoverflow
 let emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -65,6 +66,7 @@ class SignupForm extends React.Component {
     this.validateField = this.validateField.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.demoLogin = this.demoLogin.bind(this)
     this.setUpDays();
     this.setUpMonths();
     this.setUpYears();
@@ -353,6 +355,13 @@ class SignupForm extends React.Component {
     return display;
   }
 
+  demoLogin(e) {
+    e.preventDefault();
+    const {loginUser} = this.props
+    const demoUser = { email: "flamingo@gmail.com", password: "Abc123456@"}
+    loginUser(demoUser)
+  }
+
   render() {
     return (
       
@@ -511,6 +520,8 @@ class SignupForm extends React.Component {
             {this.displayCustomGenderForm()}
           </div>
           <button className="sign-up-button" type="submit">Sign Up</button>
+
+          <button className="demo-login-button" type="submit" onClick={this.demoLogin}>Demo Login</button>
         </form>
     );
   }
@@ -518,7 +529,8 @@ class SignupForm extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    createNewUser: user => dispatch(createNewUser(user))
+    createNewUser: user => dispatch(createNewUser(user)),
+    loginUser: user => dispatch(login(user))
   };
 };
 

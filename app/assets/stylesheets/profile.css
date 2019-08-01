@@ -1,0 +1,77 @@
+.profile-image-container {
+
+    background-color: #ca5fa6;
+    height: 200px;
+    position: relative;
+}
+
+.cover-image-footer {
+    position: absolute;
+    bottom: 0px;
+}
+
+.profile-image {
+    width: 168px;
+    height: 168px;
+    border-radius: 50%;
+    background-color: yellow;
+    box-sizing: border-box;
+    border: 3px solid #fa8282;
+    position: absolute;
+    bottom: -30px;
+    left: 20px;
+}
+
+.profile-name {
+    color: white;
+    font-size: 32px;
+    margin-left: 300px;
+}
+
+.image-footer-button {
+    width: 100px;
+    height: 27px;
+    box-sizing: border-box;
+    padding: 0 10px;
+    border: 1px solid rgba(0, 0, 0, .4);
+    margin: 12px;
+}
+
+.profile-nav-bar {
+    height: 53px;
+    border-bottom: 1px solid gray;
+    padding-left: 201px;
+}
+
+.timeline-nav-link {
+    border-right: 1px solid #e9eaed;
+    border-left: 1px solid #e9eaed;
+}
+
+.profile-nav-bar span {
+    height: 100%;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 17px 17px;
+    box-sizing: border-box;
+}
+
+.profile-nav-bar span:not(:nth-child(1)) {
+    border-right: 1px solid #e9eaed;
+}
+
+.sidebar-friends,
+.sidebar-intro,
+.sidebar-photos {
+    width: 323px;
+    min-height: 48px;
+}
+
+.profile-wall {
+    display: inline-block;
+}
+
+.profile-sidebar {
+    display: inline-block;
+}

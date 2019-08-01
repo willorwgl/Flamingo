@@ -1,14 +1,15 @@
-import React from "react"
-import UserNavBar from "../navbars/user_nav_bar"
+import React from "react";
+import Profile from "./profiles/profile";
 
 class UserHomePage extends React.Component {
-
-
-    render() {
-        return (
-            <div >Logged in</div>
-        )
-    }
+  render() {
+    return (
+      <div className="user-home-page">
+        Logged in
+        <Profile />
+      </div>
+    );
+  }
 }
 
-export default UserHomePage
+export default UserHomePage;

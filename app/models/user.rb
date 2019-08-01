@@ -26,12 +26,24 @@ class User < ApplicationRecord
 
     attr_reader :password
 
-    def self.find_by_credentials(email, password) 
-        user = User.find_by_email(email)
+    has_many :authored_posts, 
+        foreign_key: :author_id,
+        class_name: :Post
 
+    has_many :wall_posts, 
+        foreign_key: :wall_id,
+        class_name: :Post
+
+
+    def self.find_by_credentials(user, password)     
         return nil unless user && user.is_password?(password)
         user
     end
+
+    def self.find_by_email(email) 
+        User.find_by(email: email)
+    end
+
 
     def reset_session_token!
         self.session_token = User.generate_session_token

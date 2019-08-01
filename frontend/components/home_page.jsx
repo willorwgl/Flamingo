@@ -3,6 +3,8 @@ import SignupForm from "./signup/signup_form";
 import Splash from "./splash";
 import HomeNavBar from "./navbars/home_nav_bar";
 import { connect } from "react-redux";
+import userHomePage from "./user/user_home_page";
+import UserHomePage from "./user/user_home_page";
 
 class FlamingoHomePage extends React.Component {
   loggedIn() {
@@ -23,7 +25,7 @@ class FlamingoHomePage extends React.Component {
   }
 
   userHomePage() {
-    return <div className="user-home-page">User logged in!!!</div>;
+    return <UserHomePage />;
   }
 
   render() {

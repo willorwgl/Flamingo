@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { login } from "../../actions/session_actions";
+import { withRouter } from "react-router-dom";
 
 class NavLoginForm extends React.Component {
   constructor(props) {
@@ -23,6 +24,11 @@ class NavLoginForm extends React.Component {
     e.preventDefault();
     const { loginUser } = this.props;
     loginUser(this.state);
+  }
+
+  componentDidUpdate() {
+    const { errors, history } = this.props;
+    if ( Object.values(errors).length) history.push("/login") 
   }
 
   render() {
@@ -59,7 +65,15 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(NavLoginForm);
+const mapStateToProps = state => {
+  return {
+    errors: state.errors
+  };
+};
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(NavLoginForm)
+);

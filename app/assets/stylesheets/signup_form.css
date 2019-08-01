@@ -1,8 +1,7 @@
 .sign-up-form {
     width: 410px;
+    margin-top: 50px;
 }
-
-
 
 .input-error::after {
     position: absolute;
@@ -23,7 +22,7 @@
 }
 
 .input-error *[class*="input"] {
-    border: 1px solid red;
+    border: 1px solid red !important;
 }
 
 
@@ -103,19 +102,14 @@
     margin-bottom: 12px;
 }
 
-.sign-up-button {
+.sign-up-button, .demo-login-button {
     font-family: 'Freight Sans Bold',
         Helvetica,
         Arial,
         sans-serif !important;
     font-size: 19px;
-    margin-top: 10px;
+    margin-top: 20px;
     margin-bottom: 10px;
-    /* background: linear-gradient(#67ae55, #578843);
-    background-color: #69a74e;
-    box-shadow: inset 0 1px 1px #a4e388;
-    border-color: #3b6e22 #3b6e22 #2c5115; */
-    /* background-color: #cf455c; */
     background: rgb(255, 186, 146);
     background: linear-gradient(90deg, rgba(255, 186, 146, 1) 0%, rgba(255, 128, 128, 1) 35%, rgba(255, 72, 72, 1) 100%);
     font-weight: 600;
@@ -125,6 +119,7 @@
     border-radius: 5px;
     color: white;
     text-shadow: 0 1px 2px rgba(0, 0, 0, .5);
+    display: block;
 }
 
 .pronoun-input {
@@ -249,7 +244,6 @@
     z-index: 1;
     right: 45px;
     top: 67px;
-    /* border-radius: 10px; */
 }
 
 .last-name-error-bubble:after {
