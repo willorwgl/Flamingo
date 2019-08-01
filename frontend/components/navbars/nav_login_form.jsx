@@ -60,6 +60,7 @@ class NavLoginForm extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => {
+  
   return {
     loginUser: user => dispatch(login(user))
   };
