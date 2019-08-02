@@ -1,10 +1,14 @@
 .user-post {
-    width: 514px;
+    width: 100%;
     /* background: red; */
     border: 1px solid #ccd0d5;
     padding: 12px 12px 0;
     box-sizing: border-box;
-    margin: 10px 0 0 ;
+    margin: 10px 0 0;
+}
+
+.post-container {
+    width: 514px;
 }
 
 .post-header {
@@ -25,7 +29,16 @@
     /* margin-top: 20px;
     margin-left: 10px; */
     position: relative;
-    padding: 0 0 3px;
+    /* padding: 0 0 3px; */
+}
+
+.commenter-icon {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid red;
+    position: relative;
 }
 
 .post-info {
@@ -42,7 +55,7 @@
 }
 
 .post-body {
-    margin: 6px 0 0;
+    margin: 6px 0;
     min-width: 18px;
     font-size: 14px;
     line-height: 1.38;
@@ -51,9 +64,42 @@
 
 .post-footer {
     height: 40px;
-    width: 514px;
+    width: 100%;
     border-left: 1px solid #ccd0d5;
     border-bottom: 1px solid #ccd0d5;
     border-right: 1px solid #ccd0d5;
-    box-sizing: border-box
+    box-sizing: border-box;
+    padding: 0 10px;
+
+}
+
+/* .post-like {
+    display: inline-block;
+    width: 163px;
+    height: 100%;
+} */
+
+.post-comment,
+.post-share,
+.post-like {
+    display: inline-block;
+    width: 159.73px;
+    height: 100%;
+    text-align: center;
+    padding: 10px 0;
+    box-sizing: border-box;
+    color: #1c1e21;
+    font-size: 13px;
+    min-height: 63px;
+
+}
+
+
+.post-comment-form {
+    padding: 8px 12px;
+    width: 100%;
+    box-sizing: border-box;
+    border-left: 1px solid #ccd0d5;
+    border-bottom: 1px solid #ccd0d5;
+    border-right: 1px solid #ccd0d5;
 }

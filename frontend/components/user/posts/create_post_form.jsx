@@ -48,8 +48,7 @@ class CreatePostForm extends React.Component {
         <form className="create-post-form" onBlur={this.handleBlur}>
           <div className="create-post-header">
             <span className="post-header-option">
-              <i class="fas fa-pencil-alt" />
-              Create Post
+              <i class="fas fa-pencil-alt" /> Create Post
             </span>
           </div>
           <div className="create-post-body">
