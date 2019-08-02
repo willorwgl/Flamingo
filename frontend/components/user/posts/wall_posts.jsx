@@ -6,7 +6,7 @@ import Post from "./post";
 class WallPosts extends React.Component {
   componentDidMount() {
     const { requestWallPosts, userId } = this.props;
-    requestWallPosts(10, "wall");
+    requestWallPosts(19, "wall");
   }
 
   render() {

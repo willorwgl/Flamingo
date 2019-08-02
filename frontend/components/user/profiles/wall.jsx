@@ -6,7 +6,6 @@ class Wall extends React.Component {
   render() {
     return (
       <div className="profile-wall">
-        Wall
         <CreatePostForm />
         <WallPosts />
       </div>

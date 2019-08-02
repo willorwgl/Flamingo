@@ -8,6 +8,7 @@ class Api::PostsController < ApplicationController
         else 
             @posts = User.includes(:authored_posts, [:author] ).find(params[:user_id]).authored_posts
         end
+        # , :order => "created_at desc"?
         render :index
     end
 

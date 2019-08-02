@@ -1,22 +1,26 @@
 import React from "react";
 import { connect } from "react-redux";
 import { createPost } from "../../../actions/posts_actions";
+import TextareaAutosize from "react-autosize-textarea";
 
 class CreatePostForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      body: "", 
-      wall_id: 10
+      body: "",
+      wall_id: 19, // hardcoding for now
+      modal: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this)
+    this.handleChange = this.handleChange.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    const { createPost } = this.props
-    createPost(this.state)
+    const { createPost } = this.props;
+    createPost(this.state);
   }
 
   handleChange(e) {
@@ -25,26 +29,69 @@ class CreatePostForm extends React.Component {
     this.setState({ [field]: value });
   }
 
+  handleFocus() {
+    this.setState({ modal: true });
+  }
+
+  handleBlur() {
+    this.setState({ modal: false });
+  }
+
+  // modalView() {
+  //   const { modal } = this.state
+  //   return
+  // }
+
   render() {
     return (
-      <form className="create-post-form">
-        <div className="create-post-header">
-          <span>Create Post</span>
-        </div>
-        <div className="create-post-body">
-          <div className="create-post-icon">icon goes here</div>
-          <input
-            type="text"
-            name="body"
-            value={this.state.body}
-            onChange={this.handleChange}
-            placeholder="body goes here"
-          />
-        </div>
-        <button type="submit" onClick={this.handleSubmit}>
-          Create new post
-        </button>
-      </form>
+      <>
+        <form className="create-post-form" onBlur={this.handleBlur}>
+          <div className="create-post-header">
+            <span className="post-header-option">
+              <i class="fas fa-pencil-alt" />
+              Create Post
+            </span>
+          </div>
+          <div className="create-post-body">
+            <img className="create-post-icon" />
+            <TextareaAutosize
+              className="post-body-input"
+              onResize={e => {}}
+              name="body"
+              value={this.state.body}
+              onChange={this.handleChange}
+              placeholder="What's on your mind?"
+              onFocus={this.handleFocus}
+            />
+          </div>
+
+          <div className="create-post-footer">
+            <span className="post-footer-option">
+              <i class="far fa-image" /> Photo/Video
+            </span>
+            <span className="post-footer-option">
+              <i class="fas fa-user-friends" /> Tag Friends
+            </span>
+            <span className="post-footer-option feeling-activity-option">
+              <i class="far fa-smile" /> Feeling/Activ...
+            </span>
+          </div>
+
+          {this.state.modal ? (
+            <>
+              <button
+                class="create-post-btn"
+                type="submit"
+                onClick={this.handleSubmit}
+              >
+                Post
+              </button>
+            </>
+          ) : null}
+        </form>
+
+        {this.state.modal ? <div className="modal-background" /> : null}
+      </>
     );
   }
 }
