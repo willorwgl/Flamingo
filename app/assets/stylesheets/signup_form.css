@@ -25,6 +25,10 @@
     border: 1px solid red !important;
 }
 
+.input-error {
+    position: relative;
+}
+
 
 
 .sign-up-form input[class*="-input"] {

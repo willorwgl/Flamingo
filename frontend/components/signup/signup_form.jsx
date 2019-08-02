@@ -310,9 +310,9 @@ class SignupForm extends React.Component {
             className={
               `${
                 this.isErrorVisible("pronoun")
-                  ? "error-bubble-input"
+                  ? ""
                   : `${this.hasError("pronoun")}`
-              }` + " custom-gender-div"
+              } custom-gender-div`
             }
           >
             <select
@@ -364,165 +364,184 @@ class SignupForm extends React.Component {
 
   render() {
     return (
-      
-        <form className="sign-up-form" onSubmit={this.handleSubmit}>
-          <span className="form-label">Sign Up</span>
-          <span className="form-description">It's quick and easy.</span>
-          <div
-            className={
-              `${
-                this.isErrorVisible("first_name")
-                  ? "error-bubble-input"
-                  : `${this.hasError("first_name")}`
-              }` + " first-name-div"
-            }
-          >
-            <input
-              className="first-name-input"
-              type="text"
-              name="first_name"
-              value={this.state.first_name}
-              placeholder="First name"
-              onChange={this.handleChange}
-              onBlur={this.handleBlur}
-              onFocus={this.handleFocus}
+      <form className="sign-up-form" onSubmit={this.handleSubmit}>
+        <span className="form-label">Sign Up</span>
+        <span className="form-description">It's quick and easy.</span>
+        <div
+          className={
+            `${
+              this.isErrorVisible("first_name")
+                ? ""
+                : `${this.hasError("first_name")}`
+            } first-name-div`
+          }
+        >
+          <input
+            className="first-name-input"
+            type="text"
+            name="first_name"
+            value={this.state.first_name}
+            placeholder="First name"
+            onChange={this.handleChange}
+            onBlur={this.handleBlur}
+            onFocus={this.handleFocus}
+          />
+          {this.isErrorVisible("first_name") ? (
+            <ErrorBubble
+              className="first-name-error-bubble"
+              message={this.getErrorMessage("first_name")}
             />
-            {this.isErrorVisible("first_name") ? (
-              <ErrorBubble
-                className="first-name-error-bubble"
-                message={this.getErrorMessage("first_name")}
-              />
-            ) : null}
-          </div>
+          ) : null}
+        </div>
 
-          <div
-            className={
-              `${
-                this.isErrorVisible("last_name")
-                  ? "error-bubble-input"
-                  : `${this.hasError("last_name")}`
-              }` + " last-name-div"
-            }
-          >
-            <input
-              className="last-name-input"
-              type="text"
-              name="last_name"
-              value={this.state.last_name}
-              placeholder="Last name"
-              onChange={this.handleChange}
-              onBlur={this.handleBlur}
-              onFocus={this.handleFocus}
+        <div
+          className={
+            `${
+              this.isErrorVisible("last_name")
+                ? ""
+                : `${this.hasError("last_name")}`
+            } last-name-div`
+          }
+        >
+          <input
+            className="last-name-input"
+            type="text"
+            name="last_name"
+            value={this.state.last_name}
+            placeholder="Last name"
+            onChange={this.handleChange}
+            onBlur={this.handleBlur}
+            onFocus={this.handleFocus}
+          />
+          {this.isErrorVisible("last_name") ? (
+            <ErrorBubble
+              className="last-name-error-bubble"
+              message={this.getErrorMessage("last_name")}
             />
-            {this.isErrorVisible("last_name") ? (
-              <ErrorBubble
-                className="last-name-error-bubble"
-                message={this.getErrorMessage("last_name")}
-              />
-            ) : null}
-          </div>
+          ) : null}
+        </div>
 
-          <div
-            className={
-              `${
-                this.isErrorVisible("email")
-                  ? "error-bubble-input"
-                  : `${this.hasError("email")}`
-              }` + " email-div"
-            }
-          >
-            <input
-              className="email-input"
-              type="text"
-              name="email"
-              value={this.state.email}
-              placeholder="Email"
-              onChange={this.handleChange}
-              onBlur={this.handleBlur}
-              onFocus={this.handleFocus}
+        <div
+          className={
+            `${
+              this.isErrorVisible("email")
+                ? ""
+                : `${this.hasError("email")}`
+            } email-div`
+          }
+        >
+          <input
+            className="email-input"
+            type="text"
+            name="email"
+            value={this.state.email}
+            placeholder="Email"
+            onChange={this.handleChange}
+            onBlur={this.handleBlur}
+            onFocus={this.handleFocus}
+          />
+          {this.isErrorVisible("email") ? (
+            <ErrorBubble
+              className="email-error-bubble"
+              message={this.getErrorMessage("email")}
             />
-            {this.isErrorVisible("email") ? (
-              <ErrorBubble
-                className="email-error-bubble"
-                message={this.getErrorMessage("email")}
-              />
-            ) : null}
-          </div>
+          ) : null}
+        </div>
 
-          <div
-            className={
-              `${
-                this.isErrorVisible("password")
-                  ? "error-bubble-input"
-                  : `${this.hasError("password")}`
-              }` + " password-div"
-            }
-          >
-            <input
-              className="password-input"
-              type="password"
-              name="password"
-              value={this.state.password}
-              placeholder="New password"
-              onChange={this.handleChange}
-              onBlur={this.handleBlur}
-              onFocus={this.handleFocus}
+        <div
+          className={
+            `${
+              this.isErrorVisible("password")
+                ? ""
+              : `${this.hasError("password")}` 
+            } password-div`
+          }
+        >
+          <input
+            className="password-input"
+            type="password"
+            name="password"
+            value={this.state.password}
+            placeholder="New password"
+            onChange={this.handleChange}
+            onBlur={this.handleBlur}
+            onFocus={this.handleFocus}
+          />
+          {this.isErrorVisible("password") ? (
+            <ErrorBubble
+              className="password-error-bubble"
+              message={this.getErrorMessage("password")}
             />
-            {this.isErrorVisible("password") ? (
-              <ErrorBubble
-                className="password-error-bubble"
-                message={this.getErrorMessage("password")}
-              />
-            ) : null}
-          </div>
+          ) : null}
+        </div>
 
-          <div className="birthday-form">
-            <div className="birthday-form-label">Birthday</div>
-            <select name="day" onChange={this.handleChange} className="day-input">
-              {this.dayOptions}
-            </select>
-            <select name="month" onChange={this.handleChange} className="month-input">
-              {this.monthOptions}
-            </select>
-            <select name="year" onChange={this.handleChange} className="year-input">
-              {this.yearOptions}
-            </select>
-          </div>
-          <div className="gender-form">
-            <div className="gender-form-label">Gender </div>
-            <span className="gender-input">
-              <input
-                type="radio"
-                name="gender"
-                value="male"
-                onClick={this.handleRadioClick}
-              />
-              Male
-            </span>
-            <span className="gender-input">
-              <input
-                type="radio"
-                name="gender"
-                value="female"
-                onClick={this.handleRadioClick}
-              />
-              Female
-            </span>
-            <span className="gender-input ">
-              <input
-                type="radio"
-                name="gender"
-                value="custom"
-                onClick={this.handleRadioClick}
-              />
-              Custom
-            </span>
-            {this.displayCustomGenderForm()}
-          </div>
-          <button className="sign-up-button" type="submit">Sign Up</button>
+        <div className="birthday-form">
+          <div className="birthday-form-label">Birthday</div>
+          <select
+            name="day"
+            onChange={this.handleChange}
+            className="day-input"
+          >
+            {this.dayOptions}
+          </select>
+          <select
+            name="month"
+            onChange={this.handleChange}
+            className="month-input"
+          >
+            {this.monthOptions}
+          </select>
+          <select
+            name="year"
+            onChange={this.handleChange}
+            className="year-input"
+          >
+            {this.yearOptions}
+          </select>
+        </div>
+        <div className="gender-form">
+          <div className="gender-form-label">Gender </div>
+          <span className="gender-input">
+            <input
+              type="radio"
+              name="gender"
+              value="male"
+              onClick={this.handleRadioClick}
+            />
+            Male
+          </span>
+          <span className="gender-input">
+            <input
+              type="radio"
+              name="gender"
+              value="female"
+              onClick={this.handleRadioClick}
+            />
+            Female
+          </span>
+          <span className="gender-input ">
+            <input
+              type="radio"
+              name="gender"
+              value="custom"
+              onClick={this.handleRadioClick}
+            />
+            Custom
+          </span>
+          {this.displayCustomGenderForm()}
+        </div>
+        <button className="sign-up-button" type="submit">
+          Sign Up
+        </button>
 
-          <button className="demo-login-button" type="submit" onClick={this.demoLogin}>Demo Login</button>
-        </form>
+        <button
+          className="demo-login-button"
+          type="submit"
+          onClick={this.demoLogin}
+        >
+          Demo Login
+        </button>
+      </form>
     );
   }
 }

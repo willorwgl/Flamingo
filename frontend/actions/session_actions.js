@@ -7,6 +7,7 @@ import {
 export const RECEIVE_USER = "RECEIVE_USER"
 export const LOGOUT_CURRENT_USER = "LOGOUT_CURRENT_USER"
 export const RECEIVE_SESSION_ERRORS = 'RECEIVE_SESSION_ERRORS';
+export const CLEAR_ERRORS = "CLEAR_ERRORS"
 
 export const receiveCurrentUser = (user) => {
     return {
@@ -25,6 +26,12 @@ export const receiveErrors = errors => ({
     type: RECEIVE_SESSION_ERRORS,
     errors
 });
+
+export const clearErrors = () => {
+    return {
+        type: CLEAR_ERRORS
+    }
+}
 
 export const createNewUser = (user) => dispatch => {
     return postUser(user)

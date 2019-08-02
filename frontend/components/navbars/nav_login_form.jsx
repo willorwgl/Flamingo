@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { login } from "../../actions/session_actions";
+import { login, clearErrors } from "../../actions/session_actions";
 import { withRouter } from "react-router-dom";
 
 class NavLoginForm extends React.Component {
@@ -26,9 +26,13 @@ class NavLoginForm extends React.Component {
     loginUser(this.state);
   }
 
+  componentDidMount() {
+    const { clearErrors } = this.props;
+    clearErrors();
+  }
   componentDidUpdate() {
     const { errors, history } = this.props;
-    if ( Object.values(errors).length) history.push("/login") 
+    if (Object.values(errors).length) history.push("/login");
   }
 
   render() {
@@ -60,9 +64,9 @@ class NavLoginForm extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => {
-  
   return {
-    loginUser: user => dispatch(login(user))
+    loginUser: user => dispatch(login(user)),
+    clearErrors: () => dispatch(clearErrors())
   };
 };
 
