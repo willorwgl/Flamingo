@@ -2,13 +2,15 @@ import React from "react";
 import { connect } from "react-redux";
 import { createPost } from "../../../actions/posts_actions";
 import TextareaAutosize from "react-autosize-textarea";
+import { withRouter } from "react-router-dom" 
 
 class CreatePostForm extends React.Component {
   constructor(props) {
     super(props);
+    const { id: profileId} = this.props.match.params
     this.state = {
       body: "",
-      wall_id: 19, // hardcoding for now
+      wall_id: profileId,
       modal: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -37,10 +39,6 @@ class CreatePostForm extends React.Component {
     this.setState({ modal: false });
   }
 
-  // modalView() {
-  //   const { modal } = this.state
-  //   return
-  // }
 
   render() {
     return (
@@ -101,7 +99,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
+export default withRouter(connect(
   null,
   mapDispatchToProps
-)(CreatePostForm);
+)(CreatePostForm));

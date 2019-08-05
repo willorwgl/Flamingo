@@ -2,17 +2,34 @@ import React from "react";
 import { connect } from "react-redux";
 import { requestPosts } from "../../../actions/posts_actions";
 import Post from "./post";
+import {withRouter} from "react-router-dom"
 
 class WallPosts extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = { id: null}
+  }
+
   componentDidMount() {
-    const { requestWallPosts, userId } = this.props;
-    requestWallPosts(19, "wall");
+    const { requestWallPosts } = this.props;
+    const { id } = this.props.match.params;
+    requestWallPosts(id, "wall");
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { id: currentId } = this.props.match.params;
+    const { id: prevId } = prevProps.match.params;
+    if (currentId != prevId) {
+      const { requestWallPosts } = this.props;
+      requestWallPosts(currentId, "wall");
+    }
   }
 
   render() {
     const posts = Object.values(this.props.posts).map(post => {
-          return <Post key={post.id} post={post} />;
-        })
+      return <Post key={post.id} post={post} />;
+    });
     return (
       <>
         <div>posts</div>
@@ -32,7 +49,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(WallPosts);
+)(WallPosts));

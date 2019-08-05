@@ -34,6 +34,9 @@ class User < ApplicationRecord
         foreign_key: :wall_id,
         class_name: :Post
 
+    has_many :comments,
+        foreign_key: :author_id
+
 
     def self.find_by_credentials(user, password)     
         return nil unless user && user.is_password?(password)

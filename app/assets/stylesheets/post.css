@@ -94,12 +94,132 @@
 
 }
 
+.post-comment:hover,
+.post-share:hover,
+.post-like:hover {
+    cursor: pointer;
+}
+
 
 .post-comment-form {
-    padding: 8px 12px;
     width: 100%;
     box-sizing: border-box;
     border-left: 1px solid #ccd0d5;
     border-bottom: 1px solid #ccd0d5;
     border-right: 1px solid #ccd0d5;
+    padding: 8px 12px;
+    display: flex;
+    align-items: flex-start
+}
+
+.comment-input-container {
+    display: inline-block;
+    width: 452px;
+    margin-left: 8px;
+}
+
+.comment-input {
+    border: 1px solid #ccd0d5;
+    border-radius: 20px;
+    width: 100%;
+    min-height: 36px;
+    outline: none;
+    resize: none;
+    width: 95%;
+    min-height: 16px;
+    padding: 8px 10px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.user-comment {
+    width: 490px;
+    min-height: 53px;
+    border: 1px solid white;
+    display: flex;
+}
+
+.comments-container {
+    padding: 8px 12px 4px;
+    border-left: 1px solid #ccd0d5;
+    border-bottom: 1px solid #ccd0d5;
+    border-right: 1px solid #ccd0d5;
+}
+
+.comment-body {
+    display: inline-block;
+    padding: 8px 10px;
+    max-width: 390px;
+    min-height: 32px;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    border-radius: 20px;
+    background-color: #f2f6f5;
+    margin-left: 5px;
+
+}
+
+.user-comment-container {
+    margin: 5px;
+}
+
+.comment-reply-option {
+    cursor: pointer;
+    margin-left: 5px;
+    display: inline-block;
+    color: lightblue;
+    font-size: 11px;
+}
+
+.comment-reply-option:hover {
+    text-decoration: underline;
+}
+
+.replier-icon {
+    min-width: 20px;
+    min-height: 20px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid red;
+    margin-left: 40px;
+    margin-top: 5px;
+    margin-right: 5px;
+    box-sizing: border-box;
+}
+
+.reply-input {
+    border: none;
+    outline: none;
+    resize: none;
+    width: 414px;
+    min-height: 16px;
+    /* height: 32px; */
+    padding: 8px 10px;
+    font-size: 14px;
+    box-sizing: border-box;
+    border: 1px solid red;
+    border-radius: 20px;
+}
+
+.comment-reply {
+    display: flex;
+    align-items: flex-start;
+}
+
+.user-reply {
+    width: 300px;
+    display: flex;
+}
+
+.reply-body {
+    display: inline-block;
+    padding: 8px 10px;
+    max-width: 352px;
+    min-height: 32px;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    border-radius: 20px;
+    background-color: #f2f6f5;
+    margin-left: 5px;
 }

@@ -5,13 +5,9 @@ import SidebarFriends from "./sidebar_friends"
 
 class ProfileSidebar extends React.Component {
   render() {
-    return (
-      <div className="profile-sidebar">
-        <SidebarIntro />
-        <SidebarPhotos />
-        <SidebarFriends />
-      </div>
-    );
+    // return (
+      
+    // );
   }
 }
 

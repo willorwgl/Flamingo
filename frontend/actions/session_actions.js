@@ -2,7 +2,7 @@ import {
     postUser,
     postSession,
     deleteSession
-} from "../util/session_utils"
+} from "../util/session_util"
 
 export const RECEIVE_USER = "RECEIVE_USER"
 export const LOGOUT_CURRENT_USER = "LOGOUT_CURRENT_USER"

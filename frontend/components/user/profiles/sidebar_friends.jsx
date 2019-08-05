@@ -5,9 +5,10 @@ class SidebarFriends extends React.Component {
 
     render() {
         return (
+    
           <div className="sidebar-friends">
+          <div className="friends-icon"></div>
             <span>
-              <i className="fas fa-user-friends" />
               Friends
             </span>
           </div>

@@ -16,6 +16,7 @@ class FlamingoHomePage extends React.Component {
     return (
       <>
         <HomeNavBar />
+
         <div className="main-container">
           <Splash />
           <SignupForm />

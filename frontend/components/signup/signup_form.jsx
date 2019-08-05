@@ -1,6 +1,6 @@
 import React from "react";
 import { merge } from "lodash";
-import generate_random_key from "../../util/app_utils";
+import generate_random_key from "../../util/app_util";
 import ErrorBubble from "./error_bubble";
 import { connect } from "react-redux";
 import { createNewUser, login } from "../../actions/session_actions";

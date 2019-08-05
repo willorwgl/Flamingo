@@ -2,18 +2,31 @@ import React from "react";
 
 class UserImage extends React.Component {
 
+    // componentDidMount() {
+    //     const { requestWallPosts } = this.props;
+    //     const { id } = this.props.match.params;
+    //     requestWallPosts(id, "wall");
+    // }
+
+    // componentDidUpdate(prevProps, prevState) {
+    //     const { id: currentId } = this.props.match.params;
+    //     const { id: prevId } = prevProps.match.params;
+    //     if (currentId != prevId) {
+    //         const { requestWallPosts } = this.props;
+    //         requestWallPosts(currentId, "wall");
+    //     }
+    // }
+
 
     render() {
-
+        const { first_name = '', last_name = ''} = this.props.profileUser
+        const fullName = `${first_name} ${last_name}`
         return (
         <div className="profile-image-container">
-            Image Container!!!
-
-
             <div>
                 <div className="cover-image-footer">
                     <span className="profile-name">
-                        Flamingo
+                        {fullName}
                     </span>
                     <button className="image-footer-button">Update Info</button>
 
@@ -33,5 +46,16 @@ class UserImage extends React.Component {
         )
     }
 }
+
+
+// const mapStateToProps = state => {
+//     return {
+
+//     }
+// }
+
+// const mapDispatchToProps = dispatch => {
+
+// }
 
 export default UserImage

@@ -7,8 +7,8 @@ class SidebarPhotos extends React.Component {
 
         return (
           <div className="sidebar-photos">
+          <div className="photos-icon"></div>
             <span>
-              <i className="fas fa-file-image" />
               Photos
             </span>
           </div>
