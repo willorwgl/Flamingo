@@ -22,7 +22,7 @@ class User < ApplicationRecord
     validates :session_token, :email, uniqueness: true
     validates :password, length: { minimum: 6 }, allow_nil: true
 
-    after_initialize :ensure_session_token
+    after_initialize :ensure_session_token, :ensure_bio
 
     attr_reader :password
 
@@ -75,6 +75,12 @@ class User < ApplicationRecord
     def self.generate_session_token
         SecureRandom::urlsafe_base64
     end
+
+    def ensure_bio 
+        self.bio = ""
+    end
+
+
 
 
 end

@@ -31,7 +31,7 @@ class UserImage extends React.Component {
 
 
     render() {
-        const { first_name = '', last_name = '', profilePhoto} = this.props.profileUser
+        const { first_name = '', last_name = '', profilePhoto = window.defaultUserIcon } = this.props.profileUser
         const fullName = `${first_name} ${last_name}`
         return (
           <div className="profile-image-container">
@@ -51,7 +51,7 @@ class UserImage extends React.Component {
             <img className="profile-image" src={profilePhoto} />
             <div className="add-photo-semicircle" onClick={this.addProfilePhoto}>
               <div className="camera-icon"></div>
-              <div className="add-photo"> {profilePhoto ? "Update" : "Add Photo"}</div>
+              <div className="add-photo"> {this.props.profilePhoto ? "Update" : "Add Photo"}</div>
             </div>
           </div>
         );

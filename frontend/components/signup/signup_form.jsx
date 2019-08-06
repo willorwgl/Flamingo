@@ -163,6 +163,7 @@ class SignupForm extends React.Component {
       const dob = `${month}-${day}-${year}`;
       createNewUser(merge({}, this.state, { dob }));
     }
+    
   }
 
   handleFocus(e) {
