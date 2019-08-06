@@ -4,11 +4,10 @@ class Api::PostsController < ApplicationController
 
     def index
         if params[:type] == "wall" 
-            @posts = User.includes(wall_posts: [:author]).find(params[:user_id]).wall_posts
+            @posts = User.includes(wall_posts: [:author, :comments]).find(params[:user_id]).wall_posts
         else 
             @posts = User.includes(:authored_posts, [:author] ).find(params[:user_id]).authored_posts
         end
-        # , :order => "created_at desc"?
         render :index
     end
 

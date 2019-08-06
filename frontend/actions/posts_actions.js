@@ -42,7 +42,9 @@ export const destroyPost = (id) => dispatch => {
 }
 
 export const requestPosts = (id, type) => dispatch => {
+
     return PostUtil.requestPosts(id, type).then((posts) => {
+
         dispatch(receivePosts(posts))
     });
 }

@@ -7,6 +7,7 @@ import {
 } from "../../../actions/comments_actions";
 import { merge } from "lodash";
 import Comment from "./comment";
+import { Link } from "react-router-dom";
 
 class Post extends React.Component {
   constructor(props) {
@@ -18,17 +19,17 @@ class Post extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleEnter = this.handleEnter.bind(this);
-    this.handleCommentClick = this.handleCommentClick.bind(this)
-    this.commentRef = React.createRef()
+    this.handleCommentClick = this.handleCommentClick.bind(this);
+    this.commentRef = React.createRef();
   }
 
-  componentDidMount() {
-    const {
-      requestComments,
-      post: { id: postId }
-    } = this.props;
-    requestComments(postId);
-  }
+  // componentDidMount() {
+  //   const {
+  //     requestComments,
+  //     post: { id: postId }
+  //   } = this.props;
+  //   requestComments(postId);
+  // }
 
   handleChange(e) {
     const field = e.target.name;
@@ -48,7 +49,7 @@ class Post extends React.Component {
   }
 
   handleCommentClick(e) {
-    this.commentRef.current.focus()
+    this.commentRef.current.focus();
   }
 
   comments() {
@@ -71,26 +72,42 @@ class Post extends React.Component {
     //     childComments[el.parent_comment_id].push(el)
     //   }
     // })
-    return parentComments.map(el => {
-      return (
-        <Comment
-          comment={el}
-          key={el.id}
-          childComments={childComments[el.id]}
-        />
-      );
-    });
+    if (parentComments.length) {
+      const commentList = parentComments.map(el => {
+        return (
+          <Comment
+            comment={el}
+            key={el.id}
+            childComments={childComments[el.id]}
+          />
+        );
+      });
+      return <div className="comments-container">{commentList}</div>;
+    }
+    return null;
   }
 
   render() {
-    const { body, first_name, last_name } = this.props.post;
+    const { author = {}, currentUser = {} } = this.props;
+    const {
+      first_name = "",
+      last_name = "",
+      id = null,
+      profilePhoto = window.defaultUserIcon
+    } = author;
+    const { body = "" } = this.props.post;
     const fullName = `${first_name} ${last_name}`;
-
+    const {
+      id: currentUserId = null,
+      profilePhoto: currentUserProfilePhoto = window.defaultUserIcon
+    } = currentUser;
     return (
       <div className="post-container">
         <div className="user-post">
           <div className="post-header">
-            <span className="poster-icon" />
+            <Link to={`/user/${id}`}>
+              <img className="poster-icon" src={profilePhoto} />
+            </Link>
             <span className="post-info">
               <div className="poster-name">{fullName}</div>
               <div className="post-time">time</div>
@@ -110,9 +127,12 @@ class Post extends React.Component {
             <i class="fas fa-share" /> Share
           </span>
         </div>
-        <div className="comments-container">{this.comments()}</div>
+        {this.comments()}
         <div className="post-comment-form">
-          <img className="commenter-icon" />
+          <Link to={`/user/${currentUserId}`}>
+            <img className="commenter-icon" src={currentUserProfilePhoto} />
+          </Link>
+
           <div className="comment-input-container">
             <TextareaAutosize
               className="comment-input"
@@ -132,17 +152,21 @@ class Post extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const comments = state.entities.comments || {};
+  const comments = state.entities.comments;
+  const authors = state.entities.users;
+  const currentUser = state.session.currentUser;
   const postComments = Object.values(comments).filter(value => {
     return value.post_id === ownProps.post.id;
   });
-  return merge({}, ownProps, { comments: postComments });
+  const author = Object.values(authors).find(value => {
+    return value.id === ownProps.post.author_id;
+  });
+  return merge({}, ownProps, { comments: postComments, author, currentUser });
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    createComment: comment => dispatch(createComment(comment)),
-    requestComments: postId => dispatch(requestComments(postId))
+    createComment: comment => dispatch(createComment(comment))
   };
 };
 

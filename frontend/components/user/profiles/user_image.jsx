@@ -1,4 +1,6 @@
 import React from "react";
+import { openModal } from "../../../actions/modal_actions";
+import { connect  } from "react-redux"
 
 class UserImage extends React.Component {
 
@@ -17,33 +19,42 @@ class UserImage extends React.Component {
     //     }
     // }
 
+    constructor(props) {
+        super(props)
+        this.addProfilePhoto = this.addProfilePhoto.bind(this)
+    }
+
+    addProfilePhoto(e) {
+       const { openModal } = this.props
+       openModal("add photo")
+    }
+
 
     render() {
-        const { first_name = '', last_name = ''} = this.props.profileUser
+        const { first_name = '', last_name = '', profilePhoto} = this.props.profileUser
         const fullName = `${first_name} ${last_name}`
         return (
-        <div className="profile-image-container">
+          <div className="profile-image-container">
             <div>
-                <div className="cover-image-footer">
-                    <span className="profile-name">
-                        {fullName}
-                    </span>
-                    <button className="image-footer-button">Update Info</button>
+              <div className="cover-image-footer">
+                <span className="profile-name">{fullName}</span>
+                <button className="image-footer-button">
+                  Update Info
+                </button>
 
-                    <button className="image-footer-button">Activity</button>
-
-
-                </div>
+                <button className="image-footer-button">
+                  Activity
+                </button>
+              </div>
             </div>
 
-            <div className="profile-image-circle">
-                <img className="profile-image" src={window.splashImage}/>
-
+            <img className="profile-image" src={profilePhoto} />
+            <div className="add-photo-semicircle" onClick={this.addProfilePhoto}>
+              <div className="camera-icon"></div>
+              <div className="add-photo"> {profilePhoto ? "Update" : "Add Photo"}</div>
             </div>
-           
-
-        </div>
-        )
+          </div>
+        );
     }
 }
 
@@ -54,8 +65,10 @@ class UserImage extends React.Component {
 //     }
 // }
 
-// const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = dispatch => {
+    return {
+        openModal:  (modalName) => dispatch(openModal(modalName))
+    }
+}
 
-// }
-
-export default UserImage
+export default connect(null, mapDispatchToProps)(UserImage)

@@ -3,7 +3,6 @@
     border: 1px solid #dddfe2;
     position: relative;
     background: white;
-    z-index: 1000 !important;
 }
 
 /* .create-post-btn-div {} */
@@ -20,7 +19,7 @@
     padding: 4px 6px 4px 4px
 }
 
-.modal-background {
+/* .modal-background {
     position: absolute;
     left: 0;
     top: 0;
@@ -29,7 +28,7 @@
     background-color: black;
     opacity: 0.6;
     z-index: 10;
-}
+} */
 
 
 
@@ -45,7 +44,6 @@
     /* left: 10px;
     top: -15px; */
     border-radius: 50%;
-    border: 1px solid red;
     margin-top: 20px;
     margin-left: 10px;
 }
@@ -89,18 +87,71 @@
     display: inline-block;
     width: 118px;
     height: 32px;
-    text-overflow: ellipsis;
     color: #4b4f56;
     font-weight: 600;
     cursor: pointer;
     margin-right: 10px;
     background: #f5f6f7;
     border-radius: 20px;
-    padding: 5px 7px;
     box-sizing: border-box;
     font-size: 12px;
+    line-height: 32px;
+    vertical-align: center;
+    text-align: center;
 }
 
 .feeling-activity-option {
     width: 138px;
+}
+
+.on-top {
+    z-index: 15;
+}
+
+.post-file {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+.post-photo-preview-container {
+    display: flex;
+}
+
+.post-photo-preview {
+    width: 100%;
+    height: 100%;
+
+}
+
+.more-post-file-container {
+    width: 100px;
+    height: 100px;
+    border: 1px dashed #dddfe2;
+    cursor: pointer;
+}
+
+.add-photo-sign {
+    display: block;
+    text-align: center;
+    line-height: 100px;
+    vertical-align: center;
+}
+
+.photo-attached {
+    background: #9cf196;
+}
+
+.preview-photo-container {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    margin: 0 10px;
+}
+
+.fa-times {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
 }

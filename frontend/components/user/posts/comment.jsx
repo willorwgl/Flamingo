@@ -2,6 +2,8 @@ import React from "react";
 import TextareaAutosize from "react-autosize-textarea";
 import { createComment } from "../../../actions/comments_actions";
 import { connect } from "react-redux";
+import { merge } from "lodash";
+import { Link } from "react-router-dom";
 
 class Comment extends React.Component {
   constructor(props) {
@@ -44,10 +46,19 @@ class Comment extends React.Component {
 
   replyForm() {
     const { reply } = this.state;
+    const { currentUser = {} } = this.state;
+    const {
+      first_name = "",
+      last_name = "",
+      id = null,
+      profilePhoto = window.defaultUserIcon
+    } = currentUser;
     if (reply) {
       return (
         <div className="comment-reply">
-          <img className="replier-icon" />
+          <Link to={`/user/${id}`}>
+            <img className="replier-icon" src={profilePhoto} />
+          </Link>
           <div className="reply-input-container">
             <TextareaAutosize
               autoFocus
@@ -68,12 +79,19 @@ class Comment extends React.Component {
   }
 
   replies() {
-    const { childComments: replies } = this.props;
-
+    const { childComments: replies, author = {} } = this.props;
     return replies.map(reply => {
       return (
         <div key={reply.id} className="user-reply">
-          <img className="replier-icon" />
+          <Link to={`/user/${reply.author_id}`}>
+            <img
+              className="replier-icon"
+              src={
+                reply.profilePhoto ? reply.profilePhoto : window.defaultUserIcon
+              }
+            />
+          </Link>
+
           <div>
             <div className="reply-body"> {reply.body}</div>
             <div className="reply-options">
@@ -92,11 +110,20 @@ class Comment extends React.Component {
   }
 
   render() {
-    const { comment } = this.props;
+    const { comment, author = {}, currentUser = {} } = this.props;
+    const {
+      first_name = "",
+      last_name = "",
+      id = null,
+      profilePhoto = window.defaultUserIcon
+    } = author;
     return (
       <div className="user-comment-container">
         <div className="user-comment">
-          <img className="commenter-icon" />
+          <Link to={`/user/${id}`}>
+            <img className="commenter-icon" src={profilePhoto} />
+          </Link>
+
           <div>
             <div className="comment-body"> {comment.body}</div>
             <div className="comment-options">
@@ -118,6 +145,15 @@ class Comment extends React.Component {
   }
 }
 
+const mapStateToProps = (state, ownProps) => {
+  const authors = state.entities.users;
+  // const currentUser = state.session.currentUser;
+  const author = Object.values(authors).find(value => {
+    return value.id === ownProps.comment.author_id;
+  });
+  return merge({}, ownProps, { author });
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     createReply: comment => dispatch(createComment(comment))
@@ -125,6 +161,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Comment);

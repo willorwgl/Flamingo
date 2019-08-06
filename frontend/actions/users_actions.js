@@ -1,7 +1,6 @@
-import {
-    RECEIVE_USER
-} from "./session_actions"
 import * as UserUtil from "../util/user_util"
+
+export const RECEIVE_USER = "RECEIVE_USER"
 
 
 export const receiveUser = user => {
@@ -12,9 +11,7 @@ export const receiveUser = user => {
 }
 
 export const requestUser = (id) => dispatch => {
-
     return UserUtil.requestUser(id).then((user) => {
-
         dispatch(receiveUser(user))
     })
 }

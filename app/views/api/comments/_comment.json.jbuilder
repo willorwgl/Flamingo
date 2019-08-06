@@ -1,4 +1,4 @@
 
 json.set! comment.id do 
-    json.extract! comment, :id, :body, :post_id, :parent_comment_id
+    json.extract! comment, :id, :body, :post_id, :parent_comment_id, :author_id
 end

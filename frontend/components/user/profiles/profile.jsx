@@ -1,14 +1,13 @@
 import React from "react";
 import UserImage from "./user_image";
 import ProfileNavBar from "./profile_nav_bar";
-import ProfileSidebar from "./sidebar";
 import CreatePostForm from "../posts/create_post_form";
 import WallPosts from "./../posts/wall_posts";
 import { connect } from "react-redux";
 import { requestUser } from "../../../actions/users_actions";
-import SidebarIntro from "./sidebar_intro"
-import SidebarFriends from "./sidebar_friends"
-import SidebarPhotos from "./sidebar_photos"
+import SidebarIntro from "./sidebar_intro";
+import SidebarFriends from "./sidebar_friends";
+import SidebarPhotos from "./sidebar_photos";
 
 class Profile extends React.Component {
   componentDidMount() {
@@ -17,8 +16,17 @@ class Profile extends React.Component {
     requestProfileUser(id);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    const { id: currentId } = this.props.match.params;
+    const { id: prevId } = prevProps.match.params;
+    if (currentId != prevId) {
+      const { requestProfileUser } = this.props;
+      requestProfileUser(currentId);
+    }
+  }
+
   render() {
-    const { profileUser } = this.props;
+    const { profileUser} = this.props;
     return (
       <div className="profile">
         <UserImage profileUser={profileUser} />
@@ -43,7 +51,7 @@ const mapStateToProps = (state, ownProps) => {
   const { id } = ownProps.match.params;
   const profileUser = state.entities.users[id] || {};
   return {
-    profileUser
+    profileUser,
   };
 };
 

@@ -37,6 +37,10 @@ class User < ApplicationRecord
     has_many :comments,
         foreign_key: :author_id
 
+    has_one_attached :profile_photo
+
+    has_one_attached :cover_image
+
 
     def self.find_by_credentials(user, password)     
         return nil unless user && user.is_password?(password)

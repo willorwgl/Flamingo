@@ -1,5 +1,3 @@
-
-
 export const requestPosts = (id, type) => {
     return $.ajax({
         method: "GET",
@@ -14,7 +12,9 @@ export const createPost = (post) => {
     return $.ajax({
         method: "POST",
         url: "api/posts",
-        data: { post }
+        data: {
+            post
+        }
     })
 }
 
@@ -22,7 +22,9 @@ export const updatePost = (post) => {
     return $.ajax({
         method: "PATCH",
         url: "api/posts",
-        data: { post }
+        data: {
+            post
+        }
     })
 }
 
@@ -30,6 +32,8 @@ export const deletePost = (id) => {
     return $.ajax({
         method: "DELETE",
         url: "api/posts",
-        data: {id}
+        data: {
+            id
+        }
     })
 }

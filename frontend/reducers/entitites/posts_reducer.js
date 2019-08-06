@@ -3,6 +3,7 @@ import {
     DELETE_POST,
     RECEIVE_POSTS
 } from "../../actions/posts_actions"
+import { merge } from "lodash"
 
 
 
@@ -10,13 +11,13 @@ export default (state = {}, action) => {
     Object.freeze(state)
     switch (action.type) {
         case RECEIVE_POST:
-            return Object.assign({}, state, action.post)
+            return merge({}, state, action.post.post)
         case DELETE_POST:
             const newState = Object.assign({}, state)
             delete newState[action.id]
             return newState
         case RECEIVE_POSTS:
-            return action.posts
+            return  action.posts.posts
         default:
             return state
     }

@@ -25,9 +25,58 @@
 }
 
 .star-icon {
+    
     background-image: image-url("side-icons.png");
     background-size: 27px 1030px;
     width: 24px;
     height: 24px;
     background-position: 0 -47px;
+}
+
+.school-icon {
+    display: inline-block;
+    margin-right: 8px;
+    background-image: image-url("side-icons.png");
+    background-size: 27px 1030px;
+    width: 16px;
+    height: 16px;
+    background-position: 0 -527px;
+}
+
+.city-icon {
+    display: inline-block;
+    margin-right: 8px;
+    background-image: image-url("side-icons.png");
+    background-size: 27px 1030px;
+    width: 16px;
+    height: 16px;
+    background-position: 0 -408px;
+}
+
+.workplace-icon {
+    display: inline-block;
+    margin-right: 8px;
+    background-image: image-url("side-icons.png");
+    background-size: 27px 1030px;
+    width: 16px;
+    height: 16px;
+    background-position: 0 -340px;
+}
+
+.relationship-icon {
+    display: inline-block;
+    margin-right: 8px;
+    background-image: image-url("side-icons.png");
+    background-size: 27px 1030px;
+    width: 16px;
+    height: 16px;
+    background-position: 0 -578px;
+}
+
+.camera-icon {
+    width: 26px;
+    height: 21px;
+    background-image: image-url("side-icons.png");
+    background-size: 27px 1030px;
+    background-position: 0 0;
 }

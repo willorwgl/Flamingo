@@ -1,5 +1,5 @@
 import {
-    RECEIVE_USER,
+    RECEIVE_CURRENT_USER,
     LOGOUT_CURRENT_USER
 } from "../actions/session_actions"
 
@@ -10,9 +10,9 @@ const _nullSession = {
 export default (state = _nullSession, action) => {
     Object.freeze(state)
     switch (action.type) {
-        case RECEIVE_USER:
+        case RECEIVE_CURRENT_USER:
             return Object.assign({}, {
-                currentUser: action.user
+                currentUser: Object.values(action.user)[0]
             })
         case LOGOUT_CURRENT_USER:
             return _nullSession

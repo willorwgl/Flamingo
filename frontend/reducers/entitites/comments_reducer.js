@@ -6,6 +6,7 @@ import {
     DELETE_COMMENT,
     CLEAR_COMMENTS
 } from "../../actions/comments_actions"
+import { RECEIVE_POSTS } from "../../actions/posts_actions";
 
 export default (state = {}, action) => {
     Object.freeze(state)
@@ -22,6 +23,8 @@ export default (state = {}, action) => {
             return newState
         case CLEAR_COMMENTS: 
             return {}
+        case RECEIVE_POSTS: 
+            return merge({}, state, action.posts.comments)
         default:
             return state
     }

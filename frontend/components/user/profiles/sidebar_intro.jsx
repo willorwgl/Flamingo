@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { updateUser } from "../../../actions/users_actions";
 import { merge } from "lodash";
+import { throws } from "assert";
 
 class SidebarIntro extends React.Component {
   constructor(props) {
@@ -72,6 +73,44 @@ class SidebarIntro extends React.Component {
     }
   }
 
+  featured() {
+    return (
+      <>
+        <div className="star-icon" />
+        <div className="featured-description">
+          Showcase what's important to you by adding photos, pages, groups and
+          more to your featured section on your public profile.
+        </div>
+        <div className="add-feature-link">Add to Featured</div>
+      </>
+    );
+  }
+
+  introInfo() {
+    return (
+      <>
+        <div className="intro-city-info">
+          <div className="city-icon" />
+          Current city:
+        </div>
+        <div className="intro-workplace-info">
+          <div className="workplace-icon" />
+          Workplace:
+        </div>
+
+        <div className="intro-school-info">
+          <div className="school-icon" />
+          School
+        </div>
+
+        <div className="relationship-info">
+          <div className="relationship-icon" />
+          Relationship
+        </div>
+      </>
+    );
+  }
+
   handleChange(e) {
     const field = e.target.name;
     const value = e.target.value;
@@ -82,7 +121,7 @@ class SidebarIntro extends React.Component {
     e.preventDefault();
     const value = e.target.elements.bio.value;
     const { updateUser, profileUser } = this.props;
-    updateUser(merge({}, profileUser, {bio: value}));
+    updateUser(merge({}, profileUser, { bio: value }));
     this.setState({ bio: value });
     this.toggleBioEdit();
   }
@@ -103,6 +142,8 @@ class SidebarIntro extends React.Component {
           </div>
         </div>
         <div className="intro-bio">{this.introBio()}</div>
+        <div className="intro-info">{this.introInfo()}</div>
+        <div className="bio-featured">{this.featured()}</div>
       </div>
     );
   }
