@@ -1,0 +1,174 @@
+.search-input {
+    height: 24px;
+    box-sizing: border-box;
+    width: 376px;
+    border: none;
+    outline: none;
+    font-size: 12px;
+    box-sizing: border-box;
+    padding-left: 10px;
+}
+
+.search-button {
+    height: 100%;
+    width: 46px;
+    text-align: center;
+    color: black !important;
+    padding: 5px 0;
+    box-sizing: border-box;
+    background: #f5f6f7;
+}
+
+.nav-search-bar {
+    display: flex;
+    position: relative;
+}
+
+.app-logo {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+.user-nav-bar {
+    display: flex;
+    align-items: center;
+}
+
+.user-nav-left {
+    display: flex;
+    width: 520px;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    margin-left: 200px;
+}
+
+.nav-options {
+    display: flex;
+    width: 1012px;
+    margin: 0 auto;
+    height: 24px;
+    color: white;
+    font-weight: 500;
+}
+
+.nav-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, .1);
+}
+
+.profile-button {
+    display: flex;
+    margin-left: 10px;
+}
+
+.nav-name {
+    line-height: 24px;
+    display: inline-block;
+    padding: 0 5px;
+    cursor: pointer;
+    margin: 0 5px;
+    color: white !important;
+}
+
+.home-button {
+    width: 60px;
+    line-height: 24px;
+    display: inline-block;
+    padding: 0 12px 1px;
+    box-sizing: border-box;
+    cursor: pointer;
+    color: white !important;
+}
+
+.home-button:hover,
+.nav-name:hover {
+    background: rgba(0, 0, 0, .1) !important;
+    color: white !important;
+}
+
+.app-logo:hover {
+    background: none !important;
+}
+
+.nav-caret {
+    vertical-align: center;
+    padding: 5px 0;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.nav-dropdown {
+    width: 207px;
+    background-color: white;
+    border: 1px solid black;
+    position: absolute;
+    left: -180px;
+    bottom: -38px;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+
+}
+
+.nav-dropdown-container {
+    position: relative;
+
+}
+
+.nav-logout-button {
+    height: 24px;
+    line-height: 24px;
+    vertical-align: center;
+    color: black;
+    margin-left: 30px;
+    font-size: 12px;
+    font-family: verdana,
+        arial,
+        helvetica,
+        sans-serif;
+    font-weight: normal;
+}
+
+.nav-dropdown-container :after {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 0px 7px 7px 7px;
+    border-color: white transparent;
+    display: block;
+    width: 0;
+    z-index: 1;
+    right: 16px;
+    top: -11px;
+
+
+
+}
+
+.search-result-container {
+    position: absolute;
+    background: white;
+    z-index: 1;
+    top: 24px;
+    width: 422px;
+}
+
+.search-result {
+    height: 32px;
+    padding-left: 10px; 
+    line-height: 32px;
+    vertical-align: center;
+
+}
+
+.search-result:hover {
+    background: #e9ebee;
+}
+
+.in-search {
+    background: #4080FF !important;
+    color: white !important;
+}

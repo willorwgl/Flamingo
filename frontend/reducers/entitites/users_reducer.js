@@ -1,5 +1,6 @@
 import {
-    RECEIVE_USER
+    RECEIVE_USER,
+    RECEIVE_USERS
 } from "../../actions/users_actions"
 import {
     merge
@@ -11,16 +12,21 @@ import {
 import {
     RECEIVE_CURRENT_USER 
 } from "../../actions/session_actions"
+import { RECEIVE_FRIENDS } from "../../actions/friendships_actions";
 
 export default (state = {}, action) => {
 
     switch (action.type) {
         case RECEIVE_USER:
             return merge({}, state, action.user)
+        case RECEIVE_USERS:
+            return merge({}, state, action.users)
         case RECEIVE_CURRENT_USER:
             return merge({}, state, action.user)
         case RECEIVE_POSTS:
             return merge({}, state, action.posts.authors)
+        case RECEIVE_FRIENDS:
+            return merge({}, state, action.friendships.friends)
         default:
             return state
     }

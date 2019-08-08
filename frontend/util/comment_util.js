@@ -10,7 +10,7 @@ export const requestComments = (postId) => {
 
 export const destroyComment = (commentId) => {
     return $.ajax( {
-        method: "DESTROY",
+        method: "DELETE",
         url: `/api/comments/${commentId}`
     })
 }
@@ -18,7 +18,7 @@ export const destroyComment = (commentId) => {
 export const patchComment = (comment) => {
     return $.ajax( {
         method: "PATCH",
-        url: `/api/comments/${commentId}`,
+        url: `/api/comments/${comment.id}`,
         data: { comment }
     })
 }

@@ -5,6 +5,8 @@
     padding: 12px 12px 0;
     box-sizing: border-box;
     margin: 10px 0 0;
+    position: relative;
+    background: white;
 }
 
 .post-container {
@@ -61,13 +63,14 @@
 }
 
 .post-footer {
-    height: 40px;
+    height: 42px;
     width: 100%;
     border-left: 1px solid #ccd0d5;
     border-bottom: 1px solid #ccd0d5;
     border-right: 1px solid #ccd0d5;
     box-sizing: border-box;
     padding: 0 10px;
+    background: white;
 
 }
 
@@ -82,20 +85,28 @@
 .post-like {
     display: inline-block;
     width: 159.73px;
-    height: 100%;
     text-align: center;
-    padding: 10px 0;
+    padding: 5px 0;
     box-sizing: border-box;
     color: #1c1e21;
     font-size: 13px;
-    min-height: 63px;
-
+    height: 30px;
+    margin: 5px 0;
 }
 
 .post-comment:hover,
 .post-share:hover,
 .post-like:hover {
     cursor: pointer;
+    background-color: lightgray;
+}
+
+.fa-thumbs-up {
+    font-size: 18px;
+}
+
+.fa-comment-alt {
+    font-size: 18px;
 }
 
 
@@ -107,7 +118,8 @@
     border-right: 1px solid #ccd0d5;
     padding: 8px 12px;
     display: flex;
-    align-items: flex-start
+    align-items: flex-start;
+    background: white;
 }
 
 .comment-input-container {
@@ -142,6 +154,7 @@
     border-left: 1px solid #ccd0d5;
     border-bottom: 1px solid #ccd0d5;
     border-right: 1px solid #ccd0d5;
+    background: white;
 }
 
 .comment-body {
@@ -161,15 +174,16 @@
     margin: 5px;
 }
 
-.comment-reply-option {
+.comment-reply-option, .comment-like-option{
     cursor: pointer;
     margin-left: 5px;
     display: inline-block;
-    color: lightblue;
+    color: #385898;
     font-size: 11px;
 }
 
-.comment-reply-option:hover {
+.comment-reply-option:hover,
+.comment-like-option:hover {
     text-decoration: underline;
 }
 
@@ -219,4 +233,138 @@
     border-radius: 20px;
     background-color: #f2f6f5;
     margin-left: 5px;
+}
+
+.post-time {
+    font-size: 12px;
+    color: gray;
+}
+
+.edit-post {
+    position: absolute;
+    right: 30px;
+    top: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    color: gray;
+}
+
+.delete-post {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    color: gray;
+}
+
+.edit-post-container,
+.edit-comment-container {
+    width: 500px;
+    background-color: white;
+}
+
+.edit-post-header,
+.edit-comment-header {
+    width: 100%;
+    padding: 10px 12px;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-weight: 600;
+    background-color: #f5f6f7;
+    position: relative;
+}
+
+.edit-post-input-container,
+.edit-comment-input-container {
+    min-height: 107px;
+    width: 100%;
+    display: flex;
+}
+
+.edit-post-input,
+.edit-comment-input {
+    width: 448px;
+    padding: 18px 48px 13px 12px;
+    box-sizing: border-box;
+    border: none;
+    resize: none;
+    font-size: 24px;
+    outline: none;
+}
+
+.edit-poster-icon,
+.edit-comment-icon {
+    margin: 20px 0 0 10px;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.edit-post-footer,
+.edit-comment-footer {
+    background-color: #f5f6f7;
+    height: 40px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.edit-post-save,
+.edit-comment-save {
+    width: 63px;
+    height: 24px;
+    padding: 0 16px;
+    box-sizing: border-box;
+    background-color: #4267b2;
+    cursor: pointer;
+    line-height: 24px;
+    vertical-align: center;
+    color: white;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.edit-photo-cancel,
+.edit-comment-cancel {
+    font-size: 16px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}
+
+.delete-comment,
+.edit-comment {
+    color: grey;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.fa-caret-right {
+    margin: 0 5px;
+}
+
+
+.user-name-link:hover {
+
+    text-decoration: underline;
+    color: #385898 !important;
+    background-color: transparent !important;
+
+}
+
+.user-name-link {
+    color: #385898 !important;
+    cursor: pointer;
+    margin-right: 5px !important;
+    display: inline-block;
+}
+
+.posts-container-label {
+    color: #606770;
+    font-weight: 600;
+    margin-top: 10px;
+    font-size: 12px;
 }

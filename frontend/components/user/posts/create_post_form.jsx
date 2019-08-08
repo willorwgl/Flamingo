@@ -4,12 +4,12 @@ import { createPost } from "../../../actions/posts_actions";
 import TextareaAutosize from "react-autosize-textarea";
 import { withRouter } from "react-router-dom";
 import { merge } from "lodash";
-import { Link } from "react-router-dom";
 
 class CreatePostForm extends React.Component {
   constructor(props) {
     super(props);
-    const { id: profileId } = this.props.match.params;
+    const { currentUser } = this.props
+    const { id: profileId = currentUser.id } = this.props.match.params;
     this.state = {
       body: "",
       wall_id: profileId,
@@ -28,10 +28,33 @@ class CreatePostForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+
+    const { photos, body, wall_id } = this.state;
+
     const { createPost } = this.props;
-    createPost(this.state);
-    this.setState({ body: "", modal: false });
-    this.postHTML.classList.remove("on-top");
+    if (photos.length) {
+
+      const formData = new FormData();
+      formData.append("post[body]", body);
+      for (let photo of photos) {
+        formData.append("post[photos][]", photo);
+      }
+      formData.append("post[wall_id]", wall_id);
+      $.ajax({
+        method: "POST",
+        url: "/api/posts",
+        data: formData,
+        processData: false,
+        contentType: false
+      });
+    } else {
+      if (!body) return
+      createPost(this.state);
+      this.setState({ body: "", modal: false });
+      this.postHTML.classList.remove("on-top");
+      this.forceUpdate()
+    }
+
   }
 
   handleChange(e) {
@@ -148,8 +171,7 @@ class CreatePostForm extends React.Component {
             </span>
           </div>
           <div className="create-post-body">
-     
-              <img className="create-post-icon" src={profilePhoto} />
+            <img className="create-post-icon" src={profilePhoto} />
 
             <TextareaAutosize
               className="post-body-input"

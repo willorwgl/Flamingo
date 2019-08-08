@@ -2,15 +2,16 @@ class Api::UsersController < ApplicationController
   
 
     def show
-      @user = User.find(params[:id])
+      @user = User.with_attached_profile_photo.find(params[:id])
     end
+
 
     def update
       @user = User.find(params[:id])
+
       if params["user"]["profile_photo"]
         @user.profile_photo.detach
       end
-
       if @user.update(user_params) 
         render :show
       else 
@@ -27,6 +28,18 @@ class Api::UsersController < ApplicationController
         render json: ["Invalid user"], status: 401
       end
     end
+
+
+    def search 
+      if params[:type] == "lite" 
+         @users = User.where("concat_ws(' ' , first_name, last_name) iLIKE ?", "%#{params[:query_string]}%").limit(7)
+          render :search_lite
+      else
+          @users = User.with_attached_profile_photo.where("concat_ws(' ' , first_name, last_name) iLIKE ?", "%#{params[:query_string]}%")
+          render :search
+      end
+    end
+
 
     private
     def user_params

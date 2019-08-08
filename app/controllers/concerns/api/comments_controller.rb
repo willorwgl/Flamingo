@@ -7,18 +7,18 @@ class Api::CommentsController < ApplicationController
     end
 
     def destroy
-        @comment = current_user.comments.find(params[:comment_id])
+        @comment = current_user.comments.find(params[:id])
         @comment.destroy
     end
 
-    def update
-        @comment = current_user.comments.find(params[:comment_id])
-        if @comment.update(params[:comment][:body])
+     def update 
+        @comment = current_user.comments.find(params[:id])
+        if @comment.update(comment_params)
             render :show
         else
-            render json: ["Invalid Comment"], status: 422
+            render json: {message: "Invalid comment"}, status: 422
         end
-    end
+  end
 
     def create 
         @comment = current_user.comments.new(comment_params)   

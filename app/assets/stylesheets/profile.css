@@ -5,7 +5,7 @@
 }
 
 .profile-image-container {
-    background-color: #ca5fa6;
+    background-color: black;
     height: 200px;
     position: relative;
 
@@ -14,7 +14,12 @@
 
 .cover-image-footer {
     position: absolute;
-    bottom: 0px;
+    bottom: 20px;
+    left: 200px;
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+
 }
 
 .profile-image {
@@ -62,15 +67,11 @@
 }
 
 
-
-
-
-
-
 .profile-name {
     color: white;
-    font-size: 32px;
-    margin-left: 300px;
+    font-size: 24px;
+    line-height: 24px;
+    vertical-align: center;
 }
 
 .image-footer-button {
@@ -88,6 +89,7 @@
     border-left: 1px solid lightgray;
     border-right: 1px solid lightgray;
     padding-left: 201px;
+    background: white;
 
 }
 
@@ -115,15 +117,19 @@
 .sidebar-photos {
     width: 323px;
     min-height: 48px;
+
+        border: 1px solid #dddfe2;
+        background: white;
 }
 
 .profile-wall {
     display: inline-block;
 }
 
-.profile-sidebar {
+/* .profile-sidebar {
     border: 1px solid #dddfe2;
-}
+    background: white;
+} */
 
 .profile-main {
     margin-top: 10px;
@@ -140,3 +146,62 @@ a:hover {
 a {
     text-decoration: none;
 }
+
+.friend-button {
+    height: 28px;
+    line-height: 28px;
+    vertical-align: center;
+    padding: 0 10px;
+    font-weight: 700px;
+    border-color: rgba(0, 0, 0, .4);
+    color: #4b4f56;
+    background-color: #f5f6f7;
+    /* position: absolute; */
+    right: 10px;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+}
+
+.friend-options-container {
+    /* background: red; */
+    /* height: 300px; */
+    position: absolute;
+    index: 1;
+    left: 0;
+    width: 180px;
+    padding-top: 13px;
+}
+
+.friend-options {
+    /* position: absolute; */
+    background: white;
+    border: 1px solid black;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+
+
+}
+
+.friend-options-container:after {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 0px 7px 7px 7px;
+    border-color: white transparent;
+    display: block;
+    width: 0;
+    z-index: 1;
+    left: 9px;
+    top: 7px;
+    border-top-color: black;
+    border-left-color: black;
+    border-right-color: black;
+
+}
+
+ body {
+     background-color: #e9ebee !important;
+     z-index: -10;
+ }

@@ -4,12 +4,16 @@ class Api::PostsController < ApplicationController
 
     def index
         if params[:type] == "wall" 
-            @posts = User.includes(wall_posts: [:author, :comments]).find(params[:user_id]).wall_posts
+            @posts = Post.includes(
+                comments: [author: [profile_photo_attachment: [:blob]]],
+                 author: [profile_photo_attachment: [:blob]])
+                 .where(wall_id: params[:user_id])
         else 
-            @posts = User.includes(:authored_posts, [:author] ).find(params[:user_id]).authored_posts
+            @posts = Post.includes(authored_posts: [:author]).where(author_id: params[:user_id])
         end
         render :index
     end
+
 
     def create
         @post = current_user.authored_posts.new(post_params)
@@ -21,16 +25,21 @@ class Api::PostsController < ApplicationController
     end
 
     def destroy
-        post = current_user.posts.find(params[:id])
+        post = current_user.authored_posts.find(params[:id])
         post.destroy
     end
 
     def update 
-
+        @post = current_user.authored_posts.find(params[:id])
+        if @post.update(post_params)
+            render :show
+        else
+            render json: {message: "Invalid post"}, status: 422
+        end
     end
 
     private 
     def post_params 
-        params.require(:post).permit(:body, :wall_id)
+        params.require(:post).permit(:body, :wall_id, photos: [])
     end
 end

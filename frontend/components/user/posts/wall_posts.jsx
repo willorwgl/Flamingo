@@ -38,7 +38,7 @@ class WallPosts extends React.Component {
           })
     return (
       <div className="posts-container">
-        posts
+        <div className="posts-container-label">Posts</div>
         {postList}
       </div>
     );

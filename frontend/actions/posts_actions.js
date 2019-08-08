@@ -38,7 +38,9 @@ export const createPost = (post) => dispatch => {
 }
 
 export const destroyPost = (id) => dispatch => {
-    return PostUtil.deletePost(id).then(() => deletePost(id))
+    return PostUtil.deletePost(id).then(() => {
+        dispatch(deletePost(id))
+    })
 }
 
 export const requestPosts = (id, type) => dispatch => {

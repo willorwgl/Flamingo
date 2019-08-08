@@ -42,10 +42,9 @@ class AddPhotoForm extends React.Component {
   save(e) {
     const formData = new FormData();
     const { currentUser } = this.props;
-    const userId = Object.values(currentUser)[0].id;
     formData.append("user[profile_photo]", this.state.profilePhoto);
     $.ajax({
-      url: `/api/users/${userId}`,
+      url: `/api/users/${currentUser.id}`,
       method: "PATCH",
       data: formData,
       contentType: false,

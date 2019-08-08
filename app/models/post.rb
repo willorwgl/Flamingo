@@ -3,7 +3,7 @@
 # Table name: posts
 #
 #  id         :bigint           not null, primary key
-#  body       :text             not null
+#  body       :text
 #  author_id  :integer          not null
 #  wall_id    :integer          not null
 #  created_at :datetime         not null
@@ -14,7 +14,7 @@
 
 class Post < ApplicationRecord 
 
-    validates :body, :author_id, :wall_id, presence: true
+    validates :author_id, :wall_id, presence: true
 
     has_many :comments, as: :commentable
 
@@ -29,6 +29,8 @@ class Post < ApplicationRecord
     has_many :comments,
         foreign_key: :post_id,
         class_name: :Comment
+    
+    has_many_attached :photos
 
 
 end

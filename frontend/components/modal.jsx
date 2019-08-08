@@ -2,16 +2,24 @@ import React from "react";
 import { closeModal } from "../actions/modal_actions";
 import { connect } from "react-redux";
 import AddPhotoForm from "./add_photo_form";
+import EditPostForm from "./user/posts/edit_post_form";
+import EditCommentForm from "./user/posts/edit_comment_form";
 
 function Modal({ modal, closeModal }) {
   if (!modal) {
     return null;
   }
   let component;
-  switch (modal) {
+  switch (modal.modalName) {
     case "add photo":
-
       component = <AddPhotoForm />;
+      break;
+    case "edit post":
+      component = <EditPostForm postId={modal.modalInfo} />;
+      break;
+    case "edit comment":
+      component = <EditCommentForm commentId={modal.modalInfo} />;
+      break;
   }
   return (
     <div className="modal-background" onClick={closeModal}>

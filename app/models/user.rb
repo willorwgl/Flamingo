@@ -13,6 +13,7 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  pronoun         :string           not null
+#  bio             :text
 #
 
 class User < ApplicationRecord
@@ -36,11 +37,21 @@ class User < ApplicationRecord
 
     has_many :comments,
         foreign_key: :author_id
+    
 
     has_one_attached :profile_photo
 
     has_one_attached :cover_image
 
+    
+
+    def friendships
+        Friendship.where("user_id = ? OR friend_id = ?", self.id, self.id)
+    end
+
+    def friends 
+        self.friendships.where(status: "accepted")
+    end
 
     def self.find_by_credentials(user, password)     
         return nil unless user && user.is_password?(password)
@@ -66,6 +77,7 @@ class User < ApplicationRecord
         @password = password
         self.password_digest = BCrypt::Password.create(password)
     end
+
 
     private
     def ensure_session_token 

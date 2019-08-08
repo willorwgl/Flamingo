@@ -7,11 +7,15 @@ class SidebarPhotos extends React.Component {
 
         return (
           <div className="sidebar-photos">
-          <div className="photos-icon"></div>
-            <span>
-              Photos
+
+            <div className="photos-label-container">
+              <div className="photos-icon"></div>
+              <span className="photos-label">
+                Photos
             </span>
+            </div>
           </div>
+         
         );
     }
 }

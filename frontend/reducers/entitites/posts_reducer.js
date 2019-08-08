@@ -14,10 +14,10 @@ export default (state = {}, action) => {
             return merge({}, state, action.post.post)
         case DELETE_POST:
             const newState = Object.assign({}, state)
-            delete newState[action.id]
+            delete newState[action.postId]
             return newState
         case RECEIVE_POSTS:
-            return  action.posts.posts
+            return  action.posts.posts || {}
         default:
             return state
     }

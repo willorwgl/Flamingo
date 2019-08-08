@@ -1,6 +1,5 @@
 .user-nav-bar {
-    background: #ff8080;
-    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, #ff8080 100%);
+    background-color: #4267b2;
     height: 42px;
     position: sticky;
     top: 0;

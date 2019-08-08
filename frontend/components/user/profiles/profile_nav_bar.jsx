@@ -1,19 +1,25 @@
 import React from "react";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 class ProfileNavBar extends React.Component {
   render() {
-    const { id } = this.props.profileUser
+    const acceptedFriends =
+      Object.values(this.props.acceptedFriends).length || null;
+    const { id } = this.props.profileUser;
     return (
       <div className="profile-nav-bar">
         <span className="timeline-nav-link">
           Timeline <i className="fas fa-caret-down" />
         </span>
 
-        <span className="about-nav-link"><Link to={`/user/${id}/about`}> About</Link></span>
-       
+        <span className="about-nav-link">
+          <Link to={`/user/${id}/about`}> About</Link>
+        </span>
 
-        <span className="friends-nav-link">Friends </span>
+        <span className="friends-nav-link">
+          Friends {acceptedFriends}
+        </span>
 
         <span className="photos-nav-link">Photos</span>
 
@@ -29,4 +35,11 @@ class ProfileNavBar extends React.Component {
   }
 }
 
-export default ProfileNavBar;
+const mapStateToProps = state => {
+  const acceptedFriends = state.entities.friendships.friends || {};
+  return {
+    acceptedFriends
+  };
+};
+
+export default connect(mapStateToProps)(ProfileNavBar);

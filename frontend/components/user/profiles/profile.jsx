@@ -8,20 +8,26 @@ import { requestUser } from "../../../actions/users_actions";
 import SidebarIntro from "./sidebar_intro";
 import SidebarFriends from "./sidebar_friends";
 import SidebarPhotos from "./sidebar_photos";
+import {requestFriendships} from "../../../actions/friendships_actions"
+import { ProtectedRoute } from "../../../util/route_util"
+import Friends from "../../friends";
+import { Switch} from "react-router-dom"
 
 class Profile extends React.Component {
   componentDidMount() {
     const { id } = this.props.match.params;
-    const { requestProfileUser } = this.props;
+    const { requestProfileUser, requestUserFriendships } = this.props;
     requestProfileUser(id);
+    requestUserFriendships(id)
   }
 
   componentDidUpdate(prevProps, prevState) {
     const { id: currentId } = this.props.match.params;
     const { id: prevId } = prevProps.match.params;
     if (currentId != prevId) {
-      const { requestProfileUser } = this.props;
+      const { requestProfileUser, requestUserFriendships} = this.props;
       requestProfileUser(currentId);
+      requestUserFriendships(currentId)
     }
   }
 
@@ -30,18 +36,26 @@ class Profile extends React.Component {
     return (
       <div className="profile">
         <UserImage profileUser={profileUser} />
-        <ProfileNavBar profileUser={profileUser} />
-        <div className="profile-main">
-          <div className="profile-sidebar">
-            <SidebarIntro profileUser={profileUser} />
-            <SidebarPhotos profileUser={profileUser} />
-            <SidebarFriends profileUser={profileUser} />
+        <ProtectedRoute
+          path="/user/:id"
+          component={() => <ProfileNavBar profileUser={profileUser} />}
+        />
+
+        <Switch>
+          <ProtectedRoute path="/user/:id/friends" component={Friends} />
+          <div className="profile-main">
+          
+            <div className="profile-sidebar">
+              <SidebarIntro profileUser={profileUser} />
+              <SidebarPhotos profileUser={profileUser} />
+              <SidebarFriends profileUser={profileUser} />
+            </div>
+            <div className="profile-wall">
+              <CreatePostForm profileUser={profileUser} />
+              <WallPosts />
+            </div>
           </div>
-          <div className="profile-wall">
-            <CreatePostForm profileUser={profileUser} />
-            <WallPosts />
-          </div>
-        </div>
+        </Switch>
       </div>
     );
   }
@@ -57,7 +71,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    requestProfileUser: id => dispatch(requestUser(id))
+    requestProfileUser: id => dispatch(requestUser(id)),
+    requestUserFriendships: id => dispatch(requestFriendships(id))
   };
 };
 
