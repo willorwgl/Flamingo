@@ -91,7 +91,7 @@ class User < ApplicationRecord
     end
 
     def ensure_bio 
-        self.bio = ""
+        self.bio ||= ""
     end
 
 
