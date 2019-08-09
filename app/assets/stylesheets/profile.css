@@ -1,7 +1,6 @@
 .profile {
     margin-left: 210px;
     width: 851px;
-    /* margin-bottom: 10px; */
 }
 
 .profile-image-container {
@@ -126,11 +125,6 @@
     display: inline-block;
 }
 
-/* .profile-sidebar {
-    border: 1px solid #dddfe2;
-    background: white;
-} */
-
 .profile-main {
     margin-top: 10px;
     display: flex;
@@ -156,7 +150,6 @@ a {
     border-color: rgba(0, 0, 0, .4);
     color: #4b4f56;
     background-color: #f5f6f7;
-    /* position: absolute; */
     right: 10px;
     cursor: pointer;
     outline: none;
@@ -164,8 +157,6 @@ a {
 }
 
 .friend-options-container {
-    /* background: red; */
-    /* height: 300px; */
     position: absolute;
     index: 1;
     left: 0;
@@ -174,14 +165,11 @@ a {
 }
 
 .friend-options {
-    /* position: absolute; */
-    background: white;
-    border: 1px solid black;
+    background: #4267b2;
     width: 100%;
     box-sizing: border-box;
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-
-
+    color: white;
 }
 
 .friend-options-container:after {
@@ -189,16 +177,12 @@ a {
     position: absolute;
     border-style: solid;
     border-width: 0px 7px 7px 7px;
-    border-color: white transparent;
+    border-color: #4267b2 transparent;
     display: block;
     width: 0;
     z-index: 1;
     left: 9px;
     top: 7px;
-    border-top-color: black;
-    border-left-color: black;
-    border-right-color: black;
-
 }
 
  body {

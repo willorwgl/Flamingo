@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :create, :update] do
       resources :posts, only: [:index]
       resources :friendships, only: [:index]
+      resources :educations, only: [:index]
+      resources :workplaces, only: [:index]
 
         get '/users/search/:query_string', to: 'users#search'
     end
@@ -22,6 +24,8 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy]
 
     resources :friendships, only: [:update, :create, :destroy]
+    resources :workplaces, only: [:update, :create, :destroy]
+    resources :educations, only: [:update, :create, :destroy]
 
   end
 end

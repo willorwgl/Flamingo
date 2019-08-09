@@ -1,14 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
 import { searchUsers } from "../../actions/users_actions";
-import { Link } from "react-router-dom"
+import { requestFriendships } from "../../actions/friendships_actions";
+import FriendSearchResult from "./friend_search_result"
 
 class SearchResult extends React.Component {
+
   componentDidMount() {
-    const { search } = this.props;
+    const { search, currentUser, requestUserFriendships } = this.props;
     const queryString = this.props.match.params.query_string;
     search(queryString, "full");
+    requestUserFriendships(currentUser.id);
   }
+
 
   componentDidUpdate(prevProps) {
     const { search } = this.props;
@@ -23,28 +27,22 @@ class SearchResult extends React.Component {
     }
   }
 
+  
+
   peopleResults() {
-    const { peopleResults = {} } = this.props;
-    const resultArray = Object.values(peopleResults).map(person => {
-      const { profilePhoto = window.defaultUserIcon } = person;
+    const { peopleResults = {}} = this.props;
+    const resultArray = Object.values(peopleResults).map(friend => {
       return (
-        <div className="person-result">
-          <Link to={`/user/${person.id}`}>
-            <img src={profilePhoto} className="search-person-icon" />
-          </Link>
-          <div className="search-user-name-container">
-            <Link to={`/user/${person.id}`} className="user-name-link">
-              {person.first_name}
-            </Link>
-          </div>
-        </div>
+        <FriendSearchResult key={friend.id}  friend={friend} />
       );
     });
     if (resultArray.length) {
-      return <div className="people-results">
-    <div className="people-result-label">People</div>
-      {resultArray}
-      </div>;
+      return (
+        <div className="people-results">
+          <div className="people-result-label">People</div>
+          {resultArray}
+        </div>
+      );
     }
     return null;
   }
@@ -52,10 +50,6 @@ class SearchResult extends React.Component {
   render() {
     return (
       <div className="search-page-container">
-        {/* <div className="search-result-sidebar">
-                    <div className="search-sidebar-label">Filter Results</div>
-                </div> */}
-
         <div className="search-result-main">{this.peopleResults()}</div>
       </div>
     );
@@ -64,13 +58,18 @@ class SearchResult extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    search: (queryString, type) => dispatch(searchUsers(queryString, type))
+    search: (queryString, type) => dispatch(searchUsers(queryString, type)),
+    requestUserFriendships: id => dispatch(requestFriendships(id)),
   };
 };
 
 const mapStateToProps = state => {
+  const currentUser =  state.session.currentUser || {}
   return {
-    peopleResults: state.entities.searchResults.fullUsers
+    peopleResults: state.entities.searchResults.fullUsers,
+    currentUser: state.session.currentUser,
+    friendships: state.entities.friendships,
+    currentUser
   };
 };
 

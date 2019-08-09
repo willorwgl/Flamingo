@@ -31,8 +31,9 @@ class SearchBar extends React.Component {
     const { clearResults } = this.props;
     this.searchButtonRef.current.classList.remove("in-search");
     setTimeout(() => {
-      clearResults();
-    }, 300);
+      clearResults()
+    }, 500)
+
   }
 
   handleFocus(e) {

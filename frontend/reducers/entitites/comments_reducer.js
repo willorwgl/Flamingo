@@ -7,6 +7,7 @@ import {
     CLEAR_COMMENTS
 } from "../../actions/comments_actions"
 import { RECEIVE_POSTS } from "../../actions/posts_actions";
+import { LOGOUT_CURRENT_USER } from "../../actions/session_actions";
 
 export default (state = {}, action) => {
     Object.freeze(state)
@@ -25,6 +26,8 @@ export default (state = {}, action) => {
             return {}
         case RECEIVE_POSTS: 
             return merge({}, state, action.posts.comments)
+        case LOGOUT_CURRENT_USER:
+            return {}
         default:
             return state
     }

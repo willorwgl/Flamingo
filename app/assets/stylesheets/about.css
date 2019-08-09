@@ -1,0 +1,238 @@
+.about-header {
+    width: 100%;
+    height: 58px;
+    margin: 15px 0 0;
+    padding: 16px 0 12px;
+    background-color: #F5F6F7;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgb(211, 214, 219);
+    border-top: 1px solid rgb(211, 214, 219);
+}
+
+.fa-user {
+    font-size: 24px;
+    color: gray;
+    margin-right: 9px;
+}
+
+.about-header-label {
+    font-size: 20px;
+    color: #4b4f56;
+}
+
+.about-label-container {
+    margin: 0 12px 5px;
+}
+
+.about-main {
+    display: flex;
+}
+
+.about-sidebar {
+    width: 242px;
+
+    height: 498px;
+}
+
+.about-container {
+    border-left: 1px solid rgb(211, 214, 219);
+    border-bottom: 1px solid rgb(211, 214, 219);
+    border-right: 1px solid rgb(211, 214, 219);
+    width: 849px;
+    background: white;
+}
+
+.about-sidebar-options {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.about-sidebar-option {
+    width: 100%;
+    height: 42px;
+    padding: 12px 4px 12px 16px;
+    font-size: 14px;
+    color: gray;
+    box-sizing: border-box;
+}
+
+.about-content {
+    width: 607px;
+    padding: 30px 24px 0;
+    border-left: 1px solid rgb(211, 214, 219);
+    box-sizing: border-box;
+}
+
+.about-sidebar-options {
+    padding: 8px 0;
+}
+
+.work-container-label {
+    color: #90949c;
+    text-transform: uppercase;
+    font-weight: 600;
+    width: 558px;
+    height: 27px;
+    border-bottom: 1px solid rgb(221, 223, 226);
+    box-sizing: border-box;
+    line-height: 27px;
+    vertical-align: center;
+}
+
+.add-work-box {
+    margin-right: 12px;
+    width: 36px;
+    height: 36px;
+    box-sizing: border-box;
+    border: 1px dashed #3578e5;
+    line-height: 36px;
+    text-align: center;
+    font-size: 10px;
+    color: #3578e5;
+    display: inline-block;
+}
+
+.add-work-label {
+    color: #3578e5;
+    display: inline-block;
+    font-size: 16px;
+    line-height: 20px;
+    vertical-align: center;
+}
+
+.add-work-container {
+    padding-top: 12px;
+    cursor: pointer;
+    margin-bottom: 12px;
+}
+
+.workplace-form-container {
+    background: white;
+    width: 558px;
+    box-sizing: border-box;
+    padding: 12px 24px;
+    background: #f5f6f7;
+}
+
+.workplace-input-container {
+    display: flex;
+    min-height: 32px;
+    margin: 10px 0;
+}
+
+.workplace-input {
+    width: 244px;
+    box-sizing: border-box;
+    padding: 7px 8px 9px;
+    vertical-align: center;
+    font-size: 14px;
+    border: 1px solid #dddfe2;
+    outline: none;
+}
+
+.workplace-input-label {
+    width: 180px;
+    height: 18px;
+    text-align: end;
+    margin-right: 18px;
+    font-size: 14px;
+    line-height: 18px;
+    color: rgb(96, 103, 112);
+
+}
+
+.description-input {
+    width: 244px;
+    height: 86px;
+    padding: 8px;
+    box-sizing: border-box;
+    outline: none;
+    border: 1px solid #dddfe2;
+    font-size: 14px;
+}
+
+.workplace-form-footer {
+    height: 39px;
+    box-sizing: border-box;
+    margin: 12px 0 0;
+    padding: 10px 0 0;
+    border-top: 1px solid #dddfe2;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.workplace-save-btn {
+    background: rgb(66, 103, 178);
+    width: 107px;
+    height: 28px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+}
+
+.workplace-cancel-btn {
+    padding: 0 10px;
+    background-color: rgb(245, 246, 247);
+    height: 28px;
+    line-height: 28px;
+    vertical-align: center;
+    margin-left: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    outline: none;
+}
+
+
+.workplace-save-btn:disabled {
+    background: rgb(156, 180, 216);
+}
+
+.workplace-container {
+    width: 558px;
+    min-height: 73px;
+    padding: 16px 0 20px;
+    box-sizing: border-box;
+    display: flex;
+    position: relative;
+}
+
+.workplace-company-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    margin-right: 12px;
+}
+
+.workplace-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.company-name {
+    color: #385898;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.workplace-extra-info {
+    color: #4b4f56;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.workplace-description {
+    margin-top: 4px;
+    color: #90949c;
+}
+
+.workplace-items-container {
+    width: 558px;
+    padding: 16 0 20px;
+    border-top: 1px solid rgb(235, 237, 240);
+}

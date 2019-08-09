@@ -43,7 +43,9 @@ class User < ApplicationRecord
 
     has_one_attached :cover_image
 
-    
+    has_many :educations
+
+    has_many :workplaces
 
     def friendships
         Friendship.where("user_id = ? OR friend_id = ?", self.id, self.id)

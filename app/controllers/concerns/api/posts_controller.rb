@@ -8,7 +8,13 @@ class Api::PostsController < ApplicationController
                 comments: [author: [profile_photo_attachment: [:blob]]],
                  author: [profile_photo_attachment: [:blob]])
                  .where(wall_id: params[:user_id])
-        else 
+        elsif params[:type] = "newfeed" 
+            ids = current_user.friends.pluck(:friend_id, :user_id) << current_user.id
+            ids = ids.flatten.uniq
+            @posts = Post.includes(
+                comments: [author: [profile_photo_attachment: [:blob]]],
+                author: [profile_photo_attachment: [:blob]]).where(author_id: ids)
+        else
             @posts = Post.includes(authored_posts: [:author]).where(author_id: params[:user_id])
         end
         render :index

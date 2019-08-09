@@ -9,7 +9,7 @@ class UserHomePage extends React.Component {
 
   componentDidMount() {
     const { requestPosts, currentUser } = this.props;
-    requestPosts(currentUser.id, "wall");
+    requestPosts(currentUser.id, "newsfeed");
   }
 
 

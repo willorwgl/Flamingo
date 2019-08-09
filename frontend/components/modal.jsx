@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import AddPhotoForm from "./add_photo_form";
 import EditPostForm from "./user/posts/edit_post_form";
 import EditCommentForm from "./user/posts/edit_comment_form";
+import WorkplaceForm from "./workplace_form";
+import EducationForm from "./education_form";
 
 function Modal({ modal, closeModal }) {
   if (!modal) {
@@ -19,6 +21,12 @@ function Modal({ modal, closeModal }) {
       break;
     case "edit comment":
       component = <EditCommentForm commentId={modal.modalInfo} />;
+      break;
+    case "workplace form":
+      component = <WorkplaceForm workplace={modal.modalInfo || {}} />;
+      break;
+    case "education form":
+      component = <EducationForm education={modal.modalInfo || {}} />;
       break;
   }
   return (

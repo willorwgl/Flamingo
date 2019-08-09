@@ -106,11 +106,11 @@ class LoginPage extends React.Component {
         </>
       );
     } else {
-      const { first_name, last_name, email } = this.props.errors.attemptedUser;
+      const { first_name, last_name, email, profilePhoto = window.defaultUserIcon } = this.props.errors.attemptedUser;
       const fullName = `${first_name} ${last_name}`;
       display = (
         <div className="login-page-user">
-          <div className="login-page-user-icon">icon</div>
+          <img className="login-page-user-icon" src={profilePhoto} />
           <div className="login-page-user-name">Log in as {fullName}</div>
           <div className="login-page-user-extra">
             <span className="login-page-user-email">{email} </span>{" "}

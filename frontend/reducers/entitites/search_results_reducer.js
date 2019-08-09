@@ -1,5 +1,6 @@
 import { RECEIVE_USERS, RECEIVE_LITE_USERS } from "../../actions/users_actions";
 import { CLEAR_RESULTS } from "../../actions/search_actions";
+import { LOGOUT_CURRENT_USER } from "../../actions/session_actions";
 
 
 
@@ -21,6 +22,8 @@ export default (state = { }, action) => {
             newState = Object.assign({}, state)
             newState.liteUsers = {}
             return newState
+        case LOGOUT_CURRENT_USER:
+            return {}
         default:
             return state
     }

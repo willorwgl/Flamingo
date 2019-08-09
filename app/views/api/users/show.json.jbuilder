@@ -7,3 +7,21 @@ json.set! @user.id do
 end
 
 
+json.workplaces do
+    @user.workplaces.each do |workplace|
+    
+        json.set! workplace.id do 
+            json.extract! workplace, :id, :company, :position, :city_town, :description, :user_id
+        end
+    end
+end
+
+json.educations do
+    @user.educations.each do |education| 
+        json.set! education.id do 
+            json.extract! education, :id, :school, :description, :user_id
+        end
+    end
+end
+
+

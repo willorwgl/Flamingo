@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { updateUser } from "../../../actions/users_actions";
 import { merge } from "lodash";
-import { throws } from "assert";
+import { withRouter, Link } from "react-router-dom";
 
 class SidebarIntro extends React.Component {
   constructor(props) {
@@ -65,9 +65,10 @@ class SidebarIntro extends React.Component {
           <div className="bio-description-text">
             Add a short bio to tell people more about yourself.
           </div>
-          <div className="intro-bio-edit" onClick={this.toggleBioEdit}>
+          {this.authorized() ? <div className="intro-bio-edit" onClick={this.toggleBioEdit}>
             Add bio
-          </div>
+          </div> : null}
+     
         </div>
       );
     }
@@ -81,32 +82,55 @@ class SidebarIntro extends React.Component {
           Showcase what's important to you by adding photos, pages, groups and
           more to your featured section on your public profile.
         </div>
-        <div className="add-feature-link">Add to Featured</div>
+        {this.authorized() ? <div className="add-feature-link">Add to Featured</div> : null}
+
       </>
     );
   }
 
   introInfo() {
+    // const { workplace, education} = this.props
+    // debugger
+    // const company = workplace.company || ""
+    // const school = education.school || ""
+    let { workplaces = {}, educations = {}, profileUser = {} } = this.props;
+    workplaces = Object.values(workplaces).filter(workplace => {
+      return workplace.user_id === this.props.match.params.id;
+    });
+    educations = Object.values(educations).filter(education => {
+      debugger;
+      return education.user_id === Number(this.props.match.params.id);
+    });
+    let workplace = {};
+    let education = {};
+    if (workplaces.length) workplace = workplaces[workplaces.length - 1];
+    if (educations.length) education = educations[educations.length - 1];
     return (
       <>
-        <div className="intro-city-info">
+        {/* <div className="intro-city-info">
           <div className="city-icon" />
           Current city:
-        </div>
+        </div> */}
         <div className="intro-workplace-info">
           <div className="workplace-icon" />
-          Workplace:
+          <Link className="about-link" to={`/user/${profileUser.id}/about`}>
+            Workplace:
+          </Link>
+          <span className="intro-user-info">{workplace.company}</span>
         </div>
 
         <div className="intro-school-info">
           <div className="school-icon" />
-          School
+          <Link className="about-link" to={`/user/${profileUser.id}/about`}>
+            School:
+          </Link>
+          <span className="intro-user-info">{education.school}</span>
         </div>
 
-        <div className="relationship-info">
+        {/* <div className="relationship-info">
           <div className="relationship-icon" />
           Relationship
-        </div>
+        </div> */}
       </>
     );
   }
@@ -132,6 +156,11 @@ class SidebarIntro extends React.Component {
     });
   }
 
+  authorized() {
+    const { profileUser, currentUser }  = this.props
+    return profileUser.id === currentUser.id
+  }
+
   render() {
     return (
       <div className="sidebar-intro">
@@ -149,13 +178,30 @@ class SidebarIntro extends React.Component {
   }
 }
 
+const mapStateToProps = (state, ownProps) => {
+  // debugger
+  // let education = {};
+  // let workplace = {};
+  // if (workplaces.length) {
+  //   workplace = workplaces[workplaces.length - 1];
+  // }
+  // if (educations.length) education = educations[educations.length - 1];
+  return {
+    currentUser: state.session.currentUser,
+    workplaces: state.entities.workplaces,
+    educations: state.entities.educations
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     updateUser: user => dispatch(updateUser(user))
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(SidebarIntro);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(SidebarIntro)
+);

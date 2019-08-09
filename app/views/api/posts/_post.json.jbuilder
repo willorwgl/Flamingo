@@ -1,6 +1,7 @@
 json.extract! post, :id, :body, :author_id, :wall_id, :updated_at
 author = post.author
 json.extract! author, :first_name, :last_name
+
 # json.comments do
 #     post.comments.each do |comment| 
 #         json.partial! 'api/comments/comment', comment: comment
@@ -14,3 +15,4 @@ json.comments do
             end
         end
 end
+

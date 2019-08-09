@@ -1,12 +1,12 @@
-
 .friends-container {
     width: 851px;
-    background: #F5F6F7;
+
     margin-top: 10px;
     /* padding-top: 16px; */
 }
 
 .friends-container-header {
+    background: #F5F6F7;
     width: 850px;
     height: 84px;
     padding: 15px;
@@ -20,7 +20,6 @@
 
 .friends-label {
     font-size: 20px;
-    font-weight: 700;
 }
 
 .friends-header-options {
@@ -31,4 +30,45 @@
     font-size: 13px;
     font-weight: 600;
     color: #4b4f56;
+}
+
+.friend-item {
+    width: 392px;
+    height: 100px;
+    border: 1px solid #e9ebee;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.friend-item-image {
+    width: 100px;
+    height: 100px;
+    border-right: 1px solid #e9ebee;
+    border-bottom: 1px solid #e9ebee;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.user-friends {
+    padding: 15px;
+    background: white;
+    width: 850px;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.friend-info {
+    width: 189px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.friend-image-container {
+    width: 100px;
+    height: 100%;
+    box-sizing: border-box;
+    margin-right: 10px;
+
+
 }

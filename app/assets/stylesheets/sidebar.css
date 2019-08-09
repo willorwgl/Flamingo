@@ -1,8 +1,6 @@
-
-
-
-
-.intro-label, .friends-label, .photos-label {
+.intro-label,
+.friends-label,
+.photos-label {
     font-size: 16px;
     height: 18px;
     margin-left: 5px;
@@ -28,6 +26,10 @@
     width: 249px;
     height: 16px;
     text-align: center;
+    color: #3578e5;
+}
+
+.add-feature-link {
     color: #3578e5;
 }
 
@@ -134,13 +136,9 @@
 .intro-info {
     display: flex;
     flex-direction: column;
-    padding: 4px 0 8px;
+    padding: 10px 0 8px;
     width: 297px;
-    height: 130px;
-    justify-content: space-between;
     margin: 0 auto;
-
-
     box-sizing: border-box;
 }
 
@@ -160,7 +158,7 @@
 
 .friend-icon-name {
     position: absolute;
-    color: white;
+    color:  #4267b2;
     z-index: 1;
     text-align: center;
     bottom: 5px;
@@ -168,7 +166,8 @@
     width: 100%;
 }
 
-.sidebar-friends, .sidebar-photos {
+.sidebar-friends,
+.sidebar-photos {
     margin-top: 10px;
 }
 
@@ -176,6 +175,9 @@
     margin-left: 5px;
     color: #90949c;
     font-size: 14px;
-    
+
 }
 
+.intro-user-info {
+    color: gray;
+}

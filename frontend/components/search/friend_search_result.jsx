@@ -1,39 +1,23 @@
 import React from "react";
-import { openModal } from "../../../actions/modal_actions";
-import { connect } from "react-redux";
 import {
   sendFriendRequest,
-  acceptFriendRequest,
-  cancelFriendRequest
-} from "../../../actions/friendships_actions";
+  cancelFriendRequest,
+  acceptFriendRequest
+} from "../../actions/friendships_actions";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
-class UserImage extends React.Component {
-  // componentDidMount() {
-  //     const { requestWallPosts } = this.props;
-  //     const { id } = this.props.match.params;
-  //     requestWallPosts(id, "wall");
-  // }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //     const { id: currentId } = this.props.match.params;
-  //     const { id: prevId } = prevProps.match.params;
-  //     if (currentId != prevId) {
-  //         const { requestWallPosts } = this.props;
-  //         requestWallPosts(currentId, "wall");
-  //     }
-  // }
-
+class FriendSearchResult extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       showFriendOptions: false
     };
-    this.addProfilePhoto = this.addProfilePhoto.bind(this);
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
     this.sendFriendRequest = this.sendFriendRequest.bind(this);
     this.acceptFriendRequest = this.acceptFriendRequest.bind(this);
     this.cancelFriendRequest = this.cancelFriendRequest.bind(this);
-    this.handleMouseEnter = this.handleMouseEnter.bind(this);
-    this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
 
   handleMouseEnter(e) {
@@ -47,13 +31,33 @@ class UserImage extends React.Component {
     }
   }
 
-  friendButton() {
-    const { currentUser, profileUser, friendship } = this.props;
+  sendFriendRequest(e) {
+    e.preventDefault();
+    const { sendFriendRequest, friend } = this.props;
+    sendFriendRequest(friend);
+  }
 
-    if (currentUser.id === profileUser.id) {
+  acceptFriendRequest(e) {
+    e.preventDefault();
+    const { acceptFriendRequest, friendship } = this.props;
+    acceptFriendRequest(friendship.id);
+  }
+
+  cancelFriendRequest(e) {
+    e.preventDefault();
+
+    const { cancelFriendRequest, friendship } = this.props;
+    cancelFriendRequest(friendship.id);
+  }
+
+  friendButton() {
+    const { currentUser = {}, friend = {}, friendship } = this.props;
+    if (currentUser.id === friend.id) {
+;
       return null;
     }
     if (!friendship) {
+;
       return (
         <button className="friend-button" onClick={this.sendFriendRequest}>
           <i class="fas fa-user-plus" /> Add Friend
@@ -64,17 +68,18 @@ class UserImage extends React.Component {
       friendship.friend_id === currentUser.id &&
       friendship.status === "pending"
     ) {
+
       return (
         <button className="friend-button" onClick={this.acceptFriendRequest}>
           Confirm Request
         </button>
       );
     }
-
     if (
       friendship.friend_id !== currentUser.id &&
       friendship.status === "pending"
     ) {
+
       return (
         <button
           className="friend-button"
@@ -87,6 +92,7 @@ class UserImage extends React.Component {
       );
     }
     if (friendship.status === "accepted") {
+
       return (
         <button
           className="friend-button"
@@ -98,10 +104,11 @@ class UserImage extends React.Component {
         </button>
       );
     }
+
   }
 
   friendButtonOptions() {
-    const { currentUser, profileUser, friendship } = this.props;
+    const { currentUser = {}, friendship = {} } = this.props;
     if (!friendship) {
       return null;
     }
@@ -143,89 +150,32 @@ class UserImage extends React.Component {
     }
   }
 
-  addProfilePhoto(e) {
-    e.preventDefault();
-    const { openModal } = this.props;
-    openModal("add photo");
-  }
-
-  sendFriendRequest(e) {
-    e.preventDefault();
-    const { sendFriendRequest, profileUser } = this.props;
-    sendFriendRequest(profileUser);
-  }
-
-  acceptFriendRequest(e) {
-    e.preventDefault();
-    const { acceptFriendRequest, friendship } = this.props;
-    acceptFriendRequest(friendship.id);
-  }
-
-  cancelFriendRequest(e) {
-    e.preventDefault();
-    const { cancelFriendRequest, friendship } = this.props;
-    cancelFriendRequest(friendship.id);
-  }
-
-  authorized() {
-    const { currentUser, profileUser } = this.props;
-    return currentUser.id === profileUser.id;
-  }
-
   render() {
     const {
-      first_name = "",
-      last_name = "",
-      profilePhoto = window.defaultUserIcon
-    } = this.props.profileUser;
-    const fullName = `${first_name} ${last_name}`;
+      profilePhoto = window.defaultUserIcon,
+      id,
+      first_name
+    } = this.props.friend;
     return (
-      <div className="profile-image-container">
-        <div>
-          <div className="cover-image-footer">
-            <span className="profile-name">{fullName}</span>
-
-            {this.friendButton()}
-          </div>
+      <div className="person-result">
+        <Link to={`/user/${id}`}>
+          <img src={profilePhoto} className="search-person-icon" />
+        </Link>
+        <div className="search-user-name-container">
+          <Link to={`/user/${id}`} className="user-name-link">
+            {first_name}
+          </Link>
+          {this.friendButton()}
         </div>
-
-        <img className="profile-image" src={profilePhoto} />
-
-        {this.authorized() ? (
-          <div className="add-photo-semicircle" onClick={this.addProfilePhoto}>
-            <div className="camera-icon" />
-            <div className="add-photo">
-              {this.props.profileUser.profilePhoto ? "Update" : "Add Photo"}
-            </div>
-          </div>
-        ) : null}
       </div>
     );
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  const currentUser = state.session.currentUser;
-  const profileUser = ownProps.profileUser;
-  const friendship = Object.values(state.entities.friendships).find(
-    friendship => {
-      return (
-        (friendship.user_id === currentUser.id &&
-          friendship.friend_id === profileUser.id) ||
-        (friendship.user_id === profileUser.id &&
-          friendship.friend_id === currentUser.id)
-      );
-    }
-  );
-  return {
-    currentUser,
-    friendship
-  };
-};
-
 const mapDispatchToProps = dispatch => {
   return {
-    openModal: modalName => dispatch(openModal(modalName)),
+    search: (queryString, type) => dispatch(searchUsers(queryString, type)),
+    requestUserFriendships: id => dispatch(requestFriendships(id)),
     sendFriendRequest: friend => dispatch(sendFriendRequest(friend)),
     acceptFriendRequest: friendshipId =>
       dispatch(acceptFriendRequest(friendshipId)),
@@ -234,7 +184,27 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+const mapStateToProps = (state, ownProps) => {
+  const friend = ownProps.friend;
+  const currentUser = state.session.currentUser;
+  const friendship = Object.values(state.entities.friendships).find(
+    friendship => {
+      return (
+        (friendship.user_id === currentUser.id &&
+          friendship.friend_id === friend.id) ||
+        (friendship.user_id === friend.id &&
+          friendship.friend_id === currentUser.id)
+      );
+    }
+  );
+
+  return {
+    currentUser: state.session.currentUser,
+    friendship
+  };
+};
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(UserImage);
+)(FriendSearchResult);

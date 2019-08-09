@@ -2,7 +2,7 @@ class Api::UsersController < ApplicationController
   
 
     def show
-      @user = User.with_attached_profile_photo.find(params[:id])
+      @user = User.with_attached_profile_photo.includes(:workplaces, :educations).find(params[:id])
     end
 
 

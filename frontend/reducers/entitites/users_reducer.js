@@ -10,7 +10,7 @@ import {
 } from "../../actions/posts_actions";
 
 import {
-    RECEIVE_CURRENT_USER 
+    RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER 
 } from "../../actions/session_actions"
 import { RECEIVE_FRIENDS } from "../../actions/friendships_actions";
 
@@ -27,6 +27,8 @@ export default (state = {}, action) => {
             return merge({}, state, action.posts.authors)
         case RECEIVE_FRIENDS:
             return merge({}, state, action.friendships.friends)
+        case LOGOUT_CURRENT_USER:
+            return {}
         default:
             return state
     }

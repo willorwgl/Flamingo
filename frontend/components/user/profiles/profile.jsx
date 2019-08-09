@@ -10,8 +10,9 @@ import SidebarFriends from "./sidebar_friends";
 import SidebarPhotos from "./sidebar_photos";
 import {requestFriendships} from "../../../actions/friendships_actions"
 import { ProtectedRoute } from "../../../util/route_util"
-import Friends from "../../friends";
+import FriendsContainer from "../../friends_container";
 import { Switch} from "react-router-dom"
+import AboutPage from "../../about"
 
 class Profile extends React.Component {
   componentDidMount() {
@@ -40,9 +41,11 @@ class Profile extends React.Component {
           path="/user/:id"
           component={() => <ProfileNavBar profileUser={profileUser} />}
         />
+        
 
         <Switch>
-          <ProtectedRoute path="/user/:id/friends" component={Friends} />
+          <ProtectedRoute path="/user/:id/about" component={AboutPage} />
+          <ProtectedRoute path="/user/:id/friends" component={FriendsContainer} />
           <div className="profile-main">
           
             <div className="profile-sidebar">

@@ -200,3 +200,14 @@
     padding: 17px 0px 0px;
     box-sizing: border-box;
 }
+
+.login-page-user-icon {
+    width: 64px;
+    height: 64px;
+}
+
+.login-page-user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_07_155650) do
+ActiveRecord::Schema.define(version: 2019_08_09_002105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,13 @@ ActiveRecord::Schema.define(version: 2019_08_07_155650) do
     t.index ["post_id"], name: "index_comments_on_post_id"
   end
 
+  create_table "educations", force: :cascade do |t|
+    t.string "school", null: false
+    t.text "description"
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_educations_on_user_id"
+  end
+
   create_table "friendships", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "friend_id"
@@ -83,6 +90,15 @@ ActiveRecord::Schema.define(version: 2019_08_07_155650) do
     t.index ["email"], name: "index_users_on_email"
     t.index ["last_name", "first_name"], name: "index_users_on_last_name_and_first_name"
     t.index ["session_token"], name: "index_users_on_session_token"
+  end
+
+  create_table "workplaces", force: :cascade do |t|
+    t.string "company", null: false
+    t.string "position"
+    t.string "city_town"
+    t.text "description"
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_workplaces_on_user_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

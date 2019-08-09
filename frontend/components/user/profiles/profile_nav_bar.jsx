@@ -10,15 +10,17 @@ class ProfileNavBar extends React.Component {
     return (
       <div className="profile-nav-bar">
         <span className="timeline-nav-link">
-          Timeline <i className="fas fa-caret-down" />
+          <Link to={`/user/${id}`}>
+            Timeline <i className="fas fa-caret-down" />
+          </Link>
         </span>
 
         <span className="about-nav-link">
           <Link to={`/user/${id}/about`}> About</Link>
         </span>
 
-        <span className="friends-nav-link">
-          Friends {acceptedFriends}
+        <span className="frien ds-nav-link">
+          <Link to={`/user/${id}/friends`}> Friends </Link>
         </span>
 
         <span className="photos-nav-link">Photos</span>

@@ -113,26 +113,28 @@ class Comment extends React.Component {
             <img className="replier-icon" src={profilePhoto} />
           </Link>
           <div>
-            <div className="reply-body">
-              <strong>
-                <Link to={`/user/${id}`} className="user-name-link">
-                  {replierFullName}
-                </Link>
-              </strong>
-              {reply.body}
+            <div className="reply-body-container">
+              <div className="reply-body">
+                <strong>
+                  <Link to={`/user/${id}`} className="user-name-link">
+                    {replierFullName}
+                  </Link>
+                </strong>
+                {reply.body}
+              </div>
+              {currentUser.id === reply.author_id ? (
+                <>
+                  <i
+                    class="far fa-edit edit-comment"
+                    onClick={this.handleEdit(reply.id)}
+                  />
+                  <i
+                    class="far fa-trash-alt delete-comment"
+                    onClick={this.handleDelete(reply.id)}
+                  />
+                </>
+              ) : null}
             </div>
-            {currentUser.id === reply.author_id ? (
-              <>
-                <i
-                  class="far fa-edit edit-comment"
-                  onClick={this.handleEdit(reply.id)}
-                />
-                <i
-                  class="far fa-trash-alt delete-comment"
-                  onClick={this.handleDelete(reply.id)}
-                />
-              </>
-            ) : null}
 
             <div className="reply-options">
               <span className="comment-like-option">Like</span>
