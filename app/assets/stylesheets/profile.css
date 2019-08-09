@@ -154,6 +154,7 @@ a {
     cursor: pointer;
     outline: none;
     position: relative;
+    display: inline-block;
 }
 
 .friend-options-container {

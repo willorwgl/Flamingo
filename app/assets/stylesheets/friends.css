@@ -36,9 +36,11 @@
     width: 392px;
     height: 100px;
     border: 1px solid #e9ebee;
-    display: flex;
-    align-items: center;
     box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    margin-left: 10px;
+    margin-bottom: 10px;
 }
 
 .friend-item-image {
@@ -54,7 +56,6 @@
     padding: 15px;
     background: white;
     width: 850px;
-    display: inline-block;
     box-sizing: border-box;
 }
 
@@ -62,6 +63,7 @@
     width: 189px;
     cursor: pointer;
     font-weight: 700;
+    
 }
 
 .friend-image-container {
@@ -71,4 +73,8 @@
     margin-right: 10px;
 
 
+}
+
+.friend-item-button {
+    display: inline-block;
 }
