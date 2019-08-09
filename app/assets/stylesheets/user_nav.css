@@ -33,6 +33,8 @@
 .user-nav-bar {
     display: flex;
     align-items: center;
+    padding-left: 23vw;
+
 }
 
 .user-nav-left {
@@ -47,7 +49,6 @@
 .nav-options {
     display: flex;
     width: 1012px;
-    margin: 0 auto;
     height: 24px;
     color: white;
     font-weight: 500;
