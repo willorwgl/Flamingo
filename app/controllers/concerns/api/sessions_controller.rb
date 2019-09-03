@@ -10,13 +10,13 @@ class Api::SessionsController < ApplicationController
         render json: emailError, status: 422 
         return
       end
-      passwordError = { attemptedUser: @user, passwordError: "The password you've entered is incorrect"}
+      password_error = { attemptedUser: @user, passwordError: "The password you've entered is incorrect", profilePhoto: url_for(@user.profile_photo)}
       @user = User.find_by_credentials(@user, params[:user][:password])
       if @user 
         login(@user)
         render 'api/users/show'
       else
-        render json: passwordError, status: 422
+        render json: password_error, status: 422
       end
     end
 

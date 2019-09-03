@@ -106,7 +106,7 @@ class LoginPage extends React.Component {
         </>
       );
     } else {
-      const { first_name, last_name, email, profilePhoto = window.defaultUserIcon } = this.props.errors.attemptedUser;
+      const { attemptedUser: {first_name, last_name, email}, profilePhoto = window.defaultUserIcon } = this.props.errors
       const fullName = `${first_name} ${last_name}`;
       display = (
         <div className="login-page-user">

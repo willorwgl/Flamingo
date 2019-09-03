@@ -27,5 +27,7 @@ Rails.application.routes.draw do
     resources :workplaces, only: [:update, :create, :destroy]
     resources :educations, only: [:update, :create, :destroy]
 
+    resources :likes, only: [:update, :create, :destroy]
+
   end
 end

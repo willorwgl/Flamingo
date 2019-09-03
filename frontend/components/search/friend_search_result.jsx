@@ -154,7 +154,8 @@ class FriendSearchResult extends React.Component {
     const {
       profilePhoto = window.defaultUserIcon,
       id,
-      first_name
+      first_name,
+      last_name
     } = this.props.friend;
     return (
       <div className="person-result">
@@ -163,7 +164,7 @@ class FriendSearchResult extends React.Component {
         </Link>
         <div className="search-user-name-container">
           <Link to={`/user/${id}`} className="user-name-link">
-            {first_name}
+            {first_name} {last_name}
           </Link>
           {this.friendButton()}
         </div>

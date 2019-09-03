@@ -5,7 +5,9 @@ import friendshipsReducer from "./entitites/friendships_reducer"
 import searchResultsReducer from "./entitites/search_results_reducer"
 import educationsReducer from "./entitites/educations_reducer"
 import workplacesReducer from "./entitites/workplaces_reducer"
+
 import { combineReducers } from "redux";
+import likeReducer from "./entitites/like_reducer";
 
 
 export default combineReducers({
@@ -15,5 +17,6 @@ export default combineReducers({
     friendships: friendshipsReducer,
     searchResults: searchResultsReducer,
     educations: educationsReducer,
-    workplaces: workplacesReducer
+    workplaces: workplacesReducer,
+    likes: likeReducer
 })

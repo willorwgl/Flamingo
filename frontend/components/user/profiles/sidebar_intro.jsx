@@ -47,7 +47,7 @@ class SidebarIntro extends React.Component {
         </form>
       );
     }
-    if (bio) {
+    if (bio && this.authorized()) {
       if (!this.state.bio) this.setState({ bio });
       return (
         <div className="user-bio">
@@ -88,35 +88,38 @@ class SidebarIntro extends React.Component {
     );
   }
 
-  introInfo() {
-    // const { workplace, education} = this.props
-    // debugger
-    // const company = workplace.company || ""
-    // const school = education.school || ""
-    let { workplaces = {}, educations = {}, profileUser = {} } = this.props;
+  mostRecentWorkplace() {
+    let { workplaces = {} } = this.props;
     workplaces = Object.values(workplaces).filter(workplace => {
-      return workplace.user_id === this.props.match.params.id;
-    });
-    educations = Object.values(educations).filter(education => {
-      debugger;
-      return education.user_id === Number(this.props.match.params.id);
+      return workplace.user_id === Number(this.props.match.params.id);
     });
     let workplace = {};
-    let education = {};
     if (workplaces.length) workplace = workplaces[workplaces.length - 1];
+    return workplace
+  }
+
+  mostRecentEducation() {
+    let { educations = {} } = this.props;
+    educations = Object.values(educations).filter(education => {
+      return education.user_id === Number(this.props.match.params.id);
+    });
+    let education = {};
     if (educations.length) education = educations[educations.length - 1];
+    return education
+  }
+
+  introInfo() {
+    let { profileUser = {} } = this.props;
+    const workplace = this.mostRecentWorkplace()
+    const education = this.mostRecentEducation()
     return (
       <>
-        {/* <div className="intro-city-info">
-          <div className="city-icon" />
-          Current city:
-        </div> */}
         <div className="intro-workplace-info">
           <div className="workplace-icon" />
           <Link className="about-link" to={`/user/${profileUser.id}/about`}>
             Workplace:
           </Link>
-          <span className="intro-user-info">{workplace.company}</span>
+          <span className="intro-user-info"> {workplace.company}</span>
         </div>
 
         <div className="intro-school-info">
@@ -124,13 +127,8 @@ class SidebarIntro extends React.Component {
           <Link className="about-link" to={`/user/${profileUser.id}/about`}>
             School:
           </Link>
-          <span className="intro-user-info">{education.school}</span>
+          <span className="intro-user-info"> {education.school}</span>
         </div>
-
-        {/* <div className="relationship-info">
-          <div className="relationship-icon" />
-          Relationship
-        </div> */}
       </>
     );
   }
@@ -179,13 +177,6 @@ class SidebarIntro extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  // debugger
-  // let education = {};
-  // let workplace = {};
-  // if (workplaces.length) {
-  //   workplace = workplaces[workplaces.length - 1];
-  // }
-  // if (educations.length) education = educations[educations.length - 1];
   return {
     currentUser: state.session.currentUser,
     workplaces: state.entities.workplaces,

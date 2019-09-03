@@ -17,9 +17,7 @@ export default (state = {}, action) => {
         case RECEIVE_COMMENT:
             return merge({}, state, action.comment)
         case DELETE_COMMENT:
-
             const newState = Object.assign({}, state)
-  
             delete newState[action.commentId]
             return newState
         case CLEAR_COMMENTS: 

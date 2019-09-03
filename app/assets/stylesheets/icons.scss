@@ -25,7 +25,7 @@
 }
 
 .star-icon {
-    
+
     background-image: image-url("side-icons.png");
     background-size: 27px 1030px;
     width: 24px;
@@ -100,3 +100,109 @@
     background-position-y: -711px;
     background-size: 37px 1608px;
 }
+
+.like-option {
+    background-image: image-url("like_options.gif");
+    background-position-x: -26px;
+    background-position-y: center;
+    background-size: 280px 60px;
+}
+
+.love-option {
+    background-image: image-url("like_options.gif");
+    background-position-x: -64px;
+    background-position-y: center;
+    background-size: 280px 55px;
+}
+
+.haha-option {
+    background-image: image-url("like_options.gif");
+    background-position-x: -140px;
+    background-position-y: center;
+    background-size: 280px 55px;
+}
+
+.wow-option {
+    background-image: image-url("like_options.gif");
+
+    background-position-x: -102px;
+    background-position-y: center;
+    background-size: 280px 55px;
+}
+
+.sad-option {
+    background-image: image-url("like_options.gif");
+    background-position-x: -178px;
+    background-position-y: center;
+    background-size: 280px 55px;
+}
+
+.angry-option {
+    background-image: image-url("like_options.gif");
+    background-position-x: -216px;
+    background-position-y: center;
+    background-size: 280px 55px;
+}
+
+
+.liked-love {
+    width: 18px;
+    height: 18px;
+    background-image: url("emojis.png");
+    background-repeat: no-repeat;
+    background-size: 97px 1406px;
+    background-position: -57px -1302px;
+    margin-right: 5px;
+}
+
+.liked-haha {
+    width: 18px;
+    height: 18px;
+    background-image: url("emojis.png");
+    background-repeat: no-repeat;
+    background-size: 97px 1406px;
+    background-position: -19px -1302px;
+    margin-right: 5px;
+}
+
+.liked-wow {
+    width: 18px;
+    height: 18px;
+    background-image: url("emojis.png");
+    background-repeat: no-repeat;
+    background-size: 97px 1406px;
+    background-position: -19px -1321px;
+    margin-right: 5px;
+}
+
+.liked-sad {
+    width: 18px;
+    height: 18px;
+    background-image: url("emojis.png");
+    background-repeat: no-repeat;
+    background-size: 97px 1406px;
+    background-position: -76px -1302px;
+    margin-right: 5px;
+}
+
+.liked-angry {
+    width: 18px;
+    height: 18px;
+    background-image: url("emojis.png");
+    background-repeat: no-repeat;
+    background-size: 97px 1406px;
+    background-position: -76px -1283px;
+    margin-right: 5px;
+}
+
+.liked-like {
+    width: 18px;
+    height: 18px;
+    background-image: url("emojis.png");
+    background-repeat: no-repeat;
+    background-size: 97px 1406px;
+    background-position: -38px -1302px;
+    margin-right: 5px;
+}
+
+

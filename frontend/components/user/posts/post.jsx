@@ -9,6 +9,8 @@ import moment from "moment";
 import { openModal } from "../../../actions/modal_actions";
 import { destroyPost } from "../../../actions/posts_actions";
 import { withRouter } from "react-router-dom";
+import Like from "../../like";
+import { fetchLikes } from "../../../actions/likes_actions";
 
 class Post extends React.Component {
   constructor(props) {
@@ -25,14 +27,6 @@ class Post extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.commentRef = React.createRef();
   }
-
-  // componentDidMount() {
-  //   const {
-  //     requestComments,
-  //     post: { id: postId }
-  //   } = this.props;
-  //   requestComments(postId);
-  // }
 
   handleChange(e) {
     const field = e.target.name;
@@ -72,7 +66,7 @@ class Post extends React.Component {
   }
 
   comments() {
-    const { comments = [] } = this.props;
+    const { comments } = this.props;
     const childComments = {};
     const parentComments = comments.filter(el => {
       if (!el.parent_comment_id) {
@@ -101,14 +95,44 @@ class Post extends React.Component {
     return null;
   }
 
+  currentUserLike() {
+    const { likes, currentUser } = this.props;
+    return likes.find(like => like.user_id === currentUser.id);
+  }
+
+  likes() {
+    const { likes } = this.props;
+    const numLikes = likes.length;
+    if (!numLikes) return
+    const options = {
+      like: [],
+      love: [],
+      haha: [],
+      angry: [],
+      sad: [],
+      wow: []
+    };
+    Object.values(likes).forEach(el => options[el.like_type].push(el));
+
+    const likeDisplay = Object.entries(options).map( ([key, option]) => {
+      return option.length ? <div key={option[0].id} class={`liked-${key}`}></div> : null }
+    )
+    return (
+      <div className="post-likes">
+          {likeDisplay} {numLikes}
+      </div>
+    );
+  }
+
   render() {
-    const { author = {}, currentUser = {}, post, profileUser } = this.props;
+    const { author = {}, currentUser, post, profileUser } = this.props;
     const {
       first_name = "",
       last_name = "",
       id = null,
       profilePhoto = window.defaultUserIcon
     } = author;
+    const currentUserLike = this.currentUserLike();
     const { body = "", updated_at } = post;
     const time = moment.utc(updated_at, "YYYY-MM-DD HH:mm:ss").fromNow();
     const fullName = `${first_name} ${last_name}`;
@@ -116,6 +140,7 @@ class Post extends React.Component {
       id: currentUserId = null,
       profilePhoto: currentUserProfilePhoto = window.defaultUserIcon
     } = currentUser;
+
     return (
       <div className="post-container">
         <div className="user-post">
@@ -157,11 +182,14 @@ class Post extends React.Component {
           </div>
 
           <div className="post-body">{body}</div>
+          {this.likes()}
         </div>
         <div className="post-footer">
-          <span className="post-like">
-            <i class="far fa-thumbs-up" /> Like
-          </span>
+          <Like
+            likeableType="Post"
+            likeableId={post.id}
+            currentUserLike={currentUserLike}
+          />
           <span className="post-comment" onClick={this.handleCommentClick}>
             <i class="far fa-comment-alt" /> Comment
           </span>
@@ -193,21 +221,25 @@ class Post extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const comments = state.entities.comments;
-  const authors = state.entities.users;
-  const currentUser = state.session.currentUser;
+  const { comments, users: authors, likes } = state.entities;
+  const { currentUser = {} } = state.session;
   let profileUser = null;
+  const { id: postId, author_id: authorId } = ownProps.post;
   if (ownProps.match.params.id) {
     profileUser = state.entities.users[ownProps.match.params.id];
   }
   const postComments = Object.values(comments).filter(value => {
-    return value.post_id === ownProps.post.id;
+    return value.post_id === postId;
   });
   const author = Object.values(authors).find(value => {
-    return value.id === ownProps.post.author_id;
+    return value.id === authorId;
+  });
+  const postLikes = Object.values(likes).filter(value => {
+    return value.likeable_id === postId;
   });
   return merge({}, ownProps, {
     comments: postComments,
+    likes: postLikes,
     author,
     currentUser,
     profileUser
@@ -219,7 +251,9 @@ const mapDispatchToProps = dispatch => {
     createComment: comment => dispatch(createComment(comment)),
     openModal: (modalName, modalInfo) =>
       dispatch(openModal(modalName, modalInfo)),
-    deletePost: id => dispatch(destroyPost(id))
+    deletePost: id => dispatch(destroyPost(id)),
+    getPostLikes: (likeableType, likeableId) =>
+      dispatch(fetchLikes(likeableType, likeableId))
   };
 };
 

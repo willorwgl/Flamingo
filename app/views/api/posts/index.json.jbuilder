@@ -25,6 +25,14 @@ end
                 json.partial! 'api/comments/comment', comment: comment
         end
     end
+
+    json.likes do
+        post.likes.each do |like|
+        json.set! like.id do
+            json.extract! like, :id, :user_id, :like_type, :likeable_type, :likeable_id
+        end     
+    end
+    end
 end
 
 

@@ -183,4 +183,5 @@
 
 .intro-user-info {
     color: gray;
+    word-wrap: break-word;
 }

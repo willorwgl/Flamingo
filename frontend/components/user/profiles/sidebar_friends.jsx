@@ -8,7 +8,6 @@ class SidebarFriends extends React.Component {
       if (acceptedFriends.length) {
         const friends = acceptedFriends.slice(0, 9).map((friend) => {
           const { profilePhoto = window.defaultUserIcon } = friend
-          debugger
           return (
             <div className="friend-icon-container">
               <Link to={`/user/${friend.id}`}>

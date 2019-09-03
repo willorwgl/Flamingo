@@ -47,6 +47,8 @@ class User < ApplicationRecord
 
     has_many :workplaces
 
+    has_many :likes
+
     def friendships
         Friendship.where("user_id = ? OR friend_id = ?", self.id, self.id)
     end
