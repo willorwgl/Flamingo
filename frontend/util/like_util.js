@@ -20,7 +20,6 @@ export const fetchLikes = (likeableType, likeableId) => {
 }
 
 export const destroyLike = likeId => {
-    debugger
     return $.ajax({
         method: "DELETE",
         url: `/api/likes/${likeId}`

@@ -4,18 +4,22 @@ import { createPost } from "../../../actions/posts_actions";
 import TextareaAutosize from "react-autosize-textarea";
 import { withRouter } from "react-router-dom";
 import { merge } from "lodash";
+import { requestFriendships } from "../../../actions/friendships_actions";
 
 class CreatePostForm extends React.Component {
   constructor(props) {
     super(props);
-    const { currentUser } = this.props
+    const { currentUser } = this.props;
     const { id: profileId = currentUser.id } = this.props.match.params;
     this.state = {
       body: "",
       wall_id: profileId,
       modal: false,
       photos: [],
-      photoUrls: []
+      photoUrls: [],
+      tagFriends: false,
+      tagged: [],
+      tagInput: ""
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -24,16 +28,15 @@ class CreatePostForm extends React.Component {
     this.handleFile = this.handleFile.bind(this);
     this.deletePhoto = this.deletePhoto.bind(this);
     this.photoButtonRef = React.createRef();
+    this.handleTagClick = this.handleTagClick.bind(this);
+    this.handleTagInputChange = this.handleTagInputChange.bind(this);
   }
 
   handleSubmit(e) {
     e.preventDefault();
-
     const { photos, body, wall_id } = this.state;
-
     const { createPost } = this.props;
     if (photos.length) {
-
       const formData = new FormData();
       formData.append("post[body]", body);
       for (let photo of photos) {
@@ -48,13 +51,12 @@ class CreatePostForm extends React.Component {
         contentType: false
       });
     } else {
-      if (!body) return
+      if (!body) return;
       createPost(this.state);
       this.setState({ body: "", modal: false });
       this.postHTML.classList.remove("on-top");
-      this.forceUpdate()
+      this.forceUpdate();
     }
-
   }
 
   handleChange(e) {
@@ -76,6 +78,11 @@ class CreatePostForm extends React.Component {
       this.setState({ modal: false });
       this.postHTML.classList.remove("on-top");
     }
+  }
+
+  componentDidMount() {
+    const { currentUser, requestFriendships } = this.props;
+    requestFriendships(currentUser.id)
   }
 
   componentDidUpdate(e) {
@@ -101,6 +108,20 @@ class CreatePostForm extends React.Component {
     if (photo) {
       fileReader.readAsDataURL(photo);
     }
+  }
+
+  handleTagInputChange(e) {
+    this.setState({ tagInput: e.target.value });
+    // this.searchFriend()
+  }
+
+  searchFriend() {
+    // const { friends } = this.props
+    // const {tagInput} = this.state
+    // debugger
+    // friends.filter((friend) => {
+    //   return
+    // })
   }
 
   deletePhoto(e) {
@@ -154,11 +175,33 @@ class CreatePostForm extends React.Component {
     return null;
   }
 
+  tagFriendsDisplay() {
+    const { tagFriends } = this.state;
+    return tagFriends ? (
+      <div className="tag-friends">
+        <div className="tag-friends-label">With</div>
+        <input
+          type="text"
+          className="tag-friends-input"
+          onChange={this.handleTagInputChange}
+          value={this.state.tagInput}
+          placeholder="Who are you with?"
+        />
+      </div>
+    ) : null;
+  }
+
+  handleTagClick(e) {
+    const { tagFriends } = this.state;
+    e.preventDefault();
+    this.setState({ tagFriends: !tagFriends });
+  }
+
   render() {
     const { currentUser = {} } = this.props;
     const {
-      first_name = "",
-      last_name = "",
+      // first_name = "",
+      // last_name = "",
       id = null,
       profilePhoto = window.defaultUserIcon
     } = currentUser;
@@ -181,6 +224,7 @@ class CreatePostForm extends React.Component {
               placeholder="What's on your mind?"
             />
           </div>
+          {this.tagFriendsDisplay()}
           {this.photosPreview()}
           <div className="create-post-footer">
             <label
@@ -196,7 +240,7 @@ class CreatePostForm extends React.Component {
               className="post-file"
               onChange={this.handleFile}
             />
-            <span className="post-footer-option">
+            <span className="post-footer-option" onClick={this.handleTagClick}>
               <i class="fas fa-user-friends" /> Tag Friends
             </span>
             <span className="post-footer-option feeling-activity-option">
@@ -227,12 +271,14 @@ class CreatePostForm extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   const currentUser = state.session.currentUser;
+  // const friends = state.entities.friendships.friends || {};
   return merge({}, ownProps, { currentUser });
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    createPost: post => dispatch(createPost(post))
+    createPost: post => dispatch(createPost(post)),
+    requestFriendships: userId => dispatch(requestFriendships(userId))
   };
 };
 

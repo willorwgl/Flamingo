@@ -96,7 +96,6 @@ class Like extends React.Component {
 
   displayCommentLike() {
     const { like_type } = this.liked();
-    debugger
     if (like_type === "like") {
       return <span className="liked-comment-like">Like</span>;
     } else {

@@ -15,9 +15,8 @@ export default (state = {}, action) => {
         case RECEIVE_FRIEND:
             return merge({}, state, action.friendship)
         case RECEIVE_FRIENDS:
-            return merge({}, state, action.friendships)
+            return action.friendships
         case DELETE_FRIEND:
-
             const newState = merge({}, state)
             newState.friends = newState.friends || {}
             const user_id = newState[action.friendshipId].user_id

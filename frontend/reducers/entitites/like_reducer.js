@@ -17,13 +17,12 @@ export default (state = {}, action) => {
         case RECEIVE_LIKE:
             return merge({}, state, action.like)
         case DELETE_LIKE:
-        debugger
             const newState = merge({}, state)
             delete newState[action.id]
             return newState
         case RECEIVE_POSTS:
             const temp = merge({}, state, action.posts.likes)
-            debugger
+
             return merge({}, temp, action.posts.comments.likes)
         case RECEIVE_COMMENTS:
 
