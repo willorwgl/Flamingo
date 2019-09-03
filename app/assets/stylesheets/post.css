@@ -193,8 +193,9 @@
 
 .comment-reply-option,
 .comment-like-option {
+    height: 19px;
     cursor: pointer;
-    margin-left: 5px;
+    margin-left: 10px;
     display: inline-block;
     color: #385898;
     font-size: 11px;
@@ -413,13 +414,67 @@
 
 .angry {
     color: rgb(233, 113, 15);
-     display: flex;
-     justify-content: center;
-     font-weight: 700;
+    display: flex;
+    justify-content: center;
+    font-weight: 700;
 }
 
 .post-likes {
     height: 18px;
     margin-bottom: 12px;
     display: flex;
+}
+
+.comment-like {
+    position: relative;
+    display: flex;
+}
+
+.comment-love {
+    color: rgb(243, 62, 88);
+    font-weight: 700;
+    font-size: 11px;
+    margin-left: 10px;
+}
+
+.comment-wow,
+.comment-haha,
+.comment-sad {
+    color: rgb(247, 177, 37);
+    font-weight: 700;
+    font-size: 11px;
+    margin-left: 10px;
+}
+
+.comment-angry {
+    color: rgb(233, 113, 15);
+    font-weight: 700;
+    font-size: 11px;
+    margin-left: 10px;
+}
+
+.liked-comment-like {
+    color: rgb(32, 120, 244);
+    font-weight: 700;
+    font-size: 11px;
+    margin-left: 10px;
+}
+
+.comment-likes {
+    margin-left: 10px;
+    display: flex;
+}
+
+.comment-options {
+    display: flex;
+}
+
+.comment-wow:hover,
+.comment-haha:hover,
+.comment-sad:hover,
+.comment-angry:hover,
+.liked-comment-like:hover,
+.comment-love:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }

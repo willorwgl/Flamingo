@@ -6,6 +6,7 @@ import { merge } from "lodash";
 import { Link } from "react-router-dom";
 import { destroyComment } from "../../../actions/comments_actions";
 import { openModal } from "../../../actions/modal_actions";
+import Like from "../../like";
 
 class Comment extends React.Component {
   constructor(props) {
@@ -89,6 +90,11 @@ class Comment extends React.Component {
     return null;
   }
 
+  currentUserLike() {
+    const { likes, currentUser } = this.props;
+    return likes.find(like => like.user_id === currentUser.id);
+  }
+
   replies() {
     const {
       childComments: replies,
@@ -152,8 +158,34 @@ class Comment extends React.Component {
     });
   }
 
+  likes() {
+    const { likes } = this.props;
+    const numLikes = likes.length;
+    if (!numLikes) return
+    const options = {
+      like: [],
+      love: [],
+      haha: [],
+      angry: [],
+      sad: [],
+      wow: []
+    };
+    Object.values(likes).forEach(el => options[el.like_type].push(el));
+
+    const likeDisplay = Object.entries(options).map(([key, option]) => {
+      return option.length ? <div key={option[0].id} class={`liked-${key}`}></div> : null
+    }
+    )
+    return (
+      <span className="comment-likes">
+        {likeDisplay} {numLikes}
+      </span>
+    );
+  }
+
   render() {
     const { comment, author = {}, currentUser } = this.props;
+    const currentUserLike = this.currentUserLike()
     const {
       first_name = "",
       last_name = "",
@@ -191,7 +223,11 @@ class Comment extends React.Component {
             ) : null}
 
             <div className="comment-options">
-              <span className="comment-like-option">Like</span>
+              <Like
+                likeableId={comment.id}
+                likeableType="Comment"
+                currentUserLike={currentUserLike}
+              />
               <span
                 onClick={this.handleReplyClick}
                 ref={this.replyRef}
@@ -199,6 +235,7 @@ class Comment extends React.Component {
               >
                 Reply
               </span>
+              {this.likes()}
             </div>
           </div>
         </div>
@@ -211,7 +248,9 @@ class Comment extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   const authors = state.entities.users;
-  const { childComments: replies = {} } = ownProps;
+  const likes = state.entities.likes
+  const { childComments: replies = {}, comment = {} } = ownProps;
+
   const replierIds = replies.map(reply => {
     return reply.author_id;
   });
@@ -222,7 +261,17 @@ const mapStateToProps = (state, ownProps) => {
   const replyUsers = Object.values(state.entities.users).filter(user => {
     return replierIds.includes(user.id);
   });
-  return merge({}, ownProps, { author, currentUser, replyUsers });
+  const commentLikes = Object.values(likes).filter(value => {
+    return (
+      value.likeable_type === "Comment" && value.likeable_id === comment.id
+    );
+  });
+  return merge({}, ownProps, {
+    author,
+    currentUser,
+    replyUsers,
+    likes: commentLikes
+  });
 };
 
 const mapDispatchToProps = dispatch => {

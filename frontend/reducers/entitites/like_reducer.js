@@ -8,6 +8,7 @@ import {
 import {
     merge
 } from "lodash"
+import { RECEIVE_COMMENTS } from "../../actions/comments_actions";
 
 
 export default (state = {}, action) => {
@@ -21,7 +22,11 @@ export default (state = {}, action) => {
             delete newState[action.id]
             return newState
         case RECEIVE_POSTS:
-            return merge({}, state, action.posts.likes)
+            const temp = merge({}, state, action.posts.likes)
+            debugger
+            return merge({}, temp, action.posts.comments.likes)
+        case RECEIVE_COMMENTS:
+
         default:
             return state
     }

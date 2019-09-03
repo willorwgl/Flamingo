@@ -76,7 +76,7 @@ class Like extends React.Component {
     ) : null;
   }
 
-  displayLike() {
+  displayPostLike() {
     const { like_type } = this.liked();
     if (like_type === "like") {
       return (
@@ -94,22 +94,49 @@ class Like extends React.Component {
     }
   }
 
-  render() {
+  displayCommentLike() {
+    const { like_type } = this.liked();
+    debugger
+    if (like_type === "like") {
+      return <span className="liked-comment-like">Like</span>;
+    } else {
+      return (
+        <span className={`comment-${like_type}`}>
+          {like_type.charAt(0).toUpperCase() + like_type.slice(1)}
+        </span>
+      );
+    }
+  }
+
+  postLike() {
     return (
-      <span
-        className="post-like"
-        onClick={this.handleClick(this.state.currentLikeType)}
-        onMouseOver={this.handleHover}
-        onMouseLeave={this.handleBlur}
-      >
-        {this.likeOptions()}
+      <>
         {this.liked() ? (
-          this.displayLike()
+          this.displayPostLike()
         ) : (
           <div>
             <i className="far fa-thumbs-up" /> Like
           </div>
         )}
+      </>
+    );
+  }
+
+  commentLike() {
+      return <>{this.liked() ? this.displayCommentLike() : <span className="comment-like-option" >Like </span>}</>;
+  }
+
+  render() {
+    const { likeableType } = this.props;
+    return (
+      <span
+        className={likeableType === "Post" ? "post-like" : "comment-like"}
+        onClick={this.handleClick(this.state.currentLikeType)}
+        onMouseOver={this.handleHover}
+        onMouseLeave={this.handleBlur}
+      >
+        {this.likeOptions()}
+        {likeableType === "Post" ? this.postLike() : this.commentLike()}
       </span>
     );
   }

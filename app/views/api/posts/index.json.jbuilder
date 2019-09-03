@@ -22,7 +22,7 @@ end
 
     json.comments do 
         post.comments.each do |comment|
-                json.partial! 'api/comments/comment', comment: comment
+            json.partial! 'api/comments/comment', comment: comment
         end
     end
 
@@ -30,8 +30,16 @@ end
         post.likes.each do |like|
         json.set! like.id do
             json.extract! like, :id, :user_id, :like_type, :likeable_type, :likeable_id
-        end     
-    end
+            end     
+        end
+
+        post.comments.each do |comment|
+            comment.likes.each do |like|
+                json.set! like.id do
+                    json.extract! like, :id, :user_id, :like_type, :likeable_type, :likeable_id
+                end     
+            end
+        end
     end
 end
 

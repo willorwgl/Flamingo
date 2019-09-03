@@ -235,7 +235,7 @@ const mapStateToProps = (state, ownProps) => {
     return value.id === authorId;
   });
   const postLikes = Object.values(likes).filter(value => {
-    return value.likeable_id === postId;
+    return value.likeable_type === "Post" && value.likeable_id === postId;
   });
   return merge({}, ownProps, {
     comments: postComments,
