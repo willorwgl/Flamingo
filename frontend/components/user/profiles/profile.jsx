@@ -13,6 +13,7 @@ import { ProtectedRoute } from "../../../util/route_util"
 import FriendsContainer from "../../friends_container";
 import { Switch} from "react-router-dom"
 import AboutPage from "../../about"
+import PhotosContainer from "../../photos_container";
 
 class Profile extends React.Component {
   componentDidMount() {
@@ -22,7 +23,7 @@ class Profile extends React.Component {
     requestUserFriendships(id)
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     const { id: currentId } = this.props.match.params;
     const { id: prevId } = prevProps.match.params;
     if (currentId != prevId) {
@@ -46,6 +47,7 @@ class Profile extends React.Component {
         <Switch>
           <ProtectedRoute path="/user/:id/about" component={AboutPage} />
           <ProtectedRoute path="/user/:id/friends" component={FriendsContainer} />
+          <ProtectedRoute path="/user/:id/photos" component={PhotosContainer} />
           <div className="profile-main">
           
             <div className="profile-sidebar">

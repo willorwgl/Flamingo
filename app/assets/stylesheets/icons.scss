@@ -244,6 +244,14 @@
     margin: 0 5px;
 }
 
+.selected-thankful-feeling {
+    width: 16px;
+    height: 16px;
+    background-image: image-url("thankful.png");
+    background-size: 16px 16px;
+    margin: 0 5px;
+}
+
 .selected-lovely-feeling {
     width: 16px;
     height: 16px;
@@ -282,4 +290,34 @@
     background-image: image-url("blessed.png");
     background-size: 16px 16px;
     margin: 0 5px;
+}
+
+.image-icon {
+    background-size: 64px 1916px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    background-image: image-url("even-more-icons.png");
+    background-position: 0 -1100px;
+    width: 20px;
+    height: 20px;
+}
+
+.tag-friend-icon {
+    background-size: 64px 1916px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    background-image: image-url("even-more-icons.png");
+    background-position: -21px -995px;
+    width: 20px;
+    height: 20px;
+}
+
+.feeling-icon {
+    background-size: 64px 1916px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    background-image: image-url("even-more-icons.png");
+    background-position: -21px -974px;
+    width: 20px;
+    height: 20px;
 }

@@ -159,7 +159,7 @@ class Post extends React.Component {
       <div className="post-selected-feeling">
         is
         <div className={`selected-${feeling}-feeling`}></div>
-        <span>feeling {feeling}.</span>
+        <span>feeling {feeling}</span>
       </div>
     ) : null;
   }
@@ -204,7 +204,9 @@ class Post extends React.Component {
                   <Link to={`/user/${id}`} className="user-name-link">
                     {fullName}
                   </Link>
-                  {profileUser && profileUser.id !== id ? (
+                  {this.displaySelectedFeeling() ? (
+                    this.displaySelectedFeeling()
+                  ) : profileUser && profileUser.id !== id ? (
                     <>
                       <i class="fas fa-caret-right " />
                       <Link
@@ -216,7 +218,6 @@ class Post extends React.Component {
                     </>
                   ) : null}
                 </strong>
-                {this.displaySelectedFeeling()}
               </div>
               <div className="post-time">{time}</div>
             </span>

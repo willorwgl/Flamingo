@@ -37,7 +37,7 @@ class CreatePostForm extends React.Component {
     this.handleTagInputChange = this.handleTagInputChange.bind(this);
     this.handleTagSelect = this.handleTagSelect.bind(this);
     this.toggleFeelingOption = this.toggleFeelingOption.bind(this);
-    this.handleFeelingClick = this.handleFeelingClick.bind(this)
+    this.handleFeelingClick = this.handleFeelingClick.bind(this);
   }
 
   handleSubmit(e) {
@@ -95,7 +95,7 @@ class CreatePostForm extends React.Component {
 
   handleBlur(e) {
     if (this.state.modal) {
-      this.setState({ modal: false, tagFriends: false });
+      this.setState({ modal: false, tagFriends: false, addFeeling: false, showFeelingOptions: false});
       this.postHTML.classList.remove("on-top");
     }
   }
@@ -308,12 +308,13 @@ class CreatePostForm extends React.Component {
   //--------------------------------------------------------
 
   addFeelingDisplay() {
-    const { addFeeling, feeling} = this.state;
+    const { addFeeling, feeling } = this.state;
     return addFeeling ? (
       <div className="add-feeling">
         <div className="add-feeling-label">Feeling</div>
         <div className="add-feeling-option" onClick={this.handleFeelingClick}>
-          {this.displayFeelingOptions()} {feeling ? feeling : "Choose a feeling"}
+          {this.displayFeelingOptions()}{" "}
+          {feeling ? feeling : "Choose a feeling"}
         </div>
       </div>
     ) : null;
@@ -321,7 +322,11 @@ class CreatePostForm extends React.Component {
 
   toggleFeelingOption(e) {
     const { addFeeling } = this.state;
-    this.setState({ addFeeling: !addFeeling, showFeelingOptions: true, tagFriends: false });
+    this.setState({
+      addFeeling: !addFeeling,
+      showFeelingOptions: true,
+      tagFriends: false
+    });
   }
 
   handleFeelingClick() {
@@ -333,22 +338,40 @@ class CreatePostForm extends React.Component {
     const { showFeelingOptions } = this.state;
     return showFeelingOptions ? (
       <div className="feeling-options-container">
-        <div className="feeling-option" onClick={this.handleFeelingSelect("happy")}>
+        <div
+          className="feeling-option"
+          onClick={this.handleFeelingSelect("happy")}
+        >
           <div className="happy-feeling"></div> <span>Happy</span>
         </div>
-        <div className="feeling-option" onClick={this.handleFeelingSelect("blessed")}>
+        <div
+          className="feeling-option"
+          onClick={this.handleFeelingSelect("blessed")}
+        >
           <div className="blessed-feeling"></div> <span>Blessed</span>
         </div>
-        <div className="feeling-option" onClick={this.handleFeelingSelect("lovely")}>
+        <div
+          className="feeling-option"
+          onClick={this.handleFeelingSelect("lovely")}
+        >
           <div className="lovely-feeling"></div> <span>Lovely</span>
         </div>
-        <div className="feeling-option" onClick={this.handleFeelingSelect("sad")}>
+        <div
+          className="feeling-option"
+          onClick={this.handleFeelingSelect("sad")}
+        >
           <div className="sad-feeling"></div> <span>Sad</span>
         </div>
-        <div className="feeling-option" onClick={this.handleFeelingSelect("thankful")}>
+        <div
+          className="feeling-option"
+          onClick={this.handleFeelingSelect("thankful")}
+        >
           <div className="thankful-feeling"></div> <span>Thankful</span>
         </div>
-        <div className="feeling-option" onClick={this.handleFeelingSelect("excited")}>
+        <div
+          className="feeling-option"
+          onClick={this.handleFeelingSelect("excited")}
+        >
           <div className="excited-feeling"></div> <span>Excited</span>
         </div>
       </div>
@@ -356,13 +379,13 @@ class CreatePostForm extends React.Component {
   }
 
   handleFeelingSelect(feeling) {
-    return (e) => {
-      this.setState({feeling})
-    }
+    return e => {
+      this.setState({ feeling });
+    };
   }
 
   displaySelectedFeeling() {
-    const { feeling } = this.state
+    const { feeling } = this.state;
     return feeling ? (
       <div className="selected-feeling">
         <div className={`selected-${feeling}-feeling`}></div>
@@ -406,7 +429,7 @@ class CreatePostForm extends React.Component {
               htmlFor="post-file"
               ref={this.photoButtonRef}
             >
-              <i class="far fa-image" /> Photo/Video
+              <i className="image-icon"/> Photo/Video
             </label>
             <input
               type="file"
@@ -415,13 +438,13 @@ class CreatePostForm extends React.Component {
               onChange={this.handleFile}
             />
             <span className="post-footer-option" onClick={this.handleTagClick}>
-              <i class="fas fa-user-friends" /> Tag Friends
+              <i className="tag-friend-icon"/>Tag Friends
             </span>
             <span
               className="post-footer-option feeling-activity-option"
               onClick={this.toggleFeelingOption}
             >
-              <i class="far fa-smile" /> Feeling
+              <i class="feeling-icon" /> Feeling
             </span>
           </div>
 

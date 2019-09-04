@@ -33,7 +33,7 @@ class Workplace extends React.Component {
     const { workplace } = this.props;
     return (
       <div className="workplace-container">
-        <img src={window.defaultUserIcon} className="workplace-company-icon" />
+        <img src={window.companyIcon} className="workplace-company-icon" />
         <div className="workplace-info">
           <div className="company-name">{workplace.company}</div>
           <div className="workplace-extra">

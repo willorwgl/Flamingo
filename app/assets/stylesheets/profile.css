@@ -7,8 +7,8 @@
     background-color: black;
     height: 200px;
     position: relative;
-
-
+    background-size: 100% 200px;
+    background-position: "center center no-repeat"
 }
 
 .cover-image-footer {
@@ -116,10 +116,10 @@
 .sidebar-photos {
     width: 323px;
     min-height: 48px;
-
-        border: 1px solid #dddfe2;
-        background: white;
+    border: 1px solid #dddfe2;
+    background: white;
 }
+
 
 .profile-wall {
     display: inline-block;
@@ -141,7 +141,8 @@ a {
     text-decoration: none;
 }
 
-.friend-button {
+.friend-button,
+.update-info {
     height: 28px;
     line-height: 28px;
     vertical-align: center;
@@ -151,10 +152,16 @@ a {
     color: #4b4f56;
     background-color: #f5f6f7;
     right: 10px;
-    cursor: pointer;
     outline: none;
     position: relative;
     display: inline-block;
+    cursor: pointer !important;
+}
+
+.update-info {
+    font-size: 11px;
+    font-weight: 700;
+    right: 0;
 }
 
 .friend-options-container {
@@ -186,7 +193,48 @@ a {
     top: 7px;
 }
 
- body {
-     background-color: #e9ebee !important;
-     z-index: -10;
- }
+body {
+    background-color: #e9ebee !important;
+    z-index: -10;
+}
+
+.update-info-link {
+    margin: none !important;
+}
+
+.cover-photo-option {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    height: 25px;
+    border-radius: 5px;
+    display: flex;
+    padding: 4px 6px;
+    align-items: center;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.cover-photo-camera {
+    font-size: 24px;
+}
+
+.cover-photo-option-hovered {
+    border: 1px solid #ccc;
+}
+
+.cover-image-label {
+    font-size: 11px;
+
+}
+
+.cover-photo-camera-hovered {
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.profile-sidebar {
+    position: sticky;
+    top: -260px;
+    left: 0;
+}

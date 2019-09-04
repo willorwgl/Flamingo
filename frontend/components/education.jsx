@@ -32,7 +32,7 @@ class Education extends React.Component {
     const { education } = this.props;
     return (
       <div className="workplace-container">
-        <img src={window.defaultUserIcon} className="workplace-company-icon" />
+        <img src={window.educationIcon} className="workplace-company-icon" />
         <div className="workplace-info">
           <div className="company-name">{education.school}</div>
           <div className="workplace-description">{education.description}</div>

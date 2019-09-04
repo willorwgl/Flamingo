@@ -1,11 +1,13 @@
-.friends-container {
+.friends-container,
+.photos-container {
     width: 851px;
 
     margin-top: 10px;
     /* padding-top: 16px; */
 }
 
-.friends-container-header {
+.friends-container-header,
+.photos-container-header {
     background: #F5F6F7;
     width: 850px;
     height: 84px;
@@ -13,16 +15,19 @@
     box-sizing: border-box;
 }
 
-.friends-header-icon {
+.friends-header-icon,
+.photos-header-icon {
     font-size: 24px;
     color: gray;
 }
 
-.friends-label {
+.friends-label,
+.photos-label {
     font-size: 20px;
 }
 
-.friends-header-options {
+.friends-header-options,
+.photos-header-options {
     padding-top: 8px;
     height: 31px;
     line-height: 31px;
@@ -30,6 +35,11 @@
     font-size: 13px;
     font-weight: 600;
     color: #4b4f56;
+}
+
+.photos-header-options {
+    display: flex;
+    justify-content: space-between
 }
 
 .friend-item {
@@ -64,7 +74,7 @@
     width: 150px;
     cursor: pointer;
     font-weight: 700;
-    
+
 }
 
 .friend-image-container {
@@ -78,4 +88,44 @@
 
 .friend-item-button {
     display: inline-block;
+}
+
+.photo-page-photo {
+    width: 250px;
+    height: 250px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.photo-page-photos {
+    background-color: white;
+    padding: 20px;
+}
+
+.sidebar-photo {
+    width: 101px;
+    height: 101px;
+    margin: 0 3px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.add-photo-btn {
+    height: 28px;
+    line-height: 28px;
+    vertical-align: center;
+    padding: 0 10px;
+    font-weight: 700px;
+    border: 1px solid rgba(0, 0, 0, .4);
+    color: #4b4f56;
+    background-color: #f5f6f7;
+    border-radius: 2px;
+    right: 10px;
+    outline: none;
+    position: relative;
+    display: inline-block;
+    cursor: pointer !important;
 }

@@ -14,6 +14,7 @@ class SidebarIntro extends React.Component {
     this.toggleBioEdit = this.toggleBioEdit.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleAddFeature = this.handleAddFeature.bind(this)
   }
 
   introBioForm() {
@@ -73,6 +74,10 @@ class SidebarIntro extends React.Component {
     }
   }
 
+  handleAddFeature() {
+    alert("Sorry, not implemented yet. :(")
+  }
+
   featured() {
     return this.authorized() ? (
       <div className="bio-featured">
@@ -81,7 +86,7 @@ class SidebarIntro extends React.Component {
           Showcase what's important to you by adding photos, pages, groups and
           more to your featured section on your public profile.
         </div>
-        <div className="add-feature-link">Add to Featured</div>
+        <div className="add-feature-link" onClick={this.handleAddFeature}>Add to Featured</div>
       </div>
     ) : null;
   }

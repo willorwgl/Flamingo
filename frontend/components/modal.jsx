@@ -13,9 +13,15 @@ function Modal({ modal, closeModal }) {
   }
   let component;
   switch (modal.modalName) {
-    case "add photo":
-      component = <AddPhotoForm />;
+    case "add profile photo":
+      component = <AddPhotoForm type="profile"/>;
       break;
+    case "add cover photo":
+      component = <AddPhotoForm type="cover"/>;
+      break
+    case "add other photo": 
+      component = <AddPhotoForm type="other" />;
+      break
     case "edit post":
       component = <EditPostForm postId={modal.modalInfo} />;
       break;

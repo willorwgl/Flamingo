@@ -164,7 +164,7 @@
 }
 
 .workplace-save-btn {
-    background: rgb(66, 103, 178);
+    background: #ff8080;
     width: 107px;
     height: 28px;
     padding: 0 10px;
@@ -189,7 +189,7 @@
 
 
 .workplace-save-btn:disabled {
-    background: rgb(156, 180, 216);
+    background: #ffaaa5;
 }
 
 .workplace-container {
@@ -202,8 +202,10 @@
 }
 
 .workplace-company-icon {
-    width: 36px;
-    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+        max-width: 36px;
+        max-height: 36px;
     border-radius: 50%;
     margin-right: 12px;
 }

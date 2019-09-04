@@ -19,7 +19,6 @@ export default (state = {}, action) => {
             delete newState[action.id]
             return newState
         case RECEIVE_POSTS:
-        debugger
             const temp = merge({}, state, action.posts.likes)
             return merge({}, temp, action.posts.comments ? action.posts.comments.likes : {})
         default:

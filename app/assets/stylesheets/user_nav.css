@@ -27,7 +27,12 @@
 .app-logo {
     width: 24px;
     height: 24px;
-    margin-right: 10px;
+    color: #ff8080;
+    background: white;
+    font-size: 20px;
+    text-align: end;
+    padding: 2px;
+    box-sizing: border-box;
 }
 
 .user-nav-bar {
@@ -172,4 +177,8 @@
 .in-search {
     background: #4080FF !important;
     color: white !important;
+}
+
+.app-logo-link {
+    margin-right: 10px;
 }

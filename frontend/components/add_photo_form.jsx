@@ -7,7 +7,9 @@ class AddPhotoForm extends React.Component {
     super(props);
     this.state = {
       profilePhoto: null,
-      photoUrl: null
+      photoUrl: null,
+      coverPhoto: null,
+      otherPhoto: null
     };
     this.handleFile = this.handleFile.bind(this);
     this.cancel = this.cancel.bind(this);
@@ -16,11 +18,18 @@ class AddPhotoForm extends React.Component {
   }
 
   handleFile(e) {
+    const { type } = this.props;
     const fileReader = new FileReader();
     const photo = e.currentTarget.files[0];
 
     fileReader.onloadend = () => {
-      this.setState({ profilePhoto: photo, photoUrl: fileReader.result });
+      if (type === "profile") {
+        this.setState({ profilePhoto: photo, photoUrl: fileReader.result });
+      } else if (type === "cover") {
+        this.setState({ coverPhoto: photo, photoUrl: fileReader.result });
+      } else {
+        this.setState({ otherPhoto: photo, photoUrl: fileReader.result });
+      }
     };
     if (photo) {
       fileReader.readAsDataURL(photo);
@@ -35,14 +44,22 @@ class AddPhotoForm extends React.Component {
   deletePhoto(e) {
     this.setState({
       profilePhoto: null,
-      photoUrl: null
+      photoUrl: null,
+      coverPhoto: null
     });
   }
 
   save(e) {
+    const { type } = this.props;
     const formData = new FormData();
     const { currentUser } = this.props;
-    formData.append("user[profile_photo]", this.state.profilePhoto);
+    if (type === "profile") {
+      formData.append("user[profile_photo]", this.state.profilePhoto);
+    } else if (type === "cover") {
+      formData.append("user[cover_image]", this.state.coverPhoto);
+    } else {
+      formData.append("user[other_photo]", this.state.otherPhoto);
+    }
     $.ajax({
       url: `/api/users/${currentUser.id}`,
       method: "PATCH",

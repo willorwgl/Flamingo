@@ -55,6 +55,8 @@ class User < ApplicationRecord
         through: :post_tags,
         source: :post
 
+    has_many_attached :other_photos
+
 
     def friendships
         Friendship.where("user_id = ? OR friend_id = ?", self.id, self.id)

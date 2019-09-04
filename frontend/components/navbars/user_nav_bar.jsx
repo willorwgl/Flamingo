@@ -51,8 +51,9 @@ class UserNavBar extends React.Component {
       display = (
         <div className="user-nav-bar">
           <div className="nav-options">
-            <Link to="/">
-              <img className="app-logo" src={window.logo} />
+            <Link className="app-logo-link"to="/">
+
+              <i className="fab fa-facebook-f app-logo"></i>
             </Link>
             <SearchBar />
             <div className="profile-button">

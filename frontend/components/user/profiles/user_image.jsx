@@ -6,34 +6,22 @@ import {
   acceptFriendRequest,
   cancelFriendRequest
 } from "../../../actions/friendships_actions";
+import { Link } from "react-router-dom";
 
 class UserImage extends React.Component {
-  // componentDidMount() {
-  //     const { requestWallPosts } = this.props;
-  //     const { id } = this.props.match.params;
-  //     requestWallPosts(id, "wall");
-  // }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //     const { id: currentId } = this.props.match.params;
-  //     const { id: prevId } = prevProps.match.params;
-  //     if (currentId != prevId) {
-  //         const { requestWallPosts } = this.props;
-  //         requestWallPosts(currentId, "wall");
-  //     }
-  // }
-
   constructor(props) {
     super(props);
     this.state = {
-      showFriendOptions: false
+      showFriendOptions: false,
+      showCoverImageOption: false
     };
-    this.addProfilePhoto = this.addProfilePhoto.bind(this);
+
     this.sendFriendRequest = this.sendFriendRequest.bind(this);
     this.acceptFriendRequest = this.acceptFriendRequest.bind(this);
     this.cancelFriendRequest = this.cancelFriendRequest.bind(this);
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.toggleCoverImageOption = this.toggleCoverImageOption.bind(this);
   }
 
   handleMouseEnter(e) {
@@ -101,7 +89,7 @@ class UserImage extends React.Component {
   }
 
   friendButtonOptions() {
-    const { currentUser, profileUser, friendship } = this.props;
+    const { currentUser, friendship } = this.props;
     if (!friendship) {
       return null;
     }
@@ -143,10 +131,12 @@ class UserImage extends React.Component {
     }
   }
 
-  addProfilePhoto(e) {
-    e.preventDefault();
-    const { openModal } = this.props;
-    openModal("add photo");
+  addPhoto(type) {
+    return e => {
+      e.preventDefault();
+      const { openModal } = this.props;
+      openModal(type);
+    };
   }
 
   sendFriendRequest(e) {
@@ -172,19 +162,70 @@ class UserImage extends React.Component {
     return currentUser.id === profileUser.id;
   }
 
+  updateInfo() {
+    const { profileUser } = this.props;
+    return this.authorized() ? (
+      <Link to={`/user/${profileUser.id}/about`} className="update-info-link">
+        <div className="update-info">Update Info</div>
+      </Link>
+    ) : null;
+  }
+
+  addCoverPhoto() {
+    const { profileUser } = this.props;
+    const { showCoverImageOption } = this.state;
+    return this.authorized() ? (
+      <div
+        className={`cover-photo-option ${
+          showCoverImageOption ? "cover-photo-option-hovered" : ""
+        }`}
+        onMouseEnter={this.toggleCoverImageOption}
+        onMouseLeave={this.toggleCoverImageOption}
+        onClick={this.addPhoto("add cover photo")}
+      >
+        <i
+          className={`fas fa-camera cover-photo-camera ${
+            showCoverImageOption ? "cover-photo-camera-hovered" : ""
+          }`}
+        ></i>
+        {showCoverImageOption ? (
+          <span className="cover-image-label">
+            {profileUser.cover_image ? "Add Cover Photo" : "Update Cover Photo"}
+          </span>
+        ) : null}
+      </div>
+    ) : null;
+  }
+
+  toggleCoverImageOption() {
+    const { showCoverImageOption } = this.state;
+    this.setState({ showCoverImageOption: !showCoverImageOption });
+  }
+
   render() {
     const {
       first_name = "",
       last_name = "",
-      profilePhoto = window.defaultUserIcon
+      profilePhoto = window.defaultUserIcon,
+      coverImage
     } = this.props.profileUser;
     const fullName = `${first_name} ${last_name}`;
     return (
-      <div className="profile-image-container">
+      <div
+        className="profile-image-container"
+        style={
+          coverImage
+            ? {
+                backgroundImage: `url(${coverImage})`
+              }
+            : null
+        }
+      >
+        {this.addCoverPhoto()}
         <div>
           <div className="cover-image-footer">
             <span className="profile-name">{fullName}</span>
-
+            {this.updateInfo()}
             {this.friendButton()}
           </div>
         </div>
@@ -192,7 +233,10 @@ class UserImage extends React.Component {
         <img className="profile-image" src={profilePhoto} />
 
         {this.authorized() ? (
-          <div className="add-photo-semicircle" onClick={this.addProfilePhoto}>
+          <div
+            className="add-photo-semicircle"
+            onClick={this.addPhoto("add profile photo")}
+          >
             <div className="camera-icon" />
             <div className="add-photo">
               {this.props.profileUser.profilePhoto ? "Update" : "Add Photo"}

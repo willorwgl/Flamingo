@@ -62,14 +62,14 @@
     display: block;
     height: 28px;
     color: white;
-    background-color: #4267b2;
+    background-color: #ff8080;
     width: 504px;
     font-weight: 700;
     margin: 10px 5px;
 }
 
 .post-footer-option {
-    display: inline-block;
+    display: inline-flex;
     width: 118px;
     height: 32px;
     color: #4b4f56;
@@ -83,10 +83,12 @@
     line-height: 32px;
     vertical-align: center;
     text-align: center;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 .feeling-activity-option {
-    width: 138px;
+    width: 100px;
 }
 
 .on-top {
