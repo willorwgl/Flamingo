@@ -5,7 +5,7 @@ import TextareaAutosize from "react-autosize-textarea";
 import { withRouter } from "react-router-dom";
 import { merge } from "lodash";
 import { requestFriendships } from "../../../actions/friendships_actions";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 class CreatePostForm extends React.Component {
   constructor(props) {
@@ -21,7 +21,10 @@ class CreatePostForm extends React.Component {
       tagFriends: false,
       tagged: [],
       tagInput: "",
-      searchResults: []
+      searchResults: [],
+      addFeeling: false,
+      feeling: null,
+      showFeelingOptions: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -32,14 +35,16 @@ class CreatePostForm extends React.Component {
     this.photoButtonRef = React.createRef();
     this.handleTagClick = this.handleTagClick.bind(this);
     this.handleTagInputChange = this.handleTagInputChange.bind(this);
-    this.handleTagSelect = this.handleTagSelect.bind(this)
+    this.handleTagSelect = this.handleTagSelect.bind(this);
+    this.toggleFeelingOption = this.toggleFeelingOption.bind(this);
+    this.handleFeelingClick = this.handleFeelingClick.bind(this)
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    const { photos, body, wall_id, tagged } = this.state;
+    const { photos, body, wall_id, tagged, feeling } = this.state;
     const { createPost } = this.props;
-    const post_tags = tagged.map( (friend) => friend.id)
+    const post_tags = tagged.map(friend => friend.id);
     if (photos.length) {
       const formData = new FormData();
       formData.append("post[body]", body);
@@ -48,6 +53,7 @@ class CreatePostForm extends React.Component {
       }
       formData.append("post[wall_id]", wall_id);
       formData.append("post[post_tags]", post_tags);
+      formData.append("post[feeling]", feeling);
       $.ajax({
         method: "POST",
         url: "/api/posts",
@@ -57,7 +63,7 @@ class CreatePostForm extends React.Component {
       });
     } else {
       if (!body) return;
-      createPost(merge({}, this.state, {post_tags}));
+      createPost(merge({}, this.state, { post_tags }));
     }
     this.setState({
       body: "",
@@ -65,7 +71,10 @@ class CreatePostForm extends React.Component {
       tagged: [],
       tagInput: "",
       searchResults: [],
-      tagFriends: false
+      tagFriends: false,
+      feeling: null,
+      addFeeling: false,
+      showFeelingOptions: false
     });
     this.postHTML.classList.remove("on-top");
   }
@@ -86,14 +95,14 @@ class CreatePostForm extends React.Component {
 
   handleBlur(e) {
     if (this.state.modal) {
-      this.setState({ modal: false, tagFriends: false});
+      this.setState({ modal: false, tagFriends: false });
       this.postHTML.classList.remove("on-top");
     }
   }
 
   componentDidMount() {
     const { currentUser, requestFriendships } = this.props;
-    requestFriendships(currentUser.id)
+    requestFriendships(currentUser.id);
   }
 
   componentDidUpdate(e) {
@@ -120,87 +129,6 @@ class CreatePostForm extends React.Component {
       fileReader.readAsDataURL(photo);
     }
   }
-
-  handleTagInputChange(e) {
-    const { currentUserFriends } = this.props
-    const { tagged } = this.state
-    const tagInput = e.target.value.trim()
-    if (tagInput) {
-      const searchResults = currentUserFriends.filter((friend) => {
-        const { first_name, last_name } = friend
-        return `${first_name} ${last_name}`.toLowerCase().indexOf(tagInput.toLowerCase()) >= 0 && !tagged.includes(friend)
-      })
-      this.setState({ tagInput: tagInput, searchResults})
-      return
-    } 
-    this.setState({ searchResults: [], tagInput})
-  }
-
-  handleTagSelect(friend) {
-    return (e) => {
-      const newTagged = this.state.tagged.slice()
-      newTagged.push(friend)
-      this.setState({ tagged: newTagged, searchResults: [], tagInput: "" })
-    }
-  }
-
-  handleTagUnselect(friend) {
-    return (e) => {
-      const newTagged = this.state.tagged.slice()
-      const index = newTagged.indexOf(friend);
-      if (index !== -1) newTagged.splice(index, 1);
-      this.setState({tagged: newTagged})
-    }
-  }
-
-  searchResults() {
-    const { searchResults } = this.state
-    if (!searchResults.length) return;
-    const resultDisplay = searchResults.map((friend) => {
-      const { first_name, last_name } = friend
-      const fullName = `${first_name} ${last_name}`;
-      return (
-        <div key={friend.id} className="tag-result-item"  onClick={this.handleTagSelect(friend)}>
-        <img src={friend.profilePhoto || window.defaultUserIcon} alt="" className="tag-result-item-photo"/>
-          {fullName}
-        </div>
-      );
-    })
-    return resultDisplay.length ? <div className="tag-search-results">
-        {resultDisplay}
-    </div> : null
-  }
-
-  taggedFriends() {
-    const { tagged } = this.state
-    const withFriends = tagged.map( (friend, key) => {
-      return (
-        <span className="with-tagged-friend">
-          <Link className="with-tagged-friend-item"
-            to={`/user/${friend.id}`}
-          >{`${friend.first_name} ${friend.last_name}`}</Link>
-          {key === tagged.length - 2 ? ", and " : (key === tagged.length - 1 ? "." : ", ")}
-        </span>
-      ); 
-    })
-
-    const taggedFriends = tagged.map( (friend) => {
-      return (
-        <div className="tagged-friend">
-          {`${friend.first_name} ${friend.last_name}`}
-          <i class="fas fa-times unselect-tagged" onClick={this.handleTagUnselect(friend)}></i>
-        </div>
-      );
-    })
-    return tagged.length ? (
-      <div class="tagged-friend-container">
-        <div className="post-tagged-friends">With {withFriends}</div>
-        <div className="tagged-friend-options">{taggedFriends}</div>
-      </div>
-    ) : null;
-  }
-
-
 
   deletePhoto(e) {
     const index = Number(e.target.getAttribute("data-index"));
@@ -253,6 +181,107 @@ class CreatePostForm extends React.Component {
     return null;
   }
 
+  //--------------------------------------------------------
+
+  handleTagInputChange(e) {
+    const { currentUserFriends } = this.props;
+    const { tagged } = this.state;
+    const tagInput = e.target.value.trim();
+    if (tagInput) {
+      const searchResults = currentUserFriends.filter(friend => {
+        const { first_name, last_name } = friend;
+        return (
+          `${first_name} ${last_name}`
+            .toLowerCase()
+            .indexOf(tagInput.toLowerCase()) >= 0 && !tagged.includes(friend)
+        );
+      });
+      this.setState({ tagInput: tagInput, searchResults });
+      return;
+    }
+    this.setState({ searchResults: [], tagInput });
+  }
+
+  handleTagSelect(friend) {
+    return e => {
+      const newTagged = this.state.tagged.slice();
+      newTagged.push(friend);
+      this.setState({ tagged: newTagged, searchResults: [], tagInput: "" });
+    };
+  }
+
+  handleTagUnselect(friend) {
+    return e => {
+      const newTagged = this.state.tagged.slice();
+      const index = newTagged.indexOf(friend);
+      if (index !== -1) newTagged.splice(index, 1);
+      this.setState({ tagged: newTagged });
+    };
+  }
+
+  searchResults() {
+    const { searchResults } = this.state;
+    if (!searchResults.length) return;
+    const resultDisplay = searchResults.map(friend => {
+      const { first_name, last_name } = friend;
+      const fullName = `${first_name} ${last_name}`;
+      return (
+        <div
+          key={friend.id}
+          className="tag-result-item"
+          onClick={this.handleTagSelect(friend)}
+        >
+          <img
+            src={friend.profilePhoto || window.defaultUserIcon}
+            alt=""
+            className="tag-result-item-photo"
+          />
+          {fullName}
+        </div>
+      );
+    });
+    return resultDisplay.length ? (
+      <div className="tag-search-results">{resultDisplay}</div>
+    ) : null;
+  }
+
+  taggedFriends() {
+    const { tagged } = this.state;
+    const withFriends = tagged.map((friend, key) => {
+      return (
+        <span className="with-tagged-friend">
+          <Link
+            className="with-tagged-friend-item"
+            to={`/user/${friend.id}`}
+          >{`${friend.first_name} ${friend.last_name}`}</Link>
+          {key === tagged.length - 2
+            ? ", and "
+            : key === tagged.length - 1
+            ? "."
+            : ", "}
+        </span>
+      );
+    });
+
+    const taggedFriends = tagged.map(friend => {
+      return (
+        <div className="tagged-friend">
+          {`${friend.first_name} ${friend.last_name}`}
+          <i
+            class="fas fa-times unselect-tagged"
+            onClick={this.handleTagUnselect(friend)}
+          ></i>
+        </div>
+      );
+    });
+    return tagged.length ? (
+      <div class="tagged-friend-container">
+        <div className="post-tagged-friends">With {withFriends}</div>
+        <div className="tagged-friend-options">{taggedFriends}</div>
+      </div>
+    ) : null;
+  }
+
   tagFriendsDisplay() {
     const { tagFriends } = this.state;
     return tagFriends ? (
@@ -273,15 +302,80 @@ class CreatePostForm extends React.Component {
   handleTagClick(e) {
     const { tagFriends } = this.state;
     e.preventDefault();
-    this.setState({ tagFriends: !tagFriends });
+    this.setState({ tagFriends: !tagFriends, addFeeling: false });
   }
+
+  //--------------------------------------------------------
+
+  addFeelingDisplay() {
+    const { addFeeling, feeling} = this.state;
+    return addFeeling ? (
+      <div className="add-feeling">
+        <div className="add-feeling-label">Feeling</div>
+        <div className="add-feeling-option" onClick={this.handleFeelingClick}>
+          {this.displayFeelingOptions()} {feeling ? feeling : "Choose a feeling"}
+        </div>
+      </div>
+    ) : null;
+  }
+
+  toggleFeelingOption(e) {
+    const { addFeeling } = this.state;
+    this.setState({ addFeeling: !addFeeling, showFeelingOptions: true, tagFriends: false });
+  }
+
+  handleFeelingClick() {
+    const { showFeelingOptions } = this.state;
+    this.setState({ showFeelingOptions: !showFeelingOptions });
+  }
+
+  displayFeelingOptions() {
+    const { showFeelingOptions } = this.state;
+    return showFeelingOptions ? (
+      <div className="feeling-options-container">
+        <div className="feeling-option" onClick={this.handleFeelingSelect("happy")}>
+          <div className="happy-feeling"></div> <span>Happy</span>
+        </div>
+        <div className="feeling-option" onClick={this.handleFeelingSelect("blessed")}>
+          <div className="blessed-feeling"></div> <span>Blessed</span>
+        </div>
+        <div className="feeling-option" onClick={this.handleFeelingSelect("lovely")}>
+          <div className="lovely-feeling"></div> <span>Lovely</span>
+        </div>
+        <div className="feeling-option" onClick={this.handleFeelingSelect("sad")}>
+          <div className="sad-feeling"></div> <span>Sad</span>
+        </div>
+        <div className="feeling-option" onClick={this.handleFeelingSelect("thankful")}>
+          <div className="thankful-feeling"></div> <span>Thankful</span>
+        </div>
+        <div className="feeling-option" onClick={this.handleFeelingSelect("excited")}>
+          <div className="excited-feeling"></div> <span>Excited</span>
+        </div>
+      </div>
+    ) : null;
+  }
+
+  handleFeelingSelect(feeling) {
+    return (e) => {
+      this.setState({feeling})
+    }
+  }
+
+  displaySelectedFeeling() {
+    const { feeling } = this.state
+    return feeling ? (
+      <div className="selected-feeling">
+        <div className={`selected-${feeling}-feeling`}></div>
+        <span>feeling {feeling}.</span>
+      </div>
+    ) : null;
+  }
+
+  //--------------------------------------------------------
 
   render() {
     const { currentUser = {} } = this.props;
-    const {
-      id = null,
-      profilePhoto = window.defaultUserIcon
-    } = currentUser;
+    const { id = null, profilePhoto = window.defaultUserIcon } = currentUser;
     return (
       <>
         <form className="create-post-form" onClick={this.handleClick}>
@@ -302,7 +396,9 @@ class CreatePostForm extends React.Component {
             />
           </div>
           {this.taggedFriends()}
+          {this.displaySelectedFeeling()}
           {this.tagFriendsDisplay()}
+          {this.addFeelingDisplay()}
           {this.photosPreview()}
           <div className="create-post-footer">
             <label
@@ -321,9 +417,12 @@ class CreatePostForm extends React.Component {
             <span className="post-footer-option" onClick={this.handleTagClick}>
               <i class="fas fa-user-friends" /> Tag Friends
             </span>
-            {/* <span className="post-footer-option feeling-activity-option">
-              <i class="far fa-smile" /> Feeling/Activ...
-            </span> */}
+            <span
+              className="post-footer-option feeling-activity-option"
+              onClick={this.toggleFeelingOption}
+            >
+              <i class="far fa-smile" /> Feeling
+            </span>
           </div>
 
           {this.state.modal ? (
@@ -349,16 +448,27 @@ class CreatePostForm extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   const currentUser = state.session.currentUser;
-  const friendships = Object.values(state.entities.friendships).filter((friendship) => {
-    return friendship.user_id === currentUser.id || friendship.friend_id === currentUser.id || friendship.state === "accepted"
-  })
-  const friendshipIds = friendships.map((friendship => {
-    return friendship.user_id === currentUser.id ? friendship.friend_id : friendship.user_id
-  }))
-  const acceptedFriends = Object.values(state.entities.users).filter((user) => {
-    return friendshipIds.includes(user.id)
-  })
-  return merge({}, ownProps, { currentUser, currentUserFriends: acceptedFriends });
+  const friendships = Object.values(state.entities.friendships).filter(
+    friendship => {
+      return (
+        friendship.user_id === currentUser.id ||
+        friendship.friend_id === currentUser.id ||
+        friendship.state === "accepted"
+      );
+    }
+  );
+  const friendshipIds = friendships.map(friendship => {
+    return friendship.user_id === currentUser.id
+      ? friendship.friend_id
+      : friendship.user_id;
+  });
+  const acceptedFriends = Object.values(state.entities.users).filter(user => {
+    return friendshipIds.includes(user.id);
+  });
+  return merge({}, ownProps, {
+    currentUser,
+    currentUserFriends: acceptedFriends
+  });
 };
 
 const mapDispatchToProps = dispatch => {

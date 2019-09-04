@@ -141,7 +141,8 @@
     cursor: pointer;
 }
 
-.tag-friends {
+.tag-friends,
+.add-feeling {
     height: 32px;
     width: 490px;
     border-bottom: 1px dotted #ccc;
@@ -151,8 +152,8 @@
     position: relative;
 }
 
-.tag-friends-label {
-    width: 43px;
+.tag-friends-label,
+.add-feeling-label {
     background: #e2e8f6;
     padding: 8px 6px 6px 8px;
     font-size: 11px;
@@ -160,11 +161,16 @@
     box-sizing: border-box;
 }
 
-.tag-friends-input {
+.tag-friends-input,
+.add-feeling-option {
     width: 443px;
     outline: none;
     border: none;
     padding: 8px 10px;
+}
+
+.add-feeling-option {
+    cursor: pointer;
 }
 
 .tag-search-results {
@@ -199,7 +205,6 @@
     color: white;
 }
 
-.tagged-friend-options {}
 
 .tagged-friend {
     background-color: #e9ebee;
@@ -248,4 +253,43 @@
 
 .post-tagged-friends {
     font-size: 11px;
+}
+
+.feeling-options-container {
+    position: absolute;
+    background: white;
+    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
+    width: 430px;
+    border-radius: 5px;
+    left: 0px;
+    top: 30px;
+    box-sizing: border-box;
+}
+
+.add-feeling-option {
+    position: relative;
+    font-weight: 700;
+}
+
+.feeling-option {
+    display: flex;
+    padding: 4px 12px;
+    align-items: center;
+    font-weight: 700;
+}
+
+.feeling-option:hover {
+        cursor: pointer;
+        background-color: #4267b2;
+        color: white;
+}
+
+.selected-feeling {
+    display: flex;
+    padding: 4px 12px;
+}
+
+.post-selected-feeling {
+    display: inline-flex;
+        color: #616770;
 }

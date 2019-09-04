@@ -127,7 +127,7 @@ class Post extends React.Component {
   }
 
   withFriends() {
-    const { taggedFriends } = this.props;
+    const { taggedFriends, author } = this.props;
     const withFriends = taggedFriends.map((friend, key) => {
       return (
         <span className="with-tagged-friend">
@@ -144,9 +144,26 @@ class Post extends React.Component {
       );
     });
     return withFriends.length ? (
-      <div className="post-tagged-friends">With {withFriends}</div>
+      <div className="post-tagged-friends">
+        <Link className="with-tagged-friend-item" to={`/user/${author.id}`}>
+          {author.first_name}
+        </Link>{" "}
+        is with {withFriends}
+      </div>
     ) : null;
   }
+
+  displaySelectedFeeling() {
+    const { feeling } = this.props.post;
+    return feeling ? (
+      <div className="post-selected-feeling">
+        is
+        <div className={`selected-${feeling}-feeling`}></div>
+        <span>feeling {feeling}.</span>
+      </div>
+    ) : null;
+  }
+
   render() {
     const { author = {}, currentUser, post, profileUser } = this.props;
     const {
@@ -199,14 +216,15 @@ class Post extends React.Component {
                     </>
                   ) : null}
                 </strong>
+                {this.displaySelectedFeeling()}
               </div>
               <div className="post-time">{time}</div>
             </span>
           </div>
 
           <div className="post-body">{body}</div>
-          {this.withFriends()}
           {this.likes()}
+          {this.withFriends()}
         </div>
 
         <div className="post-footer">

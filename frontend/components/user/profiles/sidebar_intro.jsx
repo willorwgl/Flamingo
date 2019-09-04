@@ -59,33 +59,31 @@ class SidebarIntro extends React.Component {
         </div>
       );
     } else {
-      return (
+      return this.authorized() ? (
         <div className="intro-bio-description">
           <div className="intro-bio-icon" />
           <div className="bio-description-text">
             Add a short bio to tell people more about yourself.
           </div>
-          {this.authorized() ? <div className="intro-bio-edit" onClick={this.toggleBioEdit}>
+          <div className="intro-bio-edit" onClick={this.toggleBioEdit}>
             Add bio
-          </div> : null}
-     
+          </div>
         </div>
-      );
+      ) : null;
     }
   }
 
   featured() {
-    return (
-      <>
+    return this.authorized() ? (
+      <div className="bio-featured">
         <div className="star-icon" />
         <div className="featured-description">
           Showcase what's important to you by adding photos, pages, groups and
           more to your featured section on your public profile.
         </div>
-        {this.authorized() ? <div className="add-feature-link">Add to Featured</div> : null}
-
-      </>
-    );
+        <div className="add-feature-link">Add to Featured</div>
+      </div>
+    ) : null;
   }
 
   mostRecentWorkplace() {
@@ -95,7 +93,7 @@ class SidebarIntro extends React.Component {
     });
     let workplace = {};
     if (workplaces.length) workplace = workplaces[workplaces.length - 1];
-    return workplace
+    return workplace;
   }
 
   mostRecentEducation() {
@@ -105,13 +103,13 @@ class SidebarIntro extends React.Component {
     });
     let education = {};
     if (educations.length) education = educations[educations.length - 1];
-    return education
+    return education;
   }
 
   introInfo() {
     let { profileUser = {} } = this.props;
-    const workplace = this.mostRecentWorkplace()
-    const education = this.mostRecentEducation()
+    const workplace = this.mostRecentWorkplace();
+    const education = this.mostRecentEducation();
     return (
       <>
         <div className="intro-workplace-info">
@@ -155,8 +153,8 @@ class SidebarIntro extends React.Component {
   }
 
   authorized() {
-    const { profileUser, currentUser }  = this.props
-    return profileUser.id === currentUser.id
+    const { profileUser, currentUser } = this.props;
+    return profileUser.id === currentUser.id;
   }
 
   render() {
@@ -170,7 +168,7 @@ class SidebarIntro extends React.Component {
         </div>
         <div className="intro-bio">{this.introBio()}</div>
         <div className="intro-info">{this.introInfo()}</div>
-        <div className="bio-featured">{this.featured()}</div>
+        {this.featured()}
       </div>
     );
   }
