@@ -55,7 +55,7 @@ class SidebarFriends extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   const { profileUser } = ownProps
   const friendships = Object.values(state.entities.friendships).filter( (friendship) => {
-    return friendship.user_id === profileUser.id || friendship.friend_id === profileUser.id || friendship.state === "accepted"
+    return (friendship.user_id === profileUser.id || friendship.friend_id === profileUser.id) && friendship.status === "accepted"
   } )
   const friendshipIds = friendships.map((friendship => {
     return friendship.user_id === profileUser.id ? friendship.friend_id : friendship.user_id
