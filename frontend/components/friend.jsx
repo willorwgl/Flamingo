@@ -31,32 +31,132 @@ class FriendItem extends React.Component {
   }
 
   friendButton() {
-    return (
-      <button
-        className="friend-button"
-        onMouseOver={this.handleMouseEnter}
-        onMouseLeave={this.handleMouseLeave}
-      >
-        <i class="fas fa-check" /> Friends
-        {this.state.showFriendOptions ? (
-          <div
-            className="friend-options-container"
-            onMouseLeave={this.handleMouseLeave}
-            onMouseOver={this.handleMouseEnter}
-          >
-            <div className="friend-options">
-              <div
-                className="unfriend-button"
-                onClick={this.cancelFriendRequest}
-              >
-                Unfriend
-              </div>
+    const { currentUser = {}, friend = {}, friendship } = this.props;
+    if (currentUser.id === friend.id) {
+      ;
+      return null;
+    }
+    if (!friendship) {
+      ;
+      return (
+        <button className="friend-button" onClick={this.sendFriendRequest}>
+          <i class="fas fa-user-plus" /> Add Friend
+        </button>
+      );
+    }
+    if (
+      friendship.friend_id === currentUser.id &&
+      friendship.status === "pending"
+    ) {
+
+      return (
+        <button className="friend-button" onClick={this.acceptFriendRequest}>
+          Confirm Request
+        </button>
+      );
+    }
+    if (
+      friendship.friend_id !== currentUser.id &&
+      friendship.status === "pending"
+    ) {
+
+      return (
+        <button
+          className="friend-button"
+          onMouseOver={this.handleMouseEnter}
+          onMouseLeave={this.handleMouseLeave}
+        >
+          <i class="fas fa-user-plus" /> Request Sent
+          {this.state.showFriendOptions ? this.friendButtonOptions() : null}
+        </button>
+      );
+    }
+    if (friendship.status === "accepted") {
+
+      return (
+        <button
+          className="friend-button"
+          onMouseOver={this.handleMouseEnter}
+          onMouseLeave={this.handleMouseLeave}
+        >
+          <i class="fas fa-check" /> Friends
+          {this.state.showFriendOptions ? this.friendButtonOptions() : null}
+        </button>
+      );
+    }
+
+  }
+
+  friendButtonOptions() {
+    const { currentUser = {}, friendship = {} } = this.props;
+    if (!friendship) {
+      return null;
+    }
+    if (
+      currentUser.id === friendship.user_id &&
+      friendship.status === "pending"
+    ) {
+      return (
+        <div
+          className="friend-options-container"
+          onMouseLeave={this.handleMouseLeave}
+          onMouseOver={this.handleMouseEnter}
+        >
+          <div className="friend-options">
+            <div
+              className="cancel-friend-request"
+              onClick={this.cancelFriendRequest}
+            >
+              Cancel Request
             </div>
           </div>
-        ) : null}
-      </button>
-    );
+        </div>
+      );
+    }
+    if (friendship.status === "accepted") {
+      return (
+        <div
+          className="friend-options-container"
+          onMouseLeave={this.handleMouseLeave}
+          onMouseOver={this.handleMouseEnter}
+        >
+          <div className="friend-options">
+            <div className="unfriend-button" onClick={this.cancelFriendRequest}>
+              Unfriend
+            </div>
+          </div>
+        </div>
+      );
+    }
   }
+
+  // friendButton() {
+  //   return (
+  //     <button
+  //       className="friend-button"
+  //       onMouseOver={this.handleMouseEnter}
+  //       onMouseLeave={this.handleMouseLeave}
+  //     >
+  //       <i class="fas fa-check" /> Friends
+  //       {this.state.showFriendOptions ? (
+  //         <div
+  //           className="friend-options-container"
+  //           onMouseLeave={this.handleMouseLeave}
+  //           onMouseOver={this.handleMouseEnter}
+  //         >
+  //           <div className="friend-options">
+  //             <div
+  //               className="unfriend-button"
+  //               onClick={this.cancelFriendRequest}
+  //             >
+  //               Unfriend
+  //             </div>
+  //           </div>
+  //         </div>
+  //       ) : null}
+  //     </button>
+  //   );
+  // }
 
   render() {
     const {

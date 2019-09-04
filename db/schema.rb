@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_03_141200) do
+ActiveRecord::Schema.define(version: 2019_09_04_000737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,21 +76,13 @@ ActiveRecord::Schema.define(version: 2019_09_03_141200) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
-  create_table "post_tags", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "post_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_post_tags_on_post_id"
-    t.index ["user_id"], name: "index_post_tags_on_user_id"
-  end
-
   create_table "posts", force: :cascade do |t|
     t.text "body"
     t.integer "author_id", null: false
     t.integer "wall_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "post_tags", default: [], array: true
     t.index ["author_id"], name: "index_posts_on_author_id"
     t.index ["wall_id"], name: "index_posts_on_wall_id"
   end

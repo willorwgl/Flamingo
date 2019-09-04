@@ -6,8 +6,9 @@ import {
 import {
     merge
 } from "lodash"
-import { LOGOUT_CURRENT_USER } from "../../actions/session_actions";
-
+import {
+    LOGOUT_CURRENT_USER
+} from "../../actions/session_actions";
 
 export default (state = {}, action) => {
     Object.freeze(state)
@@ -15,7 +16,7 @@ export default (state = {}, action) => {
         case RECEIVE_FRIEND:
             return merge({}, state, action.friendship)
         case RECEIVE_FRIENDS:
-            return action.friendships
+            return merge({}, state, action.friendships)
         case DELETE_FRIEND:
             const newState = merge({}, state)
             newState.friends = newState.friends || {}
@@ -23,11 +24,11 @@ export default (state = {}, action) => {
             const friend_id = newState[action.friendshipId].friend_id
             delete newState[action.friendshipId]
             if (newState.friends[user_id]) delete newState.friends[user_id]
-            if (newState.friends[friend_id])  delete newState.friends[friend_id]
+            if (newState.friends[friend_id]) delete newState.friends[friend_id]
             return newState
         case LOGOUT_CURRENT_USER:
             return {}
-        default:
-            return state
+            default:
+                return state
     }
 }

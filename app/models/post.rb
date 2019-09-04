@@ -8,6 +8,7 @@
 #  wall_id    :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  post_tags  :integer          default([]), is an Array
 #
 
 
@@ -34,6 +35,5 @@ class Post < ApplicationRecord
 
 
     has_many :likes, as: :likeable
-
 
 end

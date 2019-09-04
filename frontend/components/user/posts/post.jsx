@@ -103,7 +103,7 @@ class Post extends React.Component {
   likes() {
     const { likes } = this.props;
     const numLikes = likes.length;
-    if (!numLikes) return
+    if (!numLikes) return;
     const options = {
       like: [],
       love: [],
@@ -114,16 +114,39 @@ class Post extends React.Component {
     };
     Object.values(likes).forEach(el => options[el.like_type].push(el));
 
-    const likeDisplay = Object.entries(options).map( ([key, option]) => {
-      return option.length ? <div key={option[0].id} class={`liked-${key}`}></div> : null }
-    )
+    const likeDisplay = Object.entries(options).map(([key, option]) => {
+      return option.length ? (
+        <div key={option[0].id} class={`liked-${key}`}></div>
+      ) : null;
+    });
     return (
       <div className="post-likes">
-          {likeDisplay} {numLikes}
+        {likeDisplay} {numLikes}
       </div>
     );
   }
 
+  withFriends() {
+    const { taggedFriends } = this.props;
+    const withFriends = taggedFriends.map((friend, key) => {
+      return (
+        <span className="with-tagged-friend">
+          <Link
+            className="with-tagged-friend-item"
+            to={`/user/${friend.id}`}
+          >{`${friend.first_name} ${friend.last_name}`}</Link>
+          {key === taggedFriends.length - 2
+            ? ", and "
+            : key === taggedFriends.length - 1
+            ? "."
+            : ", "}
+        </span>
+      );
+    });
+    return withFriends.length ? (
+      <div className="post-tagged-friends">With {withFriends}</div>
+    ) : null;
+  }
   render() {
     const { author = {}, currentUser, post, profileUser } = this.props;
     const {
@@ -182,8 +205,10 @@ class Post extends React.Component {
           </div>
 
           <div className="post-body">{body}</div>
+          {this.withFriends()}
           {this.likes()}
         </div>
+
         <div className="post-footer">
           <Like
             likeableType="Post"
@@ -193,9 +218,9 @@ class Post extends React.Component {
           <span className="post-comment" onClick={this.handleCommentClick}>
             <i class="far fa-comment-alt" /> Comment
           </span>
-          <span className="post-share">
+          {/* <span className="post-share">
             <i class="fas fa-share" /> Share
-          </span>
+          </span> */}
         </div>
         {this.comments()}
         <div className="post-comment-form">
@@ -224,7 +249,7 @@ const mapStateToProps = (state, ownProps) => {
   const { comments, users: authors, likes } = state.entities;
   const { currentUser = {} } = state.session;
   let profileUser = null;
-  const { id: postId, author_id: authorId } = ownProps.post;
+  const { id: postId, author_id: authorId, post_tags } = ownProps.post;
   if (ownProps.match.params.id) {
     profileUser = state.entities.users[ownProps.match.params.id];
   }
@@ -237,12 +262,16 @@ const mapStateToProps = (state, ownProps) => {
   const postLikes = Object.values(likes).filter(value => {
     return value.likeable_type === "Post" && value.likeable_id === postId;
   });
+  const taggedFriends = Object.values(authors).filter(friend => {
+    return post_tags.includes(friend.id);
+  });
   return merge({}, ownProps, {
     comments: postComments,
     likes: postLikes,
     author,
     currentUser,
-    profileUser
+    profileUser,
+    taggedFriends
   });
 };
 

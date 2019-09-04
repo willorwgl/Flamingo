@@ -52,11 +52,17 @@ class SidebarFriends extends React.Component {
 
 }
 
-const mapStateToProps = (state) => {
-  // const acceptedFriendships = Object.values(state.entities.friendships).map((friendship) => {
-  //   return friendship.state === "accepted"
-  // })
-  const acceptedFriends = state.entities.friendships.friends || {}
+const mapStateToProps = (state, ownProps) => {
+  const { profileUser } = ownProps
+  const friendships = Object.values(state.entities.friendships).filter( (friendship) => {
+    return friendship.user_id === profileUser.id || friendship.friend_id === profileUser.id || friendship.state === "accepted"
+  } )
+  const friendshipIds = friendships.map((friendship => {
+    return friendship.user_id === profileUser.id ? friendship.friend_id : friendship.user_id
+  }))
+  const acceptedFriends = Object.values(state.entities.users).filter((user) => {
+    return friendshipIds.includes(user.id)
+  })
   return {
     acceptedFriends
   }

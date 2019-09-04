@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import FriendItem from "./friend";
+import { requestFriendships } from "../actions/friendships_actions";
 
 class FriendsContainer extends React.Component {
   friends() {
@@ -12,6 +13,11 @@ class FriendsContainer extends React.Component {
       return <div className="user-friends">{friends}</div>;
     }
     return null;
+  }
+
+  componentDidMount() {
+    const { currentUser, requestFriendships } = this.props
+    requestFriendships(currentUser.id)
   }
 
   render() {
@@ -33,11 +39,36 @@ class FriendsContainer extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  const acceptedFriends = state.entities.friendships.friends || {};
+const mapStateToProps = (state, ownProps ) => {
+  const profileUserId = +ownProps.match.params.id
+  const friendships = Object.values(state.entities.friendships).filter(
+    friendship => {
+      return (
+        friendship.user_id === profileUserId ||
+        friendship.friend_id === profileUserId ||
+        friendship.state === "accepted"
+      );
+    }
+  );
+  const friendshipIds = friendships.map(friendship => {
+    return friendship.user_id === profileUserId
+      ? friendship.friend_id
+      : friendship.user_id;
+  });
+  const acceptedFriends = Object.values(state.entities.users).filter(user => {
+    return friendshipIds.includes(user.id);
+  });
+  const { currentUser } = state.session
   return {
-    acceptedFriends
+    acceptedFriends,
+    currentUser
   };
 };
 
-export default connect(mapStateToProps)(FriendsContainer);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    requestFriendships: (userId) => dispatch(requestFriendships(userId))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FriendsContainer);

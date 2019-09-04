@@ -41,6 +41,7 @@
     align-items: center;
     margin-left: 10px;
     margin-bottom: 10px;
+    justify-content: space-evenly;
 }
 
 .friend-item-image {
@@ -60,7 +61,7 @@
 }
 
 .friend-info {
-    width: 189px;
+    width: 150px;
     cursor: pointer;
     font-weight: 700;
     

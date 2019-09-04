@@ -5,8 +5,6 @@
     background: white;
 }
 
-/* .create-post-btn-div {} */
-
 .create-post-header {
     height: 33px;
     background-color: #f5f6f7;
@@ -18,19 +16,6 @@
 .post-header-option {
     padding: 4px 6px 4px 4px
 }
-
-/* .modal-background {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    opacity: 0.6;
-    z-index: 10;
-} */
-
-
 
 .create-post-body {
     padding: 0;
@@ -116,12 +101,12 @@
 
 .post-photo-preview-container {
     display: flex;
+    margin-top: 5px;
 }
 
 .post-photo-preview {
     width: 100%;
     height: 100%;
-
 }
 
 .more-post-file-container {
@@ -163,6 +148,7 @@
     border-top: 1px dotted #ccc;
     margin: 0 auto;
     display: flex;
+    position: relative;
 }
 
 .tag-friends-label {
@@ -179,5 +165,87 @@
     outline: none;
     border: none;
     padding: 8px 10px;
+}
 
+.tag-search-results {
+    position: absolute;
+    top: 25px;
+    left: 50px;
+    width: 200px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
+    background-color: white;
+}
+
+.tag-result-item {
+    padding: 4px 6px;
+    box-sizing: border-box;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+}
+
+.tag-result-item-photo {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.tag-result-item:hover {
+    cursor: pointer;
+    background-color: #4267b2;
+    color: white;
+}
+
+.tagged-friend-options {}
+
+.tagged-friend {
+    background-color: #e9ebee;
+    border: 1px solid #9cb4d8;
+    border-radius: 2px;
+    color: #162643;
+    margin: 0 2px 2px 0;
+    padding: 0 18px 0 3px;
+    box-sizing: border-box;
+    display: inline-block;
+    position: relative;
+    height: 18px;
+    font-size: 11px;
+}
+
+.tagged-friend-container {
+    padding: 4px 12px;
+    margin: 0 auto;
+}
+
+.unselect-tagged {
+    position: absolute;
+    right: 2px;
+    top: 3px;
+    font-size: 11px;
+    color: #ccc;
+}
+
+.with-tagged-friend {
+    font-size: 11px;
+}
+
+.with-tagged-friend-item {
+    color: #4267b2;
+}
+
+.with-tagged-friend-item:hover {
+    cursor: pointer;
+    color: #4267b2;
+    text-decoration: underline;
+}
+
+.with-tagged-friend-item:visited {
+    color: #4267b2;
+}
+
+.post-tagged-friends {
+    font-size: 11px;
 }

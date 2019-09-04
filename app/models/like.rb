@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: likes
+#
+#  id            :bigint           not null, primary key
+#  like_type     :string           not null
+#  likeable_type :string
+#  likeable_id   :bigint
+#  user_id       :integer          not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
 
 ALLOWED_TYPES = [
    'like',

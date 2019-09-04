@@ -11,7 +11,7 @@ class ProfileNavBar extends React.Component {
       <div className="profile-nav-bar">
         <span className="timeline-nav-link">
           <Link to={`/user/${id}`}>
-            Timeline <i className="fas fa-caret-down" />
+            Timeline
           </Link>
         </span>
 
@@ -25,13 +25,13 @@ class ProfileNavBar extends React.Component {
 
         <span className="photos-nav-link">Photos</span>
 
-        <span className="archive-nav-link">
+        {/* <span className="archive-nav-link">
           <i className="fas fa-lock" /> Archive
         </span>
 
         <span className="more-nav-link">
           More <i className="fas fa-caret-down" />
-        </span>
+        </span> */}
       </div>
     );
   }
