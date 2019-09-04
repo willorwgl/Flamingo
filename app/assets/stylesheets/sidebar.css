@@ -186,3 +186,11 @@
     color: gray;
     word-wrap: break-word;
 }
+
+.personal-link {
+    display: block;
+}
+.personal-link:hover {
+    background-color: transparent !important;
+    color: #ff8080 !important;
+}

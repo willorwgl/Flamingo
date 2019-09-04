@@ -53,7 +53,10 @@
     font-weight: 700;
 }
 
-.fa-github, .fa-linkedin {
+.fa-github,
+.fa-linkedin,
+.fa-angellist,
+.fa-portrait{
     font-size: 24px;
 }
 

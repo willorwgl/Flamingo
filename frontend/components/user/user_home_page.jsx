@@ -4,14 +4,11 @@ import CreatePostForm from "./posts/create_post_form";
 import { requestPosts } from "../../actions/posts_actions";
 import Post from "./posts/post";
 
-
 class UserHomePage extends React.Component {
-
   componentDidMount() {
     const { requestPosts, currentUser } = this.props;
     requestPosts(currentUser.id, "newsfeed");
   }
-
 
   posts() {
     const { posts = {} } = this.props;
@@ -19,14 +16,10 @@ class UserHomePage extends React.Component {
       .reverse()
       .map(post => {
         return <Post key={post.id} post={post} />;
-      })
-    return (
-      <div className="posts-container">
-        {postList}
-      </div>
-    );
+      });
+    return <div className="posts-container">{postList}</div>;
   }
-  
+
   render() {
     const { currentUser } = this.props;
     const {
@@ -50,17 +43,39 @@ class UserHomePage extends React.Component {
           </div>
 
           <div className="myinfo-container">
-            <div className="github-info">
+            <a
+              className="personal-link"
+              href="https://github.com/willorwgl"
+              target="_blank"
+            >
               <i class="fab fa-github" /> Github
-            </div>
-
-            <div className="linkedin-info">
+            </a>
+            <a
+              className="personal-link"
+              href="https://www.linkedin.com/in/william-lu-a455a416b/"
+              target="_blank"
+            >
               <i class="fab fa-linkedin" /> Linkedin
-            </div>
+            </a>
+            <a
+              className="personal-link"
+              href="https://angel.co/willorwgl?public_profile=1"
+              target="_blank"
+            >
+              <i class="fab fa-angellist" /> AngelList
+            </a>
+
+            <a
+              href="http://luwilliam.me"
+              target="_blank"
+              className="personal-link"
+            >
+              <i class="fas fa-portrait"></i> Porfolio
+            </a>
           </div>
         </div>
 
-        <div className="user-home-main"> 
+        <div className="user-home-main">
           <CreatePostForm />
           {this.posts()}
         </div>
@@ -83,4 +98,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserHomePage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserHomePage);
