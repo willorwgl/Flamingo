@@ -24,7 +24,9 @@
 .friends-label,
 .photos-label {
     font-size: 20px;
+    cursor: pointer;
 }
+
 
 .friends-header-options,
 .photos-header-options {

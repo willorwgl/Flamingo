@@ -34,14 +34,14 @@ class SidebarFriends extends React.Component {
     }
     
     render() {
+        const profileUserId = this.props.profileUser.id
         const acceptedFriends = Object.values(this.props.acceptedFriends).length || null
         return (
           <div className="sidebar-friends">
             <div className="friends-label-container">
               <img src={window.friendsIcon} />
-              <span className="friends-label">
-                Friends <span className="friend-count">{acceptedFriends}</span>
-              </span>
+              <Link to={`/user/${profileUserId}/friends`}><span className="friends-label">Friends</span></Link>
+              <Link to={`/user/${profileUserId}/friends}`}><span className="friend-count">{acceptedFriends}</span></Link>
             </div>
             {this.acceptedFriends()}
           </div>

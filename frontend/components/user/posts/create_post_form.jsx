@@ -472,8 +472,8 @@ const mapStateToProps = (state, ownProps) => {
   const friendships = Object.values(state.entities.friendships).filter(
     friendship => {
       return (
-        friendship.user_id === currentUser.id ||
-        friendship.friend_id === currentUser.id ||
+        (friendship.user_id === currentUser.id ||
+        friendship.friend_id === currentUser.id) &&
         friendship.state === "accepted"
       );
     }

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"
 
 class SidebarPhotos extends React.Component {
   render() {
@@ -20,7 +21,9 @@ class SidebarPhotos extends React.Component {
       <div className="sidebar-photos">
         <div className="photos-label-container">
           <div className="photos-icon"></div>
-          <span className="photos-label">Photos</span>
+          <Link to={`/user/${profileUser.id}/photos`}>
+            <span className="photos-label">Photos</span>
+          </Link>
         </div>
         <div className="sidebar-photo-container">{photos}</div>
       </div>
