@@ -1,3 +1,5 @@
+
+
 json.posts do
      @posts.each do |post|
         json.set! post.id do
@@ -7,12 +9,10 @@ json.posts do
 end
 
 @posts.each do |post|
-
     json.authors do 
         json.set! post.author_id do
             json.partial! 'api/users/user', user: post.author
         end
-
         post.comments.each do |comment|
             json.set! comment.author_id do
                 json.partial! 'api/users/user', user: comment.author

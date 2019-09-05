@@ -43,7 +43,7 @@ class AboutPage extends React.Component {
           {this.authorized() ? (
             <div className="add-work-container" onClick={this.addWorkplace}>
               <div className="add-work-box">
-                <i class="fas fa-plus" />
+                <i className="fas fa-plus" />
               </div>
               <div className="add-work-label">Add a workplace</div>
             </div>
@@ -59,7 +59,7 @@ class AboutPage extends React.Component {
           {this.authorized() ? (
             <div className="add-work-container" onClick={this.addEducation}>
               <div className="add-work-box">
-                <i class="fas fa-plus" />
+                <i className="fas fa-plus" />
               </div>
               <div className="add-work-label">Add a College/High School</div>
             </div>
@@ -93,7 +93,7 @@ class AboutPage extends React.Component {
         {this.authorized() ? (
           <div className="add-work-container" onClick={this.addWorkplace}>
             <div className="add-work-box">
-              <i class="fas fa-plus" />
+              <i className="fas fa-plus" />
             </div>
             <div className="add-work-label">Add a workplace</div>
           </div>
@@ -124,7 +124,7 @@ class AboutPage extends React.Component {
         {this.authorized() ? (
           <div className="add-work-container" onClick={this.addEducation}>
             <div className="add-work-box">
-              <i class="fas fa-plus" />
+              <i className="fas fa-plus" />
             </div>
             <div className="add-work-label">Add a College/High School</div>
           </div>
@@ -145,7 +145,7 @@ class AboutPage extends React.Component {
       <div className="about-container">
         <div className="about-header">
           <div className="about-label-container">
-            <i class="fas fa-user" />
+            <i className="fas fa-user" />
             <span className="about-header-label">About</span>
           </div>
         </div>

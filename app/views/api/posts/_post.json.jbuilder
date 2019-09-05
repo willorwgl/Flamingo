@@ -2,17 +2,11 @@ json.extract! post, :id, :body, :author_id, :wall_id, :post_tags, :feeling, :upd
 author = post.author
 json.extract! author, :first_name, :last_name
 
-# json.comments do
-#     post.comments.each do |comment| 
-#         json.partial! 'api/comments/comment', comment: comment
-#     end
-# end
-
-json.comments do 
-        post.comments.each do |comment|
-            json.set! comment.id do 
-                json.partial! 'api/comments/comment', comment: comment
-            end
-        end
+if post.photos.attached? 
+    photos = post.photos.map  do |photo|
+        url_for(photo)
+    end
+    json.postPhotos photos
 end
+
 

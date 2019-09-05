@@ -28,7 +28,7 @@ class PhotosContainer extends React.Component {
       <div className="photos-container">
         <div className="photos-container-header">
           <div className="photos-header-label">
-            <i class="fas fa-images photos-header-icon"></i>
+            <i className="fas fa-images photos-header-icon"></i>
             <span className="photos-label">Photos</span>
           </div>
           <div className="photos-header-options">

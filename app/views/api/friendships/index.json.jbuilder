@@ -2,17 +2,15 @@
 
 
 @friendships.each do |friendship|
+
     json.set! friendship.id do
         json.extract! friendship, :id, :user_id, :friend_id, :status
     end
 end
 
-json.friends do
-
-
+json.friends do  
     @friendships.each do |friendship| 
-
-        if friendship.status == "accepted" 
+    
             user = friendship.user
             friend = friendship.friend
             if user.id != @user_id.to_i
@@ -33,6 +31,4 @@ json.friends do
                 end
             end
         end
-    end  
-
 end

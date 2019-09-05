@@ -129,3 +129,16 @@
     display: inline-block;
     cursor: pointer !important;
 }
+
+.friend-header-option {
+    margin: 5px;
+    cursor: pointer; 
+}
+
+.friend-header-option:hover {
+    color: #ff8080;
+}
+
+.friend-header-option-selected {
+    color: #ff8080;
+}

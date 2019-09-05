@@ -39,9 +39,9 @@ class Education extends React.Component {
         </div>
         {this.authorized() ? (
           <>
-            <i class="far fa-edit edit-post" onClick={this.handleEdit} />
+            <i className="far fa-edit edit-post" onClick={this.handleEdit} />
             <i
-              class="far fa-trash-alt delete-post"
+              className="far fa-trash-alt delete-post"
               onClick={this.handleDelete}
             />
           </>

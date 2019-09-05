@@ -131,11 +131,11 @@ class Comment extends React.Component {
               {currentUser.id === reply.author_id ? (
                 <>
                   <i
-                    class="far fa-edit edit-comment"
+                    className="far fa-edit edit-comment"
                     onClick={this.handleEdit(reply.id)}
                   />
                   <i
-                    class="far fa-trash-alt delete-comment"
+                    className="far fa-trash-alt delete-comment"
                     onClick={this.handleDelete(reply.id)}
                   />
                 </>
@@ -173,7 +173,7 @@ class Comment extends React.Component {
     Object.values(likes).forEach(el => options[el.like_type].push(el));
 
     const likeDisplay = Object.entries(options).map(([key, option]) => {
-      return option.length ? <div key={option[0].id} class={`liked-${key}`}></div> : null
+      return option.length ? <div key={option[0].id} className={`liked-${key}`}></div> : null
     }
     )
     return (
@@ -212,11 +212,11 @@ class Comment extends React.Component {
             {currentUser.id === id ? (
               <>
                 <i
-                  class="far fa-edit edit-comment"
+                  className="far fa-edit edit-comment"
                   onClick={this.handleEdit(comment.id)}
                 />
                 <i
-                  class="far fa-trash-alt delete-comment"
+                  className="far fa-trash-alt delete-comment"
                   onClick={this.handleDelete(comment.id)}
                 />
               </>

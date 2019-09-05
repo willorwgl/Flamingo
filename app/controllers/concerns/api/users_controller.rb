@@ -1,10 +1,8 @@
 class Api::UsersController < ApplicationController
-  
-
-    def show
-      @user = User.with_attached_profile_photo.includes(:workplaces, :educations).find(params[:id])
+      def show
+      @user = User.includes(:workplaces, :educations, [profile_photo_attachment: [:blob], cover_image_attachment: [:blob], other_photos_attachments: [:blob]]).find(params[:id])
+      
     end
-
 
     def update
       @user = User.find(params[:id])

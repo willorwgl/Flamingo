@@ -164,6 +164,27 @@ class Post extends React.Component {
     ) : null;
   }
 
+  postPhotos() {
+    const { postPhotos = [] } = this.props.post
+    debugger
+    const photos = postPhotos.map((photo) => {
+      return (
+        <img
+          src={photo}
+          className="post-photo"
+          style={{
+            width: 488 / postPhotos.length - 8,
+            height: 488 / postPhotos.length - 8
+          }}
+          alt="this is a post photo"
+        />
+      );
+    })
+    return photos.length ? (
+      <div className="post-photos-container">{photos}</div>
+    ) : null
+  }
+
   render() {
     const { author = {}, currentUser, post, profileUser } = this.props;
     const {
@@ -193,7 +214,6 @@ class Post extends React.Component {
               />
             </>
           ) : null}
-
           <div className="post-header">
             <Link to={`/user/${id}`}>
               <img className="poster-icon" src={profilePhoto} />
@@ -224,6 +244,7 @@ class Post extends React.Component {
           </div>
 
           <div className="post-body">{body}</div>
+          {this.postPhotos()}
           {this.likes()}
           {this.withFriends()}
         </div>

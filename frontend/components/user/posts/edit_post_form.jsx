@@ -41,7 +41,7 @@ class EditPostForm extends React.Component {
       <div className="edit-post-container">
         <div className="edit-post-header">
           Edit Post
-          <i class="fas fa-times edit-photo-cancel" onClick={this.handleCancel} />
+          <i className="fas fa-times edit-photo-cancel" onClick={this.handleCancel} />
         </div>
         <div className="edit-post-input-container">
           <img src={profilePhoto} className="edit-poster-icon" />

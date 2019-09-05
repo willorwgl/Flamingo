@@ -86,7 +86,7 @@ class AddPhotoForm extends React.Component {
             onChange={this.handleFile}
           />
           <label htmlFor="add-photo-file" className="add-photo-file-container ">
-            <i class="fas fa-plus" /> Add Photo
+            <i className="fas fa-plus" /> Add Photo
           </label>
         </div>
         <div />

@@ -3,8 +3,7 @@ class Api::FriendshipsController < ApplicationController
 
     def index 
         @user_id = params[:user_id]
-        @friendships = Friendship.includes(friend: [profile_photo_attachment: [:blob]],
-             user: [profile_photo_attachment: [:blob]])
+        @friendships = Friendship.includes(friend: [profile_photo_attachment: [:blob]], user: [profile_photo_attachment: [:blob]])
              .where("user_id = ? or friend_id = ?", @user_id, @user_id)
 
     end

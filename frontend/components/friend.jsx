@@ -1,5 +1,5 @@
 import React from "react";
-import { cancelFriendRequest } from "../actions/friendships_actions";
+import { cancelFriendRequest, acceptFriendRequest } from "../actions/friendships_actions";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -10,6 +10,7 @@ class FriendItem extends React.Component {
       showFriendOptions: false
     };
     this.cancelFriendRequest = this.cancelFriendRequest.bind(this);
+    this.acceptFriendRequest = this.acceptFriendRequest.bind(this)
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
@@ -26,9 +27,18 @@ class FriendItem extends React.Component {
   }
 
   cancelFriendRequest(e) {
+    e.preventDefault()
     const { cancelFriendRequest, friendship } = this.props;
     cancelFriendRequest(friendship.id);
   }
+  
+  acceptFriendRequest(e) {
+    e.preventDefault();
+    const { acceptFriendRequest, friendship } = this.props;
+    acceptFriendRequest(friendship.id);
+  }
+
+ 
 
   friendButton() {
     const { currentUser = {}, friend = {}, friendship } = this.props;
@@ -40,7 +50,7 @@ class FriendItem extends React.Component {
       ;
       return (
         <button className="friend-button" onClick={this.sendFriendRequest}>
-          <i class="fas fa-user-plus" /> Add Friend
+          <i className="fas fa-user-plus" /> Add Friend
         </button>
       );
     }
@@ -66,7 +76,7 @@ class FriendItem extends React.Component {
           onMouseOver={this.handleMouseEnter}
           onMouseLeave={this.handleMouseLeave}
         >
-          <i class="fas fa-user-plus" /> Request Sent
+          <i className="fas fa-user-plus" /> Request Sent
           {this.state.showFriendOptions ? this.friendButtonOptions() : null}
         </button>
       );
@@ -79,7 +89,7 @@ class FriendItem extends React.Component {
           onMouseOver={this.handleMouseEnter}
           onMouseLeave={this.handleMouseLeave}
         >
-          <i class="fas fa-check" /> Friends
+          <i className="fas fa-check" /> Friends
           {this.state.showFriendOptions ? this.friendButtonOptions() : null}
         </button>
       );
@@ -130,34 +140,6 @@ class FriendItem extends React.Component {
     }
   }
 
-  // friendButton() {
-  //   return (
-  //     <button
-  //       className="friend-button"
-  //       onMouseOver={this.handleMouseEnter}
-  //       onMouseLeave={this.handleMouseLeave}
-  //     >
-  //       <i class="fas fa-check" /> Friends
-  //       {this.state.showFriendOptions ? (
-  //         <div
-  //           className="friend-options-container"
-  //           onMouseLeave={this.handleMouseLeave}
-  //           onMouseOver={this.handleMouseEnter}
-  //         >
-  //           <div className="friend-options">
-  //             <div
-  //               className="unfriend-button"
-  //               onClick={this.cancelFriendRequest}
-  //             >
-  //               Unfriend
-  //             </div>
-  //           </div>
-  //         </div>
-  //       ) : null}
-  //     </button>
-  //   );
-  // }
-
   render() {
     const {
       profilePhoto = window.defaultUserIcon,
@@ -203,7 +185,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => {
   return {
     cancelFriendRequest: friendshipId =>
-      dispatch(cancelFriendRequest(friendshipId))
+      dispatch(cancelFriendRequest(friendshipId)),
+      acceptFriendRequest: friendshipId => dispatch(acceptFriendRequest(friendshipId))
   };
 };
 

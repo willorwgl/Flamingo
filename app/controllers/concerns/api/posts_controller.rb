@@ -4,16 +4,17 @@ class Api::PostsController < ApplicationController
 
     def index
         if params[:type] == "wall" 
-            @posts = Post.includes(
-                comments: [author: [profile_photo_attachment: [:blob]]],
-                 author: [profile_photo_attachment: [:blob]])
-                 .where(wall_id: params[:user_id])
+            @posts = Post.includes(:likes, comments: [:likes, author: [profile_photo_attachment: [:blob], cover_image_attachment: [:blob], other_photos_attachments: [:blob]]],
+                author: [profile_photo_attachment: [:blob], cover_image_attachment: [:blob], other_photos_attachments: [:blob]],
+                photos_attachments: [:blob])
+                .where(wall_id: params[:user_id])
         elsif params[:type] = "newfeed" 
             ids = current_user.friends.pluck(:friend_id, :user_id) << current_user.id
             ids = ids.flatten.uniq
-            @posts = Post.includes(
-                comments: [author: [profile_photo_attachment: [:blob]]],
-                author: [profile_photo_attachment: [:blob]]).where(author_id: ids)
+            @posts = Post.with_attached_photos.includes(:likes,
+                comments: [:likes, author: [profile_photo_attachment: [:blob], cover_image_attachment: [:blob], other_photos_attachments: [:blob]]],
+                author: [profile_photo_attachment: [:blob], cover_image_attachment: [:blob], other_photos_attachments: [:blob]],
+                ).where(author_id: ids)
         else
             @posts = Post.includes(authored_posts: [:author]).where(author_id: params[:user_id])
         end
