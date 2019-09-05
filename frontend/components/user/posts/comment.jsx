@@ -110,7 +110,7 @@ class Comment extends React.Component {
       const replierFullName = `${first_name} ${last_name}`;
       const { replyLikes, currentUser } = this.props;
       const currentUserLike = replyLikes.find(
-        like => like.user_id === currentUser.id
+        like => like.user_id === currentUser.id && like.likeable_id === reply.id
       );
       return (
         <div key={reply.id} className="user-reply">
@@ -153,7 +153,7 @@ class Comment extends React.Component {
               >
                 Reply
               </span>
-              {this.replyLikes()}
+              {this.replyLikes(reply)}
               <div className="comment-edit-icon" />
             </div>
           </div>
@@ -188,10 +188,9 @@ class Comment extends React.Component {
     );
   }
 
-  replyLikes() {
-    const { replyLikes } = this.props;
-    const numLikes = replyLikes.length;
-    if (!numLikes) return;
+  replyLikes(reply) {
+    const { replyLikes = [] } = this.props;
+    let numLikes =  0;
     const options = {
       like: [],
       love: [],
@@ -200,8 +199,12 @@ class Comment extends React.Component {
       sad: [],
       wow: []
     };
-    Object.values(replyLikes).forEach(el => options[el.like_type].push(el));
-
+    Object.values(replyLikes).forEach(el => {
+      if (el.likeable_id === reply.id) {
+        options[el.like_type].push(el)
+        numLikes++;
+      }
+    });
     const likeDisplay = Object.entries(options).map(([key, option]) => {
       return option.length ? (
         <div key={option[0].id} className={`liked-${key}`}></div>
@@ -209,7 +212,7 @@ class Comment extends React.Component {
     });
     return (
       <span className="comment-likes">
-        {likeDisplay} {numLikes}
+        {likeDisplay} {numLikes ? numLikes : null}
       </span>
     );
   }
