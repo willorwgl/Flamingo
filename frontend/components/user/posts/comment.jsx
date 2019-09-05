@@ -96,10 +96,7 @@ class Comment extends React.Component {
   }
 
   replies() {
-    const {
-      childComments: replies,
-      replyUsers = [],
-    } = this.props;
+    const { childComments: replies, replyUsers = [] } = this.props;
     return replies.map(reply => {
       const replier = replyUsers.find(user => {
         return user.id === reply.author_id;
@@ -156,6 +153,7 @@ class Comment extends React.Component {
               >
                 Reply
               </span>
+              {this.replyLikes()}
               <div className="comment-edit-icon" />
             </div>
           </div>
@@ -167,7 +165,7 @@ class Comment extends React.Component {
   likes() {
     const { likes } = this.props;
     const numLikes = likes.length;
-    if (!numLikes) return
+    if (!numLikes) return;
     const options = {
       like: [],
       love: [],
@@ -179,9 +177,36 @@ class Comment extends React.Component {
     Object.values(likes).forEach(el => options[el.like_type].push(el));
 
     const likeDisplay = Object.entries(options).map(([key, option]) => {
-      return option.length ? <div key={option[0].id} className={`liked-${key}`}></div> : null
-    }
-    )
+      return option.length ? (
+        <div key={option[0].id} className={`liked-${key}`}></div>
+      ) : null;
+    });
+    return (
+      <span className="comment-likes">
+        {likeDisplay} {numLikes}
+      </span>
+    );
+  }
+
+  replyLikes() {
+    const { replyLikes } = this.props;
+    const numLikes = replyLikes.length;
+    if (!numLikes) return;
+    const options = {
+      like: [],
+      love: [],
+      haha: [],
+      angry: [],
+      sad: [],
+      wow: []
+    };
+    Object.values(replyLikes).forEach(el => options[el.like_type].push(el));
+
+    const likeDisplay = Object.entries(options).map(([key, option]) => {
+      return option.length ? (
+        <div key={option[0].id} className={`liked-${key}`}></div>
+      ) : null;
+    });
     return (
       <span className="comment-likes">
         {likeDisplay} {numLikes}
@@ -191,7 +216,7 @@ class Comment extends React.Component {
 
   render() {
     const { comment, author = {}, currentUser } = this.props;
-    const currentUserLike = this.currentUserLike()
+    const currentUserLike = this.currentUserLike();
     const {
       first_name = "",
       last_name = "",
