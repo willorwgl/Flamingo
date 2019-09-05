@@ -48,21 +48,21 @@ class UserHomePage extends React.Component {
               href="https://github.com/willorwgl"
               target="_blank"
             >
-              <i class="fab fa-github" /> Github
+              <i className="fab fa-github" /> Github
             </a>
             <a
               className="personal-link"
               href="https://www.linkedin.com/in/william-lu-a455a416b/"
               target="_blank"
             >
-              <i class="fab fa-linkedin" /> Linkedin
+              <i className="fab fa-linkedin" /> Linkedin
             </a>
             <a
               className="personal-link"
               href="https://angel.co/willorwgl?public_profile=1"
               target="_blank"
             >
-              <i class="fab fa-angellist" /> AngelList
+              <i className="fab fa-angellist" /> AngelList
             </a>
 
             <a
@@ -70,7 +70,7 @@ class UserHomePage extends React.Component {
               target="_blank"
               className="personal-link"
             >
-              <i class="fas fa-portrait"></i> Porfolio
+              <i className="fas fa-portrait"></i> Porfolio
             </a>
           </div>
         </div>

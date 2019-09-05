@@ -9,10 +9,9 @@ class SidebarFriends extends React.Component {
         const friends = acceptedFriends.slice(0, 9).map((friend) => {
           const { profilePhoto = window.defaultUserIcon } = friend
           return (
-            <div className="friend-icon-container">
+            <div className="friend-icon-container" key={friend.id}>
               <Link to={`/user/${friend.id}`}>
                 <img
-                  key={friend.id}
                   src={profilePhoto}
                   className="friend-icon"
                 />

@@ -1,6 +1,6 @@
 import React from "react";
 import { merge } from "lodash";
-import generate_random_key from "../../util/app_util";
+import generateRandomKey from "../../util/app_util";
 import ErrorBubble from "./error_bubble";
 import { connect } from "react-redux";
 import { createNewUser, login } from "../../actions/session_actions";
@@ -76,7 +76,7 @@ class SignupForm extends React.Component {
     this.dayOptions = [];
     for (let day = 1; day <= 31; day++) {
       this.dayOptions.push(
-        <option key={generate_random_key()} selected={day === this.currentDay}>
+        <option key={generateRandomKey()} selected={day === this.currentDay}>
           {day}
         </option>
       );
@@ -102,7 +102,7 @@ class SignupForm extends React.Component {
     for (let month = 1; month <= 12; month++) {
       this.monthOptions.push(
         <option
-          key={generate_random_key()}
+          key={generateRandomKey()}
           selected={month === this.currentMonth}
         >
           {MONTHS[month - 1]}
@@ -116,7 +116,7 @@ class SignupForm extends React.Component {
     for (let year = 1905; year <= this.currentYear; year++) {
       this.yearOptions.push(
         <option
-          key={generate_random_key()}
+          key={generateRandomKey()}
           value={year}
           selected={year === 1994}
         >

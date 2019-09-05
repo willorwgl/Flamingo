@@ -11,6 +11,7 @@ import { destroyPost } from "../../../actions/posts_actions";
 import { withRouter } from "react-router-dom";
 import Like from "../../like";
 import { fetchLikes } from "../../../actions/likes_actions";
+import generateRandomKey from "../../../util/app_util";
 
 class Post extends React.Component {
   constructor(props) {
@@ -116,7 +117,7 @@ class Post extends React.Component {
 
     const likeDisplay = Object.entries(options).map(([key, option]) => {
       return option.length ? (
-        <div key={option[0].id} class={`liked-${key}`}></div>
+        <div key={option[0].id} className={`liked-${key}`}></div>
       ) : null;
     });
     return (
@@ -130,7 +131,7 @@ class Post extends React.Component {
     const { taggedFriends, author } = this.props;
     const withFriends = taggedFriends.map((friend, key) => {
       return (
-        <span className="with-tagged-friend">
+        <span className="with-tagged-friend" key={generateRandomKey()}>
           <Link
             className="with-tagged-friend-item"
             to={`/user/${friend.id}`}
@@ -170,6 +171,7 @@ class Post extends React.Component {
     const photos = postPhotos.map((photo) => {
       return (
         <img
+          key={generateRandomKey()}
           src={photo}
           className="post-photo"
           style={{
@@ -207,9 +209,9 @@ class Post extends React.Component {
         <div className="user-post">
           {currentUser.id === post.author_id ? (
             <>
-              <i class="far fa-edit edit-post" onClick={this.handleEdit} />
+              <i className="far fa-edit edit-post" onClick={this.handleEdit} />
               <i
-                class="far fa-trash-alt delete-post"
+                className="far fa-trash-alt delete-post"
                 onClick={this.handleDelete}
               />
             </>
@@ -228,7 +230,7 @@ class Post extends React.Component {
                     this.displaySelectedFeeling()
                   ) : profileUser && profileUser.id !== id ? (
                     <>
-                      <i class="fas fa-caret-right " />
+                      <i className="fas fa-caret-right " />
                       <Link
                         to={`/user/${profileUser.id}`}
                         className="user-name-link"
@@ -256,10 +258,10 @@ class Post extends React.Component {
             currentUserLike={currentUserLike}
           />
           <span className="post-comment" onClick={this.handleCommentClick}>
-            <i class="far fa-comment-alt" /> Comment
+            <i className="far fa-comment-alt" /> Comment
           </span>
           {/* <span className="post-share">
-            <i class="fas fa-share" /> Share
+            <i className="fas fa-share" /> Share
           </span> */}
         </div>
         {this.comments()}

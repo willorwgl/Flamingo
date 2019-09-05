@@ -44,7 +44,7 @@ class UserImage extends React.Component {
     if (!friendship) {
       return (
         <button className="friend-button" onClick={this.sendFriendRequest}>
-          <i class="fas fa-user-plus" /> Add Friend
+          <i className="fas fa-user-plus" /> Add Friend
         </button>
       );
     }
@@ -69,7 +69,7 @@ class UserImage extends React.Component {
           onMouseOver={this.handleMouseEnter}
           onMouseLeave={this.handleMouseLeave}
         >
-          <i class="fas fa-user-plus" /> Friend Request Sent
+          <i className="fas fa-user-plus" /> Friend Request Sent
           {this.state.showFriendOptions ? this.friendButtonOptions() : null}
         </button>
       );
@@ -81,7 +81,7 @@ class UserImage extends React.Component {
           onMouseOver={this.handleMouseEnter}
           onMouseLeave={this.handleMouseLeave}
         >
-          <i class="fas fa-check" /> Friends
+          <i className="fas fa-check" /> Friends
           {this.state.showFriendOptions ? this.friendButtonOptions() : null}
         </button>
       );

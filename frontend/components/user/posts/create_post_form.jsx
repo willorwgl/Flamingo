@@ -62,11 +62,12 @@ class CreatePostForm extends React.Component {
         processData: false,
         contentType: false
       });
+      location.reload();
     } else {
       if (!body) return;
       createPost(merge({}, this.state, { post_tags }));
     }
-    location.reload();
+
     this.setState({
       body: "",
       modal: false,
