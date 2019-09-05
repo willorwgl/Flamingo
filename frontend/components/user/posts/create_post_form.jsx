@@ -66,6 +66,7 @@ class CreatePostForm extends React.Component {
       if (!body) return;
       createPost(merge({}, this.state, { post_tags }));
     }
+    location.reload();
     this.setState({
       body: "",
       modal: false,
@@ -79,6 +80,7 @@ class CreatePostForm extends React.Component {
       photos: [],
       photoUrls: []
     });
+
     this.postHTML.classList.remove("on-top");
   }
 
