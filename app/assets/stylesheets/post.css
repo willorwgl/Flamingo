@@ -59,7 +59,8 @@
     min-width: 18px;
     font-size: 14px;
     line-height: 1.38;
-    word-wrap: break-word
+    word-wrap: break-word;
+    padding: 0 5px;
 }
 
 .post-footer {
