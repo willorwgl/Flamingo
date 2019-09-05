@@ -8,6 +8,7 @@ import { LOGOUT_CURRENT_USER } from "../../actions/session_actions";
 export default (state = { }, action) => {
     Object.freeze(state)
     let newState
+
     switch (action.type) {
         case RECEIVE_USERS:
             newState = Object.assign({}, state)

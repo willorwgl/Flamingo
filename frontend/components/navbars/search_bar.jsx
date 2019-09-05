@@ -1,7 +1,7 @@
 import React from "react";
 import { searchUsers } from "../../actions/users_actions";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect, withRouter } from "react-router-dom";
 import { clearResults } from "../../actions/search_actions";
 
 class SearchBar extends React.Component {
@@ -11,29 +11,44 @@ class SearchBar extends React.Component {
     this.handleBlur = this.handleBlur.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.searchButtonRef = React.createRef();
+    this.state = {
+      search: ""
+    };
+    this.handleSearch = this.handleSearch.bind(this);
+    this.handleEnter = this.handleEnter.bind(this);
   }
 
   handleChange(e) {
     const value = e.target.value.trim();
     const { search, clearResults } = this.props;
-    if (value) {
-      search(value, "lite");
-    } else {
-      clearResults();
-    }
+    this.setState({ search: value });
+    search(value, "lite");
+    if (!value) clearResults();
   }
 
-  handleSearch(e) {}
+  handleSearch(e) {
+    const { search } = this.state;
+    e.preventDefault()
+    if (!search) return;
+    this.props.history.push(`/search/${search}`);
+    this.setState({
+      search: ""
+    });
+    clearResults();
+  }
 
-  handleEnter(e) {}
+  handleEnter(e) {
+    if (event.key === "Enter") {
+      this.handleSearch(e);
+    }
+  }
 
   handleBlur(e) {
     const { clearResults } = this.props;
     this.searchButtonRef.current.classList.remove("in-search");
     setTimeout(() => {
-      clearResults()
-    }, 500)
-
+      clearResults();
+    }, 500);
   }
 
   handleFocus(e) {
@@ -53,11 +68,14 @@ class SearchBar extends React.Component {
             type="text"
             placeholder="Search"
             className="search-input"
+            onKeyPress={this.handleEnter}
             onChange={this.handleChange}
             onBlur={this.handleBlur}
             onFocus={this.handleFocus}
+            value={this.state.search}
           />
           <i
+            onClick={this.handleSearch}
             className="fas fa-search  search-button"
             ref={this.searchButtonRef}
           />
@@ -78,9 +96,7 @@ class SearchBar extends React.Component {
               className="search-result-link"
               key={result.id}
             >
-              <div className="search-result">{`${result.first_name} ${
-                result.last_name
-              }`}</div>
+              <div className="search-result">{`${result.first_name} ${result.last_name}`}</div>
             </Link>
           );
         })
@@ -104,7 +120,9 @@ const mapStateToProps = state => {
     searchResults: state.entities.searchResults.liteUsers
   };
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SearchBar);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(SearchBar)
+);

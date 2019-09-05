@@ -46,7 +46,6 @@ class FriendsContainer extends React.Component {
 
   componentDidMount() {
     const { currentUser, requestFriendships } = this.props;
-    debugger
     requestFriendships(currentUser.id);
   }
 

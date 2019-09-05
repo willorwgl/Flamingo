@@ -167,7 +167,6 @@ class Post extends React.Component {
 
   postPhotos() {
     const { postPhotos = [] } = this.props.post
-    debugger
     const photos = postPhotos.map((photo) => {
       return (
         <img
