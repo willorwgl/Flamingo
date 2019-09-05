@@ -68,8 +68,10 @@ class AddPhotoForm extends React.Component {
       processData: false
     });
     const { closeModal } = this.props;
-    location.reload();
     closeModal();
+    setTimeout(() => {
+      location.reload();
+    }, 500)
   }
 
   render() {

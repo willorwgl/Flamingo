@@ -62,7 +62,9 @@ class CreatePostForm extends React.Component {
         processData: false,
         contentType: false
       });
-      location.reload();
+      setTimeout(() => {
+        location.reload();
+      }, 500)
     } else {
       if (!body) return;
       createPost(merge({}, this.state, { post_tags }));
