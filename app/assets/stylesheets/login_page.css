@@ -82,6 +82,7 @@
     text-align: center;
     font-size: 14px;
     font-weight: 700;
+    outline: none;
 }
 
 .login-page-user-email {
@@ -165,6 +166,12 @@
     font-size: 14px;
     font-weight: 700;
     border-radius: 2px;
+    outline: none;
+}
+
+button {
+    outline: none;
+    cursor: pointer;
 }
 
 
