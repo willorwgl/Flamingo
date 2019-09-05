@@ -474,7 +474,7 @@ const mapStateToProps = (state, ownProps) => {
       return (
         (friendship.user_id === currentUser.id ||
         friendship.friend_id === currentUser.id) &&
-        friendship.state === "accepted"
+        friendship.status === "accepted"
       );
     }
   );
