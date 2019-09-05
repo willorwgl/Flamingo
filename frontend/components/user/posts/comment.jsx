@@ -98,9 +98,7 @@ class Comment extends React.Component {
   replies() {
     const {
       childComments: replies,
-      author = {},
       replyUsers = [],
-      currentUser
     } = this.props;
     return replies.map(reply => {
       const replier = replyUsers.find(user => {
@@ -113,6 +111,10 @@ class Comment extends React.Component {
         profilePhoto = window.defaultUserIcon
       } = replier;
       const replierFullName = `${first_name} ${last_name}`;
+      const { replyLikes, currentUser } = this.props;
+      const currentUserLike = replyLikes.find(
+        like => like.user_id === currentUser.id
+      );
       return (
         <div key={reply.id} className="user-reply">
           <Link to={`/user/${id}`}>
@@ -143,7 +145,11 @@ class Comment extends React.Component {
             </div>
 
             <div className="reply-options">
-              <span className="comment-like-option">Like</span>
+              <Like
+                likeableId={reply.id}
+                likeableType="Comment"
+                currentUserLike={currentUserLike}
+              />
               <span
                 onClick={this.handleReplyClick}
                 className="comment-reply-option"
@@ -266,11 +272,18 @@ const mapStateToProps = (state, ownProps) => {
       value.likeable_type === "Comment" && value.likeable_id === comment.id
     );
   });
+  const replyIds = replies.map( (reply) => reply.id) 
+  const replyLikes = Object.values(likes).filter(value => {
+    return (
+      value.likeable_type === "Comment" &&  replyIds.includes(value.likeable_id)
+    );
+  })
   return merge({}, ownProps, {
     author,
     currentUser,
     replyUsers,
-    likes: commentLikes
+    likes: commentLikes,
+    replyLikes
   });
 };
 

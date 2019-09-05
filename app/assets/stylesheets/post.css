@@ -493,3 +493,7 @@
 .post-photos-container img {
     border: 1px solid #ccc;
 }
+
+.reply-options {
+    display: flex;
+}
